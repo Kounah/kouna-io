@@ -32,3 +32,7 @@ app.listen(port);
 app.get('/', (req, res) => {
   res.send(new Template('index').parse());
 })
+
+app.get('/about', (req, res) => {
+  res.send(new Template('about').parse());
+})
