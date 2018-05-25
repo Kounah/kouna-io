@@ -10,6 +10,11 @@
       "subs": [
         { "name": "About Me",
           "href": "/about" }
+        ]},
+    { "name": "Awesome Art!",
+      "subs": [
+        { "name": "About",
+          "href": "/oko"}
         ]}
   ]
 }

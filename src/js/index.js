@@ -36,3 +36,7 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.send(new Template('about').parse());
 })
+
+app.get('/oko', (req, res) => {
+  res.send(new Template('oko').parse());
+})
