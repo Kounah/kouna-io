@@ -1,0 +1,18 @@
+{{this.data.id = uid(); undefined; }}
+<!-- BEGIN {{this.name}} -->
+<li>
+  <a href="#!" class="dropdown-trigger" data-target="{{this.data.id}}">{{this.data.name}}<i class="material-icons right">expand_more</i></a>
+  <ul class="dropdown-content" id="{{this.data.id}}">
+    {{
+      this.data.subs.map(link => {
+        if(link.href != undefined) {
+          return new Component('nav/link', link).parse();
+        }
+        if(link.subs != undefined && typeof link.subs == 'Object') {
+          return new Component('nav/dropdownLink', link).parse();
+        }
+      }).join('\n');
+    }}
+  </ul>
+</li>
+<!-- END {{this.name}} -->

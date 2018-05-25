@@ -1,0 +1,39 @@
+<ul id="mobile-nav" class="sidenav">
+  {{
+    let directLinks = [];
+    let linksWithSubs = [];
+    this.data.links.forEach(link => {
+      if(link.href != undefined) {
+        directLinks.push(new Component('sidenav/link', link).parse());
+      }
+      if(link.subs != undefined) {
+        linksWithSubs.push(link);
+      }
+    })
+
+    let result = [];
+    result.splice(0,0,directLinks);
+    result.push(new Component('sidenav/collapsed', {links: linksWithSubs}).parse());
+
+    result.join('\n');
+  }}
+</ul>
+<nav class="nav-extended">
+  <div class="nav-wrapper">
+    <ul class="left hide-on-large-only">
+      <li><a href="#!" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons left">menu</i></a></li>
+    </ul>
+    <ul class="left hide-on-med-and-down">
+      {{
+        this.data.links.map(link => {
+          if(link.href != undefined) {
+            return new Component('nav/link', link).parse();
+          }
+          if(link.subs != undefined) {
+            return new Component('nav/dropdown', link).parse();
+          }
+        }).join('\n')
+      }}
+    </ul>
+  </div>
+</nav>

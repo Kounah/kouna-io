@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {{ new Component('header', {title: 'Home'}).parse() }}
+  </head>
+  <body>
+    {{ new Component('nav', {links: config.links}).parse() }}
+
+    <main>
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
+    </main>
+
+    {{ new Component('footer').parse()}}
+  </body>
+</html>

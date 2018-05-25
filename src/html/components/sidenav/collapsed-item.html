@@ -1,0 +1,19 @@
+<!-- BEGIN {{this.name}} -->
+<li class="bold">
+  <a class="collapsible-header waves-effect">{{this.data.name}}</a>
+  <div class="collapsible-body">
+    <ul>
+      {{
+        this.data.subs.map(link => {
+          if(link.href != undefined) {
+            return new Component('nav/link', link).parse();
+          }
+          if(link.subs != undefined) {
+            return new Component('nav/dropdown', link).parse();
+          }
+        }).join('\n')
+      }}
+    </ul>
+  </div>
+</li>
+<!-- END {{this.name}} -->
