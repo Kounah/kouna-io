@@ -3,9 +3,7 @@
   <ul class="collapsible collapsible-accordion">
     {{
       this.data.links.map(link => {
-        if(link.href != undefined) {
-          return new Component('sidenav/collapsed-item', link).parse();
-        }
+        return new Component('sidenav/collapsed-item', link).parse();
       }).join('\n')
     }}
   </ul>
