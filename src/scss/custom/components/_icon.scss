@@ -1,0 +1,19 @@
+.icon {
+  height: 1.5rem;
+  display: inline-block;
+  margin: 0 .5rem;
+  width: 2rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+
+  &.right {
+    margin: 0;
+    margin-left: 1rem;
+  }
+
+  &.left {
+    margin: 0;
+    margin-right: 1rem;
+  }
+}

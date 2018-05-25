@@ -1,0 +1,57 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body * {
+  box-sizing: border-box;
+  perspective: 100px;
+}
+
+.background {
+  z-index: -1;
+  position: fixed;
+  min-height: 100vh;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  transform: translateZ(5px);
+  filter: blur(5px) grayscale(50%);
+  background-image: url(/img/header-background.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.menu-space {
+  z-index: -1;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.fix-top {
+  top: 0;
+}
+
+
+.custom-headline {
+  font-family: 'Poiret One' !important;
+  font-weight: bold;
+  font-size: 128px;
+  color: white;
+  // -webkit-text-stroke: 2px black;
+  text-shadow: 4px 6px 2px rgba(0,0,0,.2);
+  // text-shadow:
+  //    4px  4px 0px $text-shadow-color,
+  //    6px  0px 0px $text-shadow-color,
+  //    4px -4px 0px $text-shadow-color,
+  //    0px  6px 0px $text-shadow-color,
+  //    0px  0px 6px $text-shadow-color,
+  //    0px -6px 0px $text-shadow-color,
+  //   -4px  4px 0px $text-shadow-color,
+  //   -6px  0px 0px $text-shadow-color,
+  //   -4px -4px 0px $text-shadow-color;
+}
