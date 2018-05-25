@@ -12,6 +12,6 @@ if(!fs.existsSync(dist)) shell.mkdir('-p', dist);
 
 console.log('building server to' + ('' + dist).cyan);
 
-execSync(`webpack ${path.join(dir, 'src', 'js', 'index.js')} --target="node" --mode production --output ${path.join(dist, 'main.js')}`, (err, stdout, stderr) => {
-  console.log(stdout);
-}):
+// execSync(`webpack ${path.join(dir, 'src', 'js', 'index.js')} --target="node" --mode production --output ${path.join(dist, 'main.js')}`, (err, stdout, stderr) => {
+//   console.log(stdout);
+// }):
