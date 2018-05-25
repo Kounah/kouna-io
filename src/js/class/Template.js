@@ -10,7 +10,6 @@ module.exports = class Template {
     if(fs.existsSync(this.path)) {
       if(fs.statSync(this.path).isFile()) {
         this.raw = '' + fs.readFileSync(this.path);
-        console.log(`loading of ${this.name.bold} successful`)
       }
     }
   }
