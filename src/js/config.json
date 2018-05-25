@@ -1,0 +1,15 @@
+{
+  "path": {
+    "htmlComponent": "src/html/components",
+    "htmlTemplate": "src/html"
+  },
+  "links": [
+    { "name": "Home",
+      "href": "/" },
+    { "name": "Content",
+      "subs": [
+        { "name": "About Me",
+          "href": "/about" }
+        ]}
+  ]
+}
