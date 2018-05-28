@@ -86,4 +86,4 @@ and in the `src/html/component/header.html` I wrote:
 
 ## Warning
 
-If you make any Logical Mistake in your logic or not return a string at the end of a template block it will result in a empty spot on the page, and would cause an error that will be logged in the console
+If you make any Logical Mistake in your code, so that node wont execute it without an error, or not return a string at the end of a template block it will result in a empty spot on the page, and would cause an error that will be logged in the console
