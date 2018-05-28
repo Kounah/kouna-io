@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Kounah/kouna-io.git"
   },
   "author": "Kounah",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Kounah/kouna-io/issues"
   },
