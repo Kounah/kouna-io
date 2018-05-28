@@ -1,0 +1,7 @@
+<a href="{{this.data.href}}" {{ this.data.class != undefined ? `class="${this.data.class}"` : '' }} {{ this.data.target != undefined ? `target="${this.data.target}"` : '' }}>
+  {{ this.data.matIconLeft != undefined ? new Component('page/mat-icon', {icon: this.data.matIconLeft, class: 'left'}).render() : '' }}
+  {{ this.data.svgIconLeft != undefined ? new Component('page/svg-icon', {icon: this.data.svgIconLeft, class: 'left'}).render() : '' }}
+  {{ this.data.text }}
+  {{ this.data.matIconRight != undefined ? new Component('page/mat-icon', {icon: this.data.matIconRight, class: 'right'}).render() : '' }}
+  {{ this.data.svgIconRight != undefined ? new Component('page/svg-icon', {icon: this.data.svgIconRight, class: 'right'}).render() : '' }}
+</a>

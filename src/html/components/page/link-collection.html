@@ -1,0 +1,12 @@
+<div class="collection">
+  {{
+    this.data.map(link => {
+      if(link.class == undefined) {
+        link.class = "collection-item"
+      } else {
+        link.class += "collection-item";
+      }
+      return new Component('page/link', link).render()
+    }).join('\n');
+  }}
+</div>
