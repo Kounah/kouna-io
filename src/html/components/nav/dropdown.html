@@ -6,10 +6,10 @@
     {{
       this.data.subs.map(link => {
         if(link.href != undefined) {
-          return new Component('nav/link', link).parse();
+          return new Component('nav/link', link).render();
         }
         if(link.subs != undefined && typeof link.subs == 'Object') {
-          return new Component('nav/dropdownLink', link).parse();
+          return new Component('nav/dropdownLink', link).render();
         }
       }).join('\n');
     }}
