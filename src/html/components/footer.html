@@ -3,13 +3,23 @@
     <div class="row">
       <div class="col s12 m4">
         <h4>Pages</h4>
-        <div class="collection">
-          <a class="collection-item" href="/">Home</a>
-          <a class="collection-item" href="/about">About</a>
-        </div>
+        {{ new Component('page/link-collection', [
+          { href:"/",
+            text:"Home",
+            matIconLeft:"home" },
+          { href:"/about",
+            text:"About",
+            matIconLeft:"info" }
+          ]).render() }}
       </div>
       <div class="col s12 m4">
         <h4>Resources</h4>
+        {{ new Component('page/link-collection', [
+          { href:"https://materializecss.com/",
+            text:"Materialize",
+            svgIconLeft:"materialize.svg",
+            target:"_blank" }
+        ]).render() }}
       </div>
     </div>
   </div>

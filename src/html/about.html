@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    {{new Component('header', {title: "About Me"}).parse()}}
+    {{new Component('header', {title: "About Me"}).render()}}
   </head>
   <body>
-    {{ new Component('nav', {links: config.links}).parse() }}
+    {{ new Component('nav', {links: config.links}).render() }}
 
     <main>
       <div class="container">
@@ -29,6 +29,6 @@
       </div>
     </main>
 
-    {{ new Component('footer').parse()}}
+    {{ new Component('footer').render()}}
   </body>
 </html>

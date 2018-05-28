@@ -14,7 +14,7 @@ module.exports = class Template {
     }
   }
 
-  parse() {
+  render() {
     let regex = /([\ |\t]*?)\{\{([\s|\S]*?)\}\}/gm;
     let m;
 

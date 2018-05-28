@@ -30,13 +30,13 @@ app.listen(port);
 
 // express listeners
 app.get('/', (req, res) => {
-  res.send(new Template('index').parse());
+  res.send(new Template('index').render());
 })
 
 app.get('/about', (req, res) => {
-  res.send(new Template('about').parse());
+  res.send(new Template('about').render());
 })
 
 app.get('/oko', (req, res) => {
-  res.send(new Template('oko').parse());
+  res.send(new Template('oko').render());
 })

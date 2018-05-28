@@ -3,6 +3,11 @@
     "htmlComponent": "src/html/components",
     "htmlTemplate": "src/html"
   },
+  "web": {
+    "paths": {
+      "svg": "/img/icons"
+    }
+  },
   "links": [
     { "name": "Home",
       "href": "/" },

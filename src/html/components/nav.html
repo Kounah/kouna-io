@@ -4,7 +4,7 @@
     let linksWithSubs = [];
     this.data.links.forEach(link => {
       if(link.href != undefined) {
-        directLinks.push(new Component('sidenav/link', link).parse());
+        directLinks.push(new Component('sidenav/link', link).render());
       }
       if(link.subs != undefined) {
         linksWithSubs.push(link);
@@ -13,7 +13,7 @@
 
     let result = [];
     result.splice(0,0,directLinks);
-    result.push(new Component('sidenav/collapsed', {links: linksWithSubs}).parse());
+    result.push(new Component('sidenav/collapsed', {links: linksWithSubs}).render());
 
     result.join('\n');
   }}
@@ -27,10 +27,10 @@
       {{
         this.data.links.map(link => {
           if(link.href != undefined) {
-            return new Component('nav/link', link).parse();
+            return new Component('nav/link', link).render();
           }
           if(link.subs != undefined) {
-            return new Component('nav/dropdown', link).parse();
+            return new Component('nav/dropdown', link).render();
           }
         }).join('\n')
       }}
