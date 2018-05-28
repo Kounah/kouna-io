@@ -18,12 +18,12 @@ const Template = require('./class/Template'); // from index.js
 // ....
 let indexTemplate = new Template('index');
 // then you would render it using
-console.log(indexTemplate.parse());
+console.log(indexTemplate.render());
 ```
 or
 ```JS
 app.get('/', (req, res) => {
-  res.send(new Template('index').parse());
+  res.send(new Template('index').render());
 })
 ```
 
@@ -34,7 +34,7 @@ a Template is written as follows:
 <html>
   <head>
     <!-- Some header stuff, or .. -->
-    {{ new Component('header').parse() }}
+    {{ new Component('header').render() }}
   </head>
   <body>
     <h1>Templates</h1>
@@ -76,7 +76,7 @@ In my case I used it to set the page title page-specific,
 somewhere in my templates I wrote
 
 ```JS
-{{ new Component('header', {title: 'Home'}).parse() }}
+{{ new Component('header', {title: 'Home'}).render() }}
 ```
 
 and in the `src/html/component/header.html` I wrote:
