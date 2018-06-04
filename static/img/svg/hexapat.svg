@@ -1,0 +1,12 @@
+<svg width="110" height="192" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="194" width="112" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <polyline id="svg_1" points="55,0 55,32 0,64 0,128 55,160 55,192 55,160 110,128 110,64 55,32" stroke-width="8" stroke="rgba(0,0,0,0.25)" fill="none"/>
+ </g>
+</svg>
