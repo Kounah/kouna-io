@@ -13,20 +13,55 @@
 <script type="text/javascript" src="/js/materialize.js"></script>
 <script>
   // Materialize Initilaisation
+
   document.addEventListener('DOMContentLoaded', function() {
-    M.AutoInit();
-  })
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, {
+      coverTrigger: false,
+      hover: true
+    });
+  });
 
   document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.slider');
   var instances = M.Slider.init(elems, {
 
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {
+      
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    M.AutoInit();
+  });
 });
 </script>
 
 <!-- MathJax -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- Custom Init -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('top-nav');
+  var main = document.getElementById('main');
+  var footer = document.getElementById('footer');
+
+  function pageStructure () {
+    // main.style.marginTop = nav.getBoundingClientRect().height + "px";
+    main.style.marginBottom = footer.getBoundingClientRect().height + "px";
+  }
+
+  window.addEventListener('resize', pageStructure);
+  pageStructure();
+
+  console.log(nav, main, footer);
+})
+</script>
 
 <!-- Page Display -->
 <title>{{this.data.title}} ★ kouna.io</title>

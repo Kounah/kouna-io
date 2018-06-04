@@ -1,7 +1,7 @@
 {{this.data.id = uid(); undefined; }}
 <!-- BEGIN {{this.name}} -->
 <li>
-  <a href="#!" class="dropdown-trigger" data-target="{{this.data.id}}">{{this.data.name}}<i class="material-icons right">expand_more</i></a>
+  <a href="#!" class="dropdown-trigger waves-effect" data-target="{{this.data.id}}">{{this.data.name}}<i class="material-icons right">expand_more</i></a>
   <ul class="dropdown-content" id="{{this.data.id}}">
     {{
       this.data.subs.map(link => {
