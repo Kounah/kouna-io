@@ -8072,10 +8072,10 @@ input[type=range]::-ms-thumb {
 body:before {
   content: "";
   position: fixed;
-  width: 200%;
-  height: 200%;
-  top: -50%;
   left: -50%;
+  right: -50%;
+  bottom: -50%;
+  height: 200%;
   z-index: -1;
   background-color: #b0bec5;
   background-image: url(/img/svg/hexapat.svg);

@@ -4,10 +4,10 @@ body {
     content: "";
 
     position: fixed;
-    width: 200%;
-    height: 200%;
-    top: -50%;
     left: -50%;
+    right: -50%;
+    bottom: -50%;
+    height: 200%;
     z-index: -1;
 
     background-color: color("blue-grey", "lighten-3");
