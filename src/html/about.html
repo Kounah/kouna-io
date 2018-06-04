@@ -6,29 +6,41 @@
   <body>
     {{ new Component('nav', {links: config.links}).render() }}
 
-    <div class="background"> </div>
     <main id="main">
       <div class="container">
         <div class="row">
           <h1>About Me</h1>
-          <p class="flow-text">Hey there its me. <br>
-          What you don't know me, okay okay I'll introduce myself.
-          My name is Kouna, sometimes Kounah (because it was taken :/),
-          however I am {{
-            let moment = require('moment');
+          <div class="card">
+            <div class="card-content">
+              <p class="flow-text">Hey there its me. <br>
+                What you don't know me, okay okay I'll introduce myself.
+                My name is Kouna, sometimes Kounah (because it was taken :/),
+                however I am {{
+                  let moment = require('moment');
 
-            '' + Math.floor(moment.duration(moment() - moment('1999-07-05')).asDays());
-          }} Days old (Yeah days, deal with it). I also am a programmer, thats basically why this site exists and is as it is. I actually am more of a Gamer and Otku, bit since I cannot earn any money with that I decided to work as a programmer).
-          </p>
+                  '' + Math.floor(moment.duration(moment() - moment('1999-07-05')).asDays());
+                }} Days old (Yeah days, deal with it). I also am a programmer, thats basically why this site exists and is as it is. I actually am more of a Gamer and Otku, bit since I cannot earn any money with that I decided to work as a programmer).
+              </p>
 
-          <p class="flow-text">So thats enough about poor me, lets show you what I am into the most at this time, its a Game called Blade'n'Soul (Google it, links are expensive). So however thats an MMORPG all about martial arts an my char there is a Blade Dancer (cooler than Blade Masters because we are cute in addition)</p>
+              <p class="flow-text">So thats enough about poor me, lets show you what I am into the most at this time, its a Game called Blade'n'Soul (Google it, links are expensive). So however thats an MMORPG all about martial arts an my char there is a Blade Dancer (cooler than Blade Masters because we are cute in addition)</p>
+
+
+            </div>
+          </div>
 
           <img class="responsive-img" src="/img/kouna_by_Okotte-Neko.png">
 
-          <p class="flow-text">If you want to know who made this picture, it wasn't me but i can present you some links if you are really curious. <a href="#!">some link</a></p>
+          <div class="card">
+            <div class="card-content">
+              <p class="flow-text">If you want to know who made this picture, it wasn't me but i can present you some links if you are really curious. <a href="#!">some link</a></p>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>
+
+    <div id="footer-space"> </div>
 
     {{ new Component('footer').render()}}
   </body>
