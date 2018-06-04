@@ -14,8 +14,10 @@
     { "name": "Content",
       "subs": [
         { "name": "About Me",
-          "href": "/about" }
-        ]},
+          "href": "/about" },
+        { "name": "Anime",
+          "href": "/anime"}
+        ] },
     { "name": "Awesome Art!",
       "subs": [
         { "name": "About",

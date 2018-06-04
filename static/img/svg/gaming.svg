@@ -1,0 +1,34 @@
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <radialGradient cy="0.542969" cx="0.511719" gradientTransform="translate(0.003529094827586214,0) scale(0.993103448275862,1)" spreadMethod="pad" id="svg_17">
+   <stop offset="0" stop-color="#00ff90"/>
+   <stop offset="0.882813" stop-color="#ff006f"/>
+   <stop offset="0.984375" stop-color="#ff006f"/>
+  </radialGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" id="canvas_background" height="482" width="642" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect rx="20" id="svg_2" height="115" width="115" y="116" x="230.5" stroke-width="4" stroke="#17272f" fill="#27373f"/>
+  <rect rx="20" id="svg_4" height="115" width="115" y="246" x="144.5" stroke-width="4" stroke="#17272f" fill="#27373f"/>
+  <rect rx="20" id="svg_5" height="115" width="115" y="246" x="271.5" stroke-width="4" stroke="#17272f" fill="#27373f"/>
+  <rect rx="20" id="svg_6" height="115" width="115" y="246" x="400.5" stroke-width="4" stroke="#17272f" fill="#27373f"/>
+  <rect rx="10" id="svg_8" height="90" width="90" y="129" x="242.5" stroke-width="4" stroke="#37474f" fill="#47575f"/>
+  <rect rx="10" id="svg_9" height="90" width="90" y="260" x="156.5" stroke-width="4" stroke="#37474f" fill="#47575f"/>
+  <rect rx="10" id="svg_10" height="90" width="90" y="260" x="284.5" stroke-width="4" stroke="#37474f" fill="#47575f"/>
+  <rect rx="10" id="svg_11" height="90" width="90" y="261" x="412.5" stroke-width="4" stroke="#37474f" fill="#47575f"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_12" y="182" x="275.5" stroke-width="0" stroke="#37474f" fill="#00c8ff">W</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_13" y="315" x="319.5" stroke-width="0" stroke="#37474f" fill="#ff8000">S</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_14" y="312" x="191.5" stroke-width="0" stroke="#37474f" fill="#00ff90">A</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_15" y="311" x="450.5" stroke-width="0" stroke="#37474f" fill="#ff005d">D</text>
+  <ellipse id="svg_19" cy="83" cx="976.5" fill-opacity="0.35" stroke-opacity="0" stroke-width="4" stroke="#000000" fill="url(#svg_17)"/>
+  <ellipse id="svg_20" cy="57" cx="1223.5" fill-opacity="0.35" stroke-opacity="0" stroke-width="4" stroke="#000000" fill="url(#svg_17)"/>
+ </g>
+</svg>

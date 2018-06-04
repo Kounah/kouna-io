@@ -8069,15 +8069,36 @@ input[type=range]::-ms-thumb {
     margin-top: 1.2rem;
   }
 }
-body {
+body:before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -1;
   background-color: #b0bec5;
   background-image: url(/img/svg/hexapat.svg);
   background-repeat: repeat;
   background-blend-mode: overlay;
+  transform: rotate(20deg);
+  -webkit-transform: rotate(20deg);
 }
 
 main {
   min-height: calc(100vh - 64px);
+}
+main h1, main h2, main h3 {
+  background-color: #37474f;
+  color: white;
+  border-left: solid 4px #ff9800;
+  border-right: solid 4px #ff9800;
+  border-radius: 4px;
+  padding: 8px 20px;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25), 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+}
+main .card .card-image .card-title {
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.75), 1px 2px 3px rgba(0, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=static/css/materialize.css.map */
