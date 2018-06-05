@@ -7,6 +7,18 @@
  </g>
  <g>
   <title>Layer 1</title>
-  <polyline id="svg_1" points="55,0 55,32 0,64 0,128 55,160 55,192 55,160 110,128 110,64 55,32" stroke-width="8" stroke="rgba(0,0,0,0.25)" fill="none"/>
+  <polyline id="svg_1" points="55,0 55,32 0,64 0,128 55,160 55,192 55,160 110,128 110,64 55,32" stroke-width="8" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <!-- <polyline id="svg_1" points="5.5,0 5.5,3.2 0,6.4 0,12.8 5.5,16 5.5,19.2 5.5,16 11,12.8 11,6.4 5.5, 3,2" stroke-width="1" stroke="rgba(0,0,0,0.25)" fill="none"/> -->
+  <circle cx="55" cy="96" r="32" stroke-width="4" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <circle cx="0" cy="0" r="32" stroke-width="4" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <circle cx="110" cy="0" r="32" stroke-width="4" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <circle cx="0" cy="192" r="32" stroke-width="4" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <circle cx="110" cy="192" r="32" stroke-width="4" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+
+  <!-- <line x1="0" y1="0" x2="55" y2="32" stroke-width="2" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <line x1="110" y1="0" x2="55" y2="32" stroke-width="2" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <line x1="0" y1="128" x2="0" y2="192" stroke-width="2" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/>
+  <line x1="110" y1="128" x2="110" y2="192" stroke-width="2" stroke="rgba(0,0,0,1)" fill="none" shape-rendering="geometricPrecision"/> -->
+  <!-- <polyline id="svg_2" points="55,63 22.5,80" stroke-width="1" stroke="rgba(0,0,0,.25)" fill="none"/> -->
  </g>
 </svg>

@@ -1,21 +1,50 @@
+@keyframes spectrum {
+  0% {
+    background-color: hsl(0deg, 50%, 30%);
+  }
+  33% {
+    background-color: hsl(120deg, 50%, 30%);
+  }
+  66% {
+    background-color: hsl(240deg, 50%, 30%);
+  }
+  100% {
+    background-color: hsl(360deg, 50%, 30%);
+  }
+}
+
 body {
 
-  &:before {
-    content: "";
+  background-color: color("blue-grey", "darken-4");
+  background-image: url(/img/svg/hexapat2.svg);
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
+  background-attachment: fixed;
 
-    position: fixed;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
-    height: 200%;
-    z-index: -1;
+  -webkit-backface-visibility: hidden;
 
-    background-color: color("blue-grey", "lighten-3");
-    background-image: url(/img/svg/hexapat.svg);
-    background-repeat: repeat;
-    background-blend-mode: overlay;
-
-    transform: rotate(20deg);
-    -webkit-transform: rotate(20deg);
+  &.spectrum-background {
+    animation: spectrum 24s infinite;
   }
+
+  // &:before {
+  //
+  //   position: fixed;
+  //   left: -150%;
+  //   right: -150%;
+  //   bottom: -150%;
+  //   height: 400%;
+  //   z-index: -1;
+  //
+  //   background-color: color("blue-grey", "darken-2");
+  //   background-image: url(/img/svg/hexapat2.svg);
+  //   background-repeat: repeat;
+  //   background-blend-mode: overlay;
+  //
+  //   -webkit-backface-visibility: hidden;
+  //
+  //   // filter: blur(2px);
+  //   // transform: rotate(20deg);
+  //   // -webkit-transform: rotate(20deg);
+  // }
 }

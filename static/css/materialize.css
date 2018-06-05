@@ -2613,7 +2613,7 @@ a {
 }
 
 /* 2dp elevation modified*/
-.z-depth-1, .sidenav, .collapsible, .dropdown-content, .btn-floating, .btn, .btn-small, .btn-large, .toast, .card, .card-panel, nav {
+.z-depth-1, .sidenav, .collapsible, .dropdown-content, .btn-floating, .btn, .btn-small, .btn-large, .toast, .card, main h1, main h2, main h3, .card-panel, nav {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -2622,7 +2622,7 @@ a {
 }
 
 /* 6dp elevation modified*/
-.z-depth-2 {
+.z-depth-2, footer {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
@@ -3010,7 +3010,7 @@ table.responsive-table td {
 }
 .collection {
   margin: 0.5rem 0 1rem 0;
-  border: 1px solid #616161;
+  border: 1px solid #212121;
   border-radius: 2px;
   overflow: hidden;
   position: relative;
@@ -3020,7 +3020,7 @@ table.responsive-table td {
   line-height: 1.5rem;
   padding: 10px 20px;
   margin: 0;
-  border-bottom: 1px solid #616161;
+  border-bottom: 1px solid #212121;
 }
 .collection .collection-item.avatar {
   min-height: 84px;
@@ -3075,7 +3075,7 @@ table.responsive-table td {
 }
 .collection.with-header .collection-header {
   background-color: #263238;
-  border-bottom: 1px solid #616161;
+  border-bottom: 1px solid #212121;
   padding: 10px 20px;
 }
 .collection.with-header .collection-item {
@@ -4469,91 +4469,92 @@ small {
   padding: 24px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #37474f;
 }
 
-.card {
+.card, main h1, main h2, main h3 {
   position: relative;
   margin: 0.5rem 0 1rem 0;
-  background-color: #fff;
+  background-color: #37474f;
   transition: box-shadow 0.25s;
   border-radius: 2px;
+  color: #fff;
 }
-.card .card-title {
+.card .card-title, main h1 .card-title, main h2 .card-title, main h3 .card-title {
   font-size: 24px;
   font-weight: 300;
 }
-.card .card-title.activator {
+.card .card-title.activator, main h1 .card-title.activator, main h2 .card-title.activator, main h3 .card-title.activator {
   cursor: pointer;
 }
-.card.small, .card.medium, .card.large {
+.card.small, main h1.small, main h2.small, main h3.small, .card.medium, main h1.medium, main h2.medium, main h3.medium, .card.large, main h1.large, main h2.large, main h3.large {
   position: relative;
 }
-.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+.card.small .card-image, main h1.small .card-image, main h2.small .card-image, main h3.small .card-image, .card.medium .card-image, main h1.medium .card-image, main h2.medium .card-image, main h3.medium .card-image, .card.large .card-image, main h1.large .card-image, main h2.large .card-image, main h3.large .card-image {
   max-height: 60%;
   overflow: hidden;
 }
-.card.small .card-image + .card-content, .card.medium .card-image + .card-content, .card.large .card-image + .card-content {
+.card.small .card-image + .card-content, main h1.small .card-image + .card-content, main h2.small .card-image + .card-content, main h3.small .card-image + .card-content, .card.medium .card-image + .card-content, main h1.medium .card-image + .card-content, main h2.medium .card-image + .card-content, main h3.medium .card-image + .card-content, .card.large .card-image + .card-content, main h1.large .card-image + .card-content, main h2.large .card-image + .card-content, main h3.large .card-image + .card-content {
   max-height: 40%;
 }
-.card.small .card-content, .card.medium .card-content, .card.large .card-content {
+.card.small .card-content, main h1.small .card-content, main h2.small .card-content, main h3.small .card-content, .card.medium .card-content, main h1.medium .card-content, main h2.medium .card-content, main h3.medium .card-content, .card.large .card-content, main h1.large .card-content, main h2.large .card-content, main h3.large .card-content {
   max-height: 100%;
   overflow: hidden;
 }
-.card.small .card-action, .card.medium .card-action, .card.large .card-action {
+.card.small .card-action, main h1.small .card-action, main h2.small .card-action, main h3.small .card-action, .card.medium .card-action, main h1.medium .card-action, main h2.medium .card-action, main h3.medium .card-action, .card.large .card-action, main h1.large .card-action, main h2.large .card-action, main h3.large .card-action {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
 }
-.card.small {
+.card.small, main h1.small, main h2.small, main h3.small {
   height: 300px;
 }
-.card.medium {
+.card.medium, main h1.medium, main h2.medium, main h3.medium {
   height: 400px;
 }
-.card.large {
+.card.large, main h1.large, main h2.large, main h3.large {
   height: 500px;
 }
-.card.horizontal {
+.card.horizontal, main h1.horizontal, main h2.horizontal, main h3.horizontal {
   display: flex;
 }
-.card.horizontal.small .card-image, .card.horizontal.medium .card-image, .card.horizontal.large .card-image {
+.card.horizontal.small .card-image, main h1.horizontal.small .card-image, main h2.horizontal.small .card-image, main h3.horizontal.small .card-image, .card.horizontal.medium .card-image, main h1.horizontal.medium .card-image, main h2.horizontal.medium .card-image, main h3.horizontal.medium .card-image, .card.horizontal.large .card-image, main h1.horizontal.large .card-image, main h2.horizontal.large .card-image, main h3.horizontal.large .card-image {
   height: 100%;
   max-height: none;
   overflow: visible;
 }
-.card.horizontal.small .card-image img, .card.horizontal.medium .card-image img, .card.horizontal.large .card-image img {
+.card.horizontal.small .card-image img, main h1.horizontal.small .card-image img, main h2.horizontal.small .card-image img, main h3.horizontal.small .card-image img, .card.horizontal.medium .card-image img, main h1.horizontal.medium .card-image img, main h2.horizontal.medium .card-image img, main h3.horizontal.medium .card-image img, .card.horizontal.large .card-image img, main h1.horizontal.large .card-image img, main h2.horizontal.large .card-image img, main h3.horizontal.large .card-image img {
   height: 100%;
 }
-.card.horizontal .card-image {
+.card.horizontal .card-image, main h1.horizontal .card-image, main h2.horizontal .card-image, main h3.horizontal .card-image {
   max-width: 50%;
 }
-.card.horizontal .card-image img {
+.card.horizontal .card-image img, main h1.horizontal .card-image img, main h2.horizontal .card-image img, main h3.horizontal .card-image img {
   border-radius: 2px 0 0 2px;
   max-width: 100%;
   width: auto;
 }
-.card.horizontal .card-stacked {
+.card.horizontal .card-stacked, main h1.horizontal .card-stacked, main h2.horizontal .card-stacked, main h3.horizontal .card-stacked {
   display: flex;
   flex-direction: column;
   flex: 1;
   position: relative;
 }
-.card.horizontal .card-stacked .card-content {
+.card.horizontal .card-stacked .card-content, main h1.horizontal .card-stacked .card-content, main h2.horizontal .card-stacked .card-content, main h3.horizontal .card-stacked .card-content {
   flex-grow: 1;
 }
-.card.sticky-action .card-action {
+.card.sticky-action .card-action, main h1.sticky-action .card-action, main h2.sticky-action .card-action, main h3.sticky-action .card-action {
   z-index: 2;
 }
-.card.sticky-action .card-reveal {
+.card.sticky-action .card-reveal, main h1.sticky-action .card-reveal, main h2.sticky-action .card-reveal, main h3.sticky-action .card-reveal {
   z-index: 1;
   padding-bottom: 64px;
 }
-.card .card-image {
+.card .card-image, main h1 .card-image, main h2 .card-image, main h3 .card-image {
   position: relative;
 }
-.card .card-image img {
+.card .card-image img, main h1 .card-image img, main h2 .card-image img, main h3 .card-image img {
   display: block;
   border-radius: 2px 2px 0 0;
   position: relative;
@@ -4563,51 +4564,51 @@ small {
   bottom: 0;
   width: 100%;
 }
-.card .card-image .card-title {
-  color: #fff;
+.card .card-image .card-title, main h1 .card-image .card-title, main h2 .card-image .card-title, main h3 .card-image .card-title {
+  color: #37474f;
   position: absolute;
   bottom: 0;
   left: 0;
   max-width: 100%;
   padding: 24px;
 }
-.card .card-content {
+.card .card-content, main h1 .card-content, main h2 .card-content, main h3 .card-content {
   padding: 24px;
   border-radius: 0 0 2px 2px;
 }
-.card .card-content p {
+.card .card-content p, main h1 .card-content p, main h2 .card-content p, main h3 .card-content p {
   margin: 0;
 }
-.card .card-content .card-title {
+.card .card-content .card-title, main h1 .card-content .card-title, main h2 .card-content .card-title, main h3 .card-content .card-title {
   display: block;
   line-height: 32px;
   margin-bottom: 8px;
 }
-.card .card-content .card-title i {
+.card .card-content .card-title i, main h1 .card-content .card-title i, main h2 .card-content .card-title i, main h3 .card-content .card-title i {
   line-height: 32px;
 }
-.card .card-action {
+.card .card-action, main h1 .card-action, main h2 .card-action, main h3 .card-action {
   background-color: inherit;
   border-top: 1px solid rgba(160, 160, 160, 0.2);
   position: relative;
   padding: 16px 24px;
 }
-.card .card-action:last-child {
+.card .card-action:last-child, main h1 .card-action:last-child, main h2 .card-action:last-child, main h3 .card-action:last-child {
   border-radius: 0 0 2px 2px;
 }
-.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
+.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h1 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h2 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h3 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: #ffab40;
   margin-right: 24px;
   transition: color 0.3s ease;
   text-transform: uppercase;
 }
-.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h1 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h2 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h3 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
   color: #ffd8a6;
 }
-.card .card-reveal {
+.card .card-reveal, main h1 .card-reveal, main h2 .card-reveal, main h3 .card-reveal {
   padding: 24px;
   position: absolute;
-  background-color: #fff;
+  background-color: #37474f;
   width: 100%;
   overflow-y: auto;
   left: 0;
@@ -4616,7 +4617,7 @@ small {
   z-index: 3;
   display: none;
 }
-.card .card-reveal .card-title {
+.card .card-reveal .card-title, main h1 .card-reveal .card-title, main h2 .card-reveal .card-title, main h3 .card-reveal .card-title {
   cursor: pointer;
   display: block;
 }
@@ -8069,36 +8070,49 @@ input[type=range]::-ms-thumb {
     margin-top: 1.2rem;
   }
 }
-body:before {
-  content: "";
-  position: fixed;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  height: 200%;
-  z-index: -1;
-  background-color: #b0bec5;
-  background-image: url(/img/svg/hexapat.svg);
+@keyframes spectrum {
+  0% {
+    background-color: #732626;
+  }
+  33% {
+    background-color: #267326;
+  }
+  66% {
+    background-color: #262673;
+  }
+  100% {
+    background-color: #732626;
+  }
+}
+body {
+  background-color: #263238;
+  background-image: url(/img/svg/hexapat2.svg);
   background-repeat: repeat;
-  background-blend-mode: overlay;
-  transform: rotate(20deg);
-  -webkit-transform: rotate(20deg);
+  background-blend-mode: soft-light;
+  background-attachment: fixed;
+  -webkit-backface-visibility: hidden;
+}
+body.spectrum-background {
+  animation: spectrum 24s infinite;
 }
 
 main {
   min-height: calc(100vh - 64px);
 }
-main h1, main h2, main h3 {
-  background-color: #37474f;
-  color: white;
-  border-left: solid 4px #ff9800;
-  border-right: solid 4px #ff9800;
-  border-radius: 4px;
-  padding: 8px 20px;
-  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25), 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
-}
-main .card .card-image .card-title {
+main .card .card-image .card-title, main h1 .card-image .card-title, main h2 .card-image .card-title, main h3 .card-image .card-title {
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.75), 1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+main h1, main h2, main h3 {
+  border-top: solid 4px #ff9800;
+  padding: 24px;
+}
+
+footer {
+  background-image: url(/img/svg/hexapat2.svg);
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
+  background-attachment: scroll;
+  -webkit-backface-visibility: hidden;
 }
 
 /*# sourceMappingURL=static/css/materialize.css.map */

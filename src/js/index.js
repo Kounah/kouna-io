@@ -32,11 +32,16 @@ app.listen(port);
 app.get('/', (req, res) => {
   res.send(new Template('index').render());
 })
+//
+// app.get('/about', (req, res) => {
+//   res.send(new Template('about').render());
+// })
+//
+// app.get('/oko', (req, res) => {
+//   res.send(new Template('oko').render());
+// })
 
-app.get('/about', (req, res) => {
-  res.send(new Template('about').render());
-})
 
-app.get('/oko', (req, res) => {
-  res.send(new Template('oko').render());
+app.get('/*', (req, res) => {
+  res.send(new Template(req.path.substring(1, req.path.length)).render());
 })
