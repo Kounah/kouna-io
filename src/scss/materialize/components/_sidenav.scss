@@ -35,6 +35,10 @@
     float: none;
     line-height: $sidenav-line-height;
 
+    &.waves-effect {
+      display: block;
+    }
+
     &.active { background-color: rgba(0,0,0,.05); }
   }
 
