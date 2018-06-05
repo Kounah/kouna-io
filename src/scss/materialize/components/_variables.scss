@@ -165,9 +165,9 @@ $dropdown-item-height: 50px !default;
 
 // Text Inputs + Textarea
 $input-height: 3rem !default;
-$input-border-color: color("grey", "base") !default;
+$input-border-color: color("grey", "lighten-2") !default;
 $input-border: 1px solid $input-border-color !default;
-$input-background: #fff !default;
+$input-background: color("blue-grey", "darken-4") !default;
 $input-error-color: $error-color !default;
 $input-success-color: $success-color !default;
 $input-focus-color: $secondary-color !default;
@@ -182,6 +182,7 @@ $input-disabled-border: 1px dotted $input-disabled-color !default;
 $input-invalid-border: 1px solid $input-error-color !default;
 $input-icon-size: 2rem;
 $placeholder-text-color: lighten($input-border-color, 20%) !default;
+$input-font-color: #fff !default;
 
 // Radio Buttons
 $radio-fill-color: $secondary-color !default;

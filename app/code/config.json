@@ -1,7 +1,7 @@
 {
   "path": {
-    "htmlComponent": "src/html/components",
-    "htmlTemplate": "src/html"
+    "htmlComponent": "app/templates/components",
+    "htmlTemplate": "app/templates"
   },
   "web": {
     "paths": {

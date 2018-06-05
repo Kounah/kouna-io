@@ -5586,14 +5586,14 @@ button:focus {
 
 label {
   font-size: 0.8rem;
-  color: #9e9e9e;
+  color: #e0e0e0;
 }
 
 /* Text Inputs + Textarea
    ========================================================================== */
 /* Style Placeholders */
 ::placeholder {
-  color: #d1d1d1;
+  color: white;
 }
 
 /* Text inputs */
@@ -5610,9 +5610,10 @@ input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
+  color: #fff;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #9e9e9e;
+  border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   outline: none;
   height: 3rem;
@@ -5926,7 +5927,7 @@ textarea.materialize-textarea + label:after {
   width: calc(100% - 3rem - 1.5rem);
 }
 .input-field > label {
-  color: #9e9e9e;
+  color: #e0e0e0;
   position: absolute;
   top: 0;
   left: 0;
@@ -6008,7 +6009,7 @@ textarea.materialize-textarea + label:after {
   box-shadow: none;
 }
 .input-field input[type=search]:focus:not(.browser-default) {
-  background-color: #fff;
+  background-color: #263238;
   border: 0;
   box-shadow: none;
   color: #444;
@@ -6314,8 +6315,8 @@ textarea.materialize-textarea {
   height: 13px;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  border-right: 2px solid #263238;
+  border-bottom: 2px solid #263238;
   transform: rotateZ(37deg);
   transform-origin: 100% 100%;
 }
@@ -6469,7 +6470,7 @@ select {
   cursor: pointer;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #9e9e9e;
+  border-bottom: 1px solid #e0e0e0;
   outline: none;
   height: 3rem;
   line-height: 3rem;
@@ -6655,7 +6656,7 @@ input[type=range] + .thumb.active {
   border-radius: 50% 50% 50% 0;
 }
 input[type=range] + .thumb.active .value {
-  color: #fff;
+  color: #263238;
   margin-left: -1px;
   margin-top: 8px;
   font-size: 10px;

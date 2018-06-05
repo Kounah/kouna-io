@@ -16,6 +16,11 @@ module.exports = class Component {
     }
   }
 
+  context(context) {
+    this.context = context;
+    return this;
+  }
+
   render() {
     let regex = /([\ |\t]*?)\{\{([\s|\S]*?)\}\}/gm;
     let m;

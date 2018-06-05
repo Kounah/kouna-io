@@ -24,6 +24,8 @@ input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
 
   // General Styles
+  color: $input-font-color;
+
   background-color: transparent;
   border: none;
   border-bottom: $input-border;
