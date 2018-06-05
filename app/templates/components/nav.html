@@ -1,0 +1,41 @@
+<header>
+  <ul id="mobile-nav" class="sidenav">
+    {{
+      let directLinks = [];
+      let linksWithSubs = [];
+      this.data.links.forEach(link => {
+        if(link.href != undefined) {
+          directLinks.push(new Component('sidenav/link', link).render());
+        }
+        if(link.subs != undefined) {
+          linksWithSubs.push(link);
+        }
+      })
+
+      let result = [];
+      result.splice(0,0,directLinks);
+      result.push(new Component('sidenav/collapsed', {links: linksWithSubs}).render());
+
+      result.join('\n');
+    }}
+  </ul>
+  <nav class="nav-extended" id="top-nav">
+    <div class="nav-wrapper">
+      <ul class="left hide-on-large-only">
+        <li><a href="#!" data-target="mobile-nav" class="sidenav-trigger waves-effect"><i class="material-icons left">menu</i></a></li>
+      </ul>
+      <ul class="left hide-on-med-and-down">
+        {{
+          this.data.links.map(link => {
+            if(link.href != undefined) {
+              return new Component('nav/link', link).render();
+            }
+            if(link.subs != undefined) {
+              return new Component('nav/dropdown', link).render();
+            }
+          }).join('\n')
+        }}
+      </ul>
+    </div>
+  </nav>
+</header>
