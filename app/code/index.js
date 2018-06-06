@@ -88,6 +88,13 @@ app.get('/*', (req, res) => {
   }).context(req).render());
 });
 
+const Document = require('../models/document')
+app.get('/docs/*', (req, res) => {
+  let p = path.split(req.path);
+
+  res.send(p);
+})
+
 // express start
 app.listen(port);
 
