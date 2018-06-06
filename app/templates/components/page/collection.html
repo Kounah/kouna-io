@@ -1,0 +1,7 @@
+<ul class="collection">
+  {{
+    this.data.map(item => {
+      return new Component('page/collection-item', item).context(this.context).render();
+    }).join('\n');
+  }}
+</ul>

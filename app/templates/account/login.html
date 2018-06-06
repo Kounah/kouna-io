@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    {{  new Component('header', {
-          title: 'Login'
-        }).render(); }}
+    {{ new Component('header', { title: 'Login' }).render(); }}
   </head>
   <body>
-    {{  new Component('nav', {
-          links: config.links
-        }).render(); }}
+    {{ new Component('nav', {links: config.links}).context(this.context).render() }}
+
 
     {{
       (this.context.message != undefined && this.context.message.length > 0)
@@ -21,17 +18,17 @@
       <div class="container">
         <div class="row">
 
-          <div class="col s12 l8 offset-l2">
+          <div class="col s12">
             <h3>Login</h3>
           </div>
 
-          <div class="col s12 l8 offset-l2">
+          <div class="col s12">
             <div class="card">
               <div class="card-content">
                 <form class="" action="/login" method="post">
                   <div class="input-field">
-                    <input type="text" name="user" value="" tabindex="1">
-                    <label for="user">Email or username</label>
+                    <input type="email" name="email" value="" tabindex="1">
+                    <label for="user">Email</label>
                   </div>
                   <div class="input-field">
                     <input type="password" name="password" value="" tabindex="2">

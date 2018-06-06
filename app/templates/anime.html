@@ -4,7 +4,7 @@
     {{ new Component('header', {title: 'Anime'}).render()}}
   </head>
   <body>
-    {{ new Component('nav', {links: config.links}).render() }}
+    {{ new Component('nav', {links: config.links}).context(this.context).render() }}
 
     <main>
       <div class="container">

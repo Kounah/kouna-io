@@ -36,6 +36,32 @@
           }).join('\n')
         }}
       </ul>
+      <ul class="right hide-on-med-and-down">
+        {{
+          (this.context != undefined && this.context.user != undefined)
+          ? (
+            new Component('nav/link', {
+              href: '/profile',
+              name: this.context.user.local.email
+            }).render()
+            + '\n' +
+            new Component('nav/link', {
+              href: '/logout',
+              name: 'Logout'
+            }).render()
+          ) : (
+            new Component('nav/link', {
+              href: '/login',
+              name: 'Login'
+            }).render()
+            + '\n' +
+            new Component('nav/link', {
+              href: '/register',
+              name: 'Register'
+            }).render()
+          );
+        }}
+      </ul>
     </div>
   </nav>
 </header>

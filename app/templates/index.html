@@ -4,8 +4,8 @@
     {{ new Component('header', {title: 'Home'}).render() }}
   </head>
   <body>
-    {{ new Component('nav', {links: config.links}).render() }}
-
+    {{ new Component('nav', {links: config.links}).context(this.context).render() }}
+    
     <main id="main">
       <div class="container">
         <div class="row">
