@@ -23,5 +23,11 @@
         { "name": "About",
           "href": "/oko"}
         ]}
-  ]
+  ],
+  "docs": {
+    "itemsPerPage": 20,
+    "types": [
+      "markdown"
+    ]
+  }
 }

@@ -1,0 +1,6 @@
+<a {{this.data.href ? `href="${this.data.href}"` : ``}} class="btn-floating {{this.data.class ? this.data.class : ''}}" {{this.data.attr ? Object.keys(this.data.attr).map(key => {
+  return `${key}="${this.data.attr[key]}"`
+}).join(' ') : ''}}>
+  {{this.data.matIcon ? new Component('page/mat-icon', {icon: this.data.matIcon}).render() : ''}}
+  {{this.data.svgIcon ? new Component('page/svg-icon', {icon: this.data.svgIcon}).render() : ''}}
+</a>

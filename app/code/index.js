@@ -15,7 +15,7 @@ const serveStatic   = require('serve-static');
 const morgan        = require('morgan');
 const session       = require('express-session');
 
-const {dir} = require('./context');
+const {dir, config} = require('./context');
 
 // require local
 const configDB  = require(path.join(dir, 'config', 'database.js'));
@@ -37,8 +37,8 @@ require('../../config/passport')(passport);
 // express setup
 var app = express();
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(session({ secret: 'yattaneechansugeudesu'}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'yattaneechansugoidesu' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -82,22 +82,73 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 })
 
+app.get('/account/profile', (req, res) => {
+  isLoggedIn(req, res, () => {
+    res.send(new Template('account/profile').context(req).render());
+  })
+});
+
+const Document = require('../models/document')
+app.get('/docs/list', (req, res) => {
+  let page = req.query.page;
+  if(page == undefined) page = 0;
+
+  let query = undefined;
+  let sort = {title: 1};
+
+  if(req.query != undefined) {
+    if(req.query.name != undefined)
+      query.title = req.query.title
+    if(req.query.type != undefined)
+      query.type = req.query.type
+    if(req.query.sort != undefined)
+      sort = JSON.parse(req.query.sort)
+  }
+
+  Document.find(query).skip(config.docs.itemsPerPage * page).limit(config.docs.itemsPerPage).exec(function(err, docs) {
+    if(err) {
+      res.redirect('/docs/list');
+      throw(err);
+    }
+
+    res.send(new Template('docs/list', {items: docs, page: page}).context(req).render());
+  });
+})
+
+app.get('/docs/edit', (req, res) => {
+
+});
+
+app.post('/docs', (req, res) => {
+  if(req.isAuthenticated()) {
+    let newDoc = new Document();
+
+    newDoc.title = req.body.title;
+    newDoc.type  = req.body.type;
+    newDoc.owner = req.user._id;
+
+    newDoc.save(function(err) {
+      if (err) {
+        console.log(err);
+        throw err;
+        res.send(err);
+      }
+      res.redirect(`/docs/list?title=${newDoc.title}`)
+    })
+
+  } else {
+    res.redirect('/docs/list')
+  }
+})
+
 app.get('/*', (req, res) => {
   res.send(new Template(req.path.substring(1, req.path.length), {
 
   }).context(req).render());
 });
 
-const Document = require('../models/document')
-app.get('/docs/*', (req, res) => {
-  let p = path.split(req.path);
-
-  res.send(p);
-})
-
 // express start
 app.listen(port);
-
 
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()) {

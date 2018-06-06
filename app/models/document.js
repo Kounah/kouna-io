@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
-var userSchema = mongoose.Schema({
-  title       : String
-  language    : String
-  content     : String
+var docSchema = mongoose.Schema({
+  title       : String,
+  type        : String,
+  content     : String,
+  creator     : String,
+  topic       : String,
+  created     : String,
+  modified    : String,
   editors     : Array
 })
 
-module.exports = mongoose.model('Document', userSchema);
+module.exports = mongoose.model('Document', docSchema);

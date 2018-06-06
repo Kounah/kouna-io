@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    {{ new Component('header', { title: 'Login' }).render(); }}
+    {{ new Component('header', { title: this.context.user.email }).render(); }}
   </head>
   <body>
     {{ new Component('nav', {links: config.links}).context(this.context).render() }}

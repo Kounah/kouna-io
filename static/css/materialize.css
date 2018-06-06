@@ -5287,7 +5287,8 @@ body.keyboard-focused .dropdown-content li:focus {
   position: fixed;
   left: 0;
   right: 0;
-  background-color: #fafafa;
+  background-color: #37474f;
+  color: #fff;
   padding: 0;
   max-height: 70%;
   width: 55%;
@@ -8116,8 +8117,6 @@ footer {
   background-image: url(/img/svg/hexapat2.svg);
   background-repeat: repeat;
   background-blend-mode: soft-light;
-  background-attachment: scroll;
+  background-attachment: fixed;
   -webkit-backface-visibility: hidden;
 }
-
-/*# sourceMappingURL=static/css/materialize.css.map */

@@ -28,6 +28,7 @@
 //  22. Flow Text
 //  23. Collections
 //  24. Progress Bar
+//  25. Modal
 
 
 
@@ -349,3 +350,7 @@ $collection-line-height: 1.5rem !default;
 // ==========================================================================
 
 $progress-bar-color: $secondary-color !default;
+
+// 25. Modal
+$modal-background-color: color("blue-grey", "darken-3") !default;
+$modal-font-color: #fff;

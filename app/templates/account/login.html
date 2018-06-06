@@ -8,9 +8,9 @@
 
 
     {{
-      (this.context.message != undefined && this.context.message.length > 0)
+      (this.context.loginMessage != undefined && this.context.loginMessage.length > 0)
         ? new Component('toast', {
-            message: this.context.message
+            message: this.context.loginMessage
           }).render()
         : ''
     }}

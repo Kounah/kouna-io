@@ -8,10 +8,10 @@
 
     {{
       (this.context.message != undefined && this.context.message.length > 0)
-        ? new Component('toast', {
-            message: this.context.message
-          }).render()
-        : ''
+      ? new Component('toast', {
+          message: this.context.message
+        }).render()
+      : ''
     }}
     <main>
       <div class="container">
@@ -27,9 +27,7 @@
                 <div class="row">
                   <form id="registerForm" class="" action="/register" method="post">
                     <div class="input-field col s12">
-                      {{  new Component('forms/avatarupload', {
-                            name: 'pic'
-                          }).render(); }}
+                      {{  new Component('forms/avatarupload', { name: 'pic' }).render(); }}
                     </div>
 
                     <div class="input-field col s12 m6">
@@ -52,14 +50,16 @@
                     </div>
                     <div class="input-field col s12">
                       <script type="text/javascript">
-                      function submit() {
-                        var registerForm = document.getElementById('registerForm');
+                      var registerForm = document.getElementById('registerForm');
 
+                      var formSubmit = registerForm.submit;
+
+                      registerForm.submit = function() {
                         var pwdIn = document.getElementsByName('password')[0];
                         var pwdRepeatIn = document.getElementsByName('password_repeat')[0];
 
                         if(pwdIn.value == pwdRepeatIn.value) {
-                          registerForm.submit();
+                          formSubmit();
                         } else {
                           pwdIn.classList.add('invalid');
                           pwdRepeatIn.classList.add('invalid');

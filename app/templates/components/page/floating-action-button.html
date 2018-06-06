@@ -1,0 +1,15 @@
+<!-- {{this.name}} -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large {{this.data.class ? this.data.class : ''}}">
+    {{ this.data.matIcon ? new Component('page/mat-icon', {icon: this.data.matIcon}).render() : ''}}
+    {{ this.data.svgIcon ? new Component('page/svg-icon', {icon: this.data.svgIcon}).render() : ''}}
+  </a>
+  <ul>
+    {{
+      this.data.items.map(item => {
+        return '<li>' + new Component('page/floating-action-button-sub', item).context(this.context).render() + '</li>';
+      }).join('\n');
+    }}
+  </ul>
+</div>
+<!-- {{this.name}} -->
