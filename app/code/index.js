@@ -25,7 +25,7 @@ const Template  = require('./class/Template');
 const Component = require('./class/Component');
 
 // constant variables
-const port = process.env.port || 8080;
+const port = process.env.port || 8081;
 
 // require('../../config/passport.js')(passport);
 
