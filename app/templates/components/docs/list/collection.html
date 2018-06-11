@@ -1,0 +1,7 @@
+<ul class="collapsible">
+  {{
+    this.data.map(item => {
+      return new Component('docs/list/item', item).render();
+    }).join('\n')
+  }}
+</ul>

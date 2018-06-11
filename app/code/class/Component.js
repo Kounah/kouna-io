@@ -21,7 +21,16 @@ module.exports = class Component {
     return this;
   }
 
-  render() {
+  write(p) {
+    if(this.writes == undefined) this.writes = {};
+    if(this.curWrites == undefined) this.curWrites = [];
+
+    let id = uid();
+    this.curWrites.push(id);
+    this.writes[id] = p;
+  }
+
+  async render(callback) {
     let regex = /([\ |\t]*?)\{\{([\s|\S]*?)\}\}/gm;
     let m;
 
@@ -37,18 +46,27 @@ module.exports = class Component {
       m.forEach((match, groupIndex) => {
         try {
           let res = eval(match);
+
+          let asyncPlaceholders = '';
+          if(this.curWrites != undefined) asyncPlaceholders = this.curWrites.map(id => {
+            console.log(id);
+
+              this.content.split(`#${id}#`).join(writes[id]);
+            return `#${id}#`;
+          }).join('');
+
           if(res != undefined) {
-            this.content = this.content.split(fullMatch).join(spaces + ('' + res).split('\n').join('\n' + spaces));
+            this.content = this.content.split(fullMatch).join(spaces + (asyncPlaceholders + res).split('\n').join('\n' + spaces));
           } else {
-            this.content = this.content.split(fullMatch).join('');
+            this.content = this.content.split(fullMatch).join(asyncPlaceholders + '');
           }
         } catch (err) {
-          console.log(`${('[COMPONENT: ' + this.name + ']').magenta}${'[ERROR]'.red} failed to evaluate:\n${match}\n${('' + err).red}\n${err.stack}`)
+          console.log(`${('[COMPONENT: ' + this.name + ']').magenta}${'[ERROR]'.red} failed to evaluate:\n${match}\n${('' + err).red}\n${err.stack}`);
         }
       });
     }
 
-    // console.log(this.name, this.content)
-    return this.content;
+
+    callback(this.content);
   }
 }

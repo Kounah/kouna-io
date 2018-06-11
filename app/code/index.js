@@ -24,6 +24,10 @@ const configDB  = require(path.join(dir, 'config', 'database.js'));
 const Template  = require('./class/Template');
 const Component = require('./class/Component');
 
+// mongodb models
+
+const {User, Document} = require('./db');
+
 // constant variables
 const port = process.env.port || 8080;
 
@@ -88,12 +92,25 @@ app.get('/account/profile', (req, res) => {
   })
 });
 
-const Document = require('../models/document')
+app.post('/account/edit', (req, res) => {
+  User.findById(req.user._id, (err, user) => {
+    if(err)
+      throw err;
+
+    if(req.body.name != undefined)
+      user.set({'local.name': req.body.name});
+
+    user.save((err, updatedUser) => {
+      res.send(new Template('account/profile').context(req).render());
+    })
+  })
+})
+
 app.get('/docs/list', (req, res) => {
   let page = req.query.page;
   if(page == undefined) page = 0;
 
-  let query = undefined;
+  let query = {};
   let sort = {title: 1};
 
   if(req.query != undefined) {
@@ -105,6 +122,10 @@ app.get('/docs/list', (req, res) => {
       sort = JSON.parse(req.query.sort)
   }
 
+  Document.find().exec(function(err, docs) {
+    console.log(docs);
+  })
+
   Document.find(query).skip(config.docs.itemsPerPage * page).limit(config.docs.itemsPerPage).exec(function(err, docs) {
     if(err) {
       res.redirect('/docs/list');
@@ -115,6 +136,7 @@ app.get('/docs/list', (req, res) => {
   });
 })
 
+
 app.get('/docs/edit', (req, res) => {
 
 });
@@ -123,9 +145,12 @@ app.post('/docs', (req, res) => {
   if(req.isAuthenticated()) {
     let newDoc = new Document();
 
-    newDoc.title = req.body.title;
-    newDoc.type  = req.body.type;
-    newDoc.owner = req.user._id;
+    console.log(req.user._id);
+
+    newDoc.title    = req.body.title;
+    newDoc.type     = req.body.type;
+    newDoc.topic    = req.body.topic;
+    newDoc.creator  = req.user._id;
 
     newDoc.save(function(err) {
       if (err) {

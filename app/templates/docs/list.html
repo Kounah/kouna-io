@@ -8,9 +8,13 @@
 
     <main>
       <div class="container">
-        {{ this.data
-          ? '<div class="collection"></div>'
-          : '<div class="card"><div class="card-content"><p>There are no documents</p></div></div>' }}
+        {{
+          (this.data != undefined && this.data.items != undefined && JSON.stringify(this.data.items) != '[]')
+          ? new Component('docs/list/collection', this.data.items).context(this.context).renderAsync(content => {
+            this.write(content);
+          })
+          : `<div class="card"><div class="card-content"><p>There are no documents</p></div></div>`;
+        }}
       </div>
     </main>
 

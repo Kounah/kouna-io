@@ -1,0 +1,12 @@
+<li id="document-{{this.data._id}}">
+  <div class="collapsible-header">
+    {{ new Component('page/svg-icon', { icon: `filetypeicons/classic/${this.data.type}.svg`, class: 'left' }).render() }}
+    <b>{{this.data.title}}<b>
+      by
+      <i></i>
+  </div>
+  <div class="collapsible-body">
+    {{ const {User} = require('../db');
+      this.writeAsync(User.findById(this.data.creator).exec())}}
+  </div>
+</li>
