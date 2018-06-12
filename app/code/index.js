@@ -1,12 +1,12 @@
-const path      = require('path');
-const fs        = require('fs');
-const process   = require('process');
+const path          = require('path');
+const fs            = require('fs');
+const process       = require('process');
 
-const colors    = require('colors');
+const colors        = require('colors');
 
-const mongoose  = require('mongoose');
-const passport  = require('passport');
-const flash     = require('connect-flash');
+const mongoose      = require('mongoose');
+const passport      = require('passport');
+const flash         = require('connect-flash');
 
 const express       = require('express');
 const cookieParser  = require('cookie-parser');
@@ -15,14 +15,21 @@ const serveStatic   = require('serve-static');
 const morgan        = require('morgan');
 const session       = require('express-session');
 
-const {dir, config} = require('./context');
+const uid           = require('uid');
+
+const edge          = require('edge.js');
+
+const {
+  dir,
+  config
+  }                 = require('./context');
 
 // require local
-const configDB  = require(path.join(dir, 'config', 'database.js'));
+const configDB      = require(path.join(dir, 'config', 'database.js'));
 
 // class import
-const Template  = require('./class/Template');
-const Component = require('./class/Component');
+const Template      = require('./class/Template');
+const Component     = require('./class/Component');
 
 // constant variables
 const port = process.env.port || 8080;
@@ -48,9 +55,38 @@ app.use('/css', serveStatic(path.join(dir, 'static', 'css'), {}));
 app.use('/fonts', serveStatic(path.join(dir, 'static', 'fonts'), {}));
 app.use('/img', serveStatic(path.join(dir, 'static', 'img'), {}));
 
+// edge setup
+
+edge.configure({
+  cache: process.env.NODE_ENV === 'production'
+})
+
+edge.global('links', function() { return config.links });
+edge.global('uid', function() { return uid() });
+edge.global('selectIf', function(arr, condition) {
+  if(arr instanceof Array) return arr.map(item => {
+    if(function() { return eval(condition); }.bind(item)()) return item;
+  }).filter(function (n) { return n != undefined });
+});
+edge.global('path', path);
+edge.global('extend', function(obj1, obj2) {
+  if(typeof obj1 == 'Object' && typeof obj2 == 'Object') {
+    Object.keys.forEach(key => {
+      obj1[key] = obj2[key];
+    });
+    return obj1;
+  }
+})
+edge.global('formatDataTags', function(data) {
+  return Object.keys(data).map(key => {
+    return (key + '="' + data[key] + '"');
+  })
+})
+edge.registerViews(path.join(dir, 'views'));
+
 // express listeners
 app.get('/', (req, res) => {
-  res.send(new Template('index').context(req).render());
+  res.send(edge.render('index'));
 });
 
 app.get('/login', (req, res) => {

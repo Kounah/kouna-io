@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- GitHub Markdown -->
+    <link rel="stylesheet" href="/css/github-markdown.css" type="text/css">
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="/css/materialize.css" type="text/css" />
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems, {
+          coverTrigger: false,
+          hover: true
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.slider');
+      var instances = M.Slider.init(elems, {
+
+      });
+    });
+    </script>
+
+    <!-- MathJax -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+    <!-- Page Display -->
+    <title>
+      <span>
+        @!section('title')
+      </span>
+      <span> ★ kouna.io</span>
+    </title>
+    @if(themecolor)
+      <meta name="theme-color" content="{{themecolor}}">
+    @endif
+  </head>
+  <body>
+    <header>
+      @!component('components.sidenav', id = 'mobile-nav', items = links())
+      
+      <nav class="nav-extended" id="top-nav">
+        <div class="nav-wrapper">
+          <ul class="left hide-on-large-only">
+            <li><a href="#!" data-target="mobile-nav" class="sidenav-trigger waves-effect"><i class="material-icons left">menu</i></a></li>
+          </ul>
+          <ul class="left hide-on-med-and-down">
+            @each(item in links())
+              <li>{{ item }}</li>
+            @endeach
+          </ul>
+          <ul class="right hide-on-med-and-down">
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </body>
+</html>

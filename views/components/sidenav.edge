@@ -1,0 +1,11 @@
+<ul class="sidenav" id="{{id}}">
+  @each(item in selectIf(items, 'this.subs != undefined'))
+    @!component('components.sidenav.collapsible', item)
+  @endeach
+
+  @each(item in selectIf(items, 'this.href != undefined'))
+  <li>
+    @!component('components.page.link', item)
+  </li>
+  @endeach
+</ul>

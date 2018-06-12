@@ -1,0 +1,22 @@
+<!-- components.sidenav.collapsibleItem -->
+<li class="bold">
+  <a class="collapsible-header waves-effect">
+    @include('partials.itemIcon')
+    {{name}}
+    @!component('components.icons.material', classList = ["right"], name = 'expand_more')
+  </a>
+  <div class="collapsible-body">
+    <ul>
+      @each(item in subs)
+      <li>
+        @if(item.subs)
+          <!-- components.page.dropdown -->
+          @!component('components.sidenav.collapsible', item)
+        @else
+          <!-- components.page.link -->
+          @!component('components.page.link', item)
+        @endif
+      </li>
+      @endeach
+    </ul>
+  </div>

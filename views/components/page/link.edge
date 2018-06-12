@@ -1,0 +1,17 @@
+<a
+@if(href)
+href="{{ href}}"
+@endif
+@if(classnames)
+class="{{  classNames.join(' ') }}"
+@endif
+@if(target)
+target="{{ target }}"
+@endif
+@if(data)
+{{{ formatDataTags(data) }}}
+@endif
+>
+{{name}}
+@include('partials.itemIcon')
+</a>

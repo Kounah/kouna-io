@@ -1,0 +1,14 @@
+<!-- components.sidenav.collapsible -->
+<li class="no-padding">
+  <ul class="collapsible collapsible-accordion">
+    @each(item in selectIf(subs, 'this.subs != undefined'))
+      @!component('components.sidenav.collapsible', item)
+    @endeach
+
+    @each(item in selectIf(subs, 'this.href != undefined'))
+    <li>
+      @!component('components.page.link', item)
+    </li>
+    @endeach
+  </ul>
+</li>
