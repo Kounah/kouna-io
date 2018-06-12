@@ -32,6 +32,13 @@
       var instances = M.Slider.init(elems, {
 
       });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, {
+
+        });
+      });
     });
     </script>
 
@@ -40,10 +47,8 @@
 
     <!-- Page Display -->
     <title>
-      <span>
-        @!section('title')
-      </span>
-      <span> ★ kouna.io</span>
+      @!section('title')
+       ★ kouna.io
     </title>
     @if(themecolor)
       <meta name="theme-color" content="{{themecolor}}">
@@ -52,7 +57,7 @@
   <body>
     <header>
       @!component('components.sidenav', id = 'mobile-nav', items = links())
-      
+
       <nav class="nav-extended" id="top-nav">
         <div class="nav-wrapper">
           <ul class="left hide-on-large-only">
@@ -60,7 +65,13 @@
           </ul>
           <ul class="left hide-on-med-and-down">
             @each(item in links())
-              <li>{{ item }}</li>
+              <li>
+                @if(item.subs)
+                  @!component('components.page.dropdown', item)
+                @else
+                  @!component('components.page.link', item)
+                @endif
+              </li>
             @endeach
           </ul>
           <ul class="right hide-on-med-and-down">
@@ -68,5 +79,18 @@
         </div>
       </nav>
     </header>
+
+    <main>
+      <div class="container">
+        @if(messages)
+          <div class="row">
+            @!section('messages')
+          </div>
+        @endif
+        <div class="row">
+          @!section('content')
+        </div>
+      </div>
+    </main>
   </body>
 </html>

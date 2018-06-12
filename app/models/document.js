@@ -8,6 +8,7 @@ var docSchema = mongoose.Schema({
   topic       : String,
   created     : String,
   modified    : String,
+  visibility  : String,
   editors     : Array
 })
 

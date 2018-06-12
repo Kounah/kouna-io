@@ -1,6 +1,6 @@
 <!-- components.sidenav.collapsibleItem -->
 <li class="bold">
-  <a class="collapsible-header waves-effect">
+  <a class="collapsible-header waves-effect" tabindex="0">
     @include('partials.itemIcon')
     {{name}}
     @!component('components.icons.material', classList = ["right"], name = 'expand_more')
@@ -10,13 +10,12 @@
       @each(item in subs)
       <li>
         @if(item.subs)
-          <!-- components.page.dropdown -->
-          @!component('components.sidenav.collapsible', item)
+          @!component('components.page.dropdown', item)
         @else
-          <!-- components.page.link -->
           @!component('components.page.link', item)
         @endif
       </li>
       @endeach
     </ul>
   </div>
+</li>

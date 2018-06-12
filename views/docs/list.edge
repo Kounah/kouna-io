@@ -1,0 +1,13 @@
+@layout('default')
+
+@section('title')
+  Documents > List
+@endsection
+
+@section('content')
+  @if(items)
+    <pre><code>
+      {{ toJSON(items) }}
+    </code></pre>
+  @endif
+@endsection

@@ -21,7 +21,14 @@
     { "name": "Awesome Art!",
       "subs": [
         { "name": "About",
-          "href": "/oko"}
+          "href": "/oko" }
+        ]},
+    { "name": "Documents",
+      "subs": [
+        { "name": "List",
+          "href": "/docs/list" },
+        { "name": "My Docs",
+          "href": "/docs/my"}
         ]}
   ],
   "docs": {

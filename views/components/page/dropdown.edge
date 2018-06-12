@@ -1,0 +1,24 @@
+<!-- components.page.dropdown -->
+<a class="dropdown-trigger
+@if(classList)
+{{ classList.join(' ') }}
+@endif
+" href="#" data-target="dropdown-{{lowerCase(name).split(' ').join('-')}}">
+{{name}}
+@include('partials.itemIcon')
+</a>
+<ul class="dropdown-content" id="dropdown-{{lowerCase(name).split(' ').join('-')}}">
+   @each(item in subs)
+    @if(item.name === '-divider-')
+      <li class="divider" tabindex="-1"></li>
+    @else
+      <li>
+        @if(item.subs)
+          @!component('components.page.dropdown')
+        @else
+          @!component('components.page.link', item)
+        @endif
+      </li>
+    @endif
+   @endeach
+</ul>

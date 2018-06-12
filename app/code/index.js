@@ -31,6 +31,11 @@ const configDB      = require(path.join(dir, 'config', 'database.js'));
 const Template      = require('./class/Template');
 const Component     = require('./class/Component');
 
+// MongoDB models
+
+const Document      = require('../models/document');
+const User          = require('../models/user');
+
 // constant variables
 const port = process.env.port || 8080;
 
@@ -70,12 +75,12 @@ edge.global('selectIf', function(arr, condition) {
 });
 edge.global('path', path);
 edge.global('extend', function(obj1, obj2) {
-  if(typeof obj1 == 'Object' && typeof obj2 == 'Object') {
-    Object.keys.forEach(key => {
-      obj1[key] = obj2[key];
-    });
-    return obj1;
-  }
+  Object.keys(obj2).forEach(key => {
+    console.log(key);
+    obj1[key] = obj2[key];
+  });
+  console.log(obj1)
+  return obj1;
 })
 edge.global('formatDataTags', function(data) {
   return Object.keys(data).map(key => {
@@ -124,7 +129,6 @@ app.get('/account/profile', (req, res) => {
   })
 });
 
-const Document = require('../models/document')
 app.get('/docs/list', (req, res) => {
   let page = req.query.page;
   if(page == undefined) page = 0;
@@ -142,12 +146,12 @@ app.get('/docs/list', (req, res) => {
   }
 
   Document.find(query).skip(config.docs.itemsPerPage * page).limit(config.docs.itemsPerPage).exec(function(err, docs) {
+    res.send(edge.render('docs.list', {items: docs}))
+
     if(err) {
       res.redirect('/docs/list');
       throw(err);
     }
-
-    res.send(new Template('docs/list', {items: docs, page: page}).context(req).render());
   });
 })
 
@@ -162,6 +166,8 @@ app.post('/docs', (req, res) => {
     newDoc.title = req.body.title;
     newDoc.type  = req.body.type;
     newDoc.owner = req.user._id;
+
+    console.log(newDoc);
 
     newDoc.save(function(err) {
       if (err) {

@@ -8120,3 +8120,17 @@ footer {
   background-attachment: fixed;
   -webkit-backface-visibility: hidden;
 }
+
+.sidenav .collapsible-header {
+  padding: 0 32px;
+}
+
+.sidenav li > a > i.material-icons {
+  margin: 0 0 0 0;
+}
+
+.sidenav .collapsible-body > ul > li > a {
+  padding-left: 48px;
+}
+
+/*# sourceMappingURL=static/css/materialize.css.map */
