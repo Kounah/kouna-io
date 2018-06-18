@@ -45,7 +45,7 @@ var edge = require('edge.js');
 edge.registerViews(path.join(dir, './views'));
 
 edge.global('eval', function(code) {
-  return code;
+  return eval(code);
 })
 
 edge.global('filterArray', function(arr, cond) {
@@ -102,9 +102,13 @@ app.get('/jquery', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  res.send(new Template('account/login', {
-    message: req.flash('loginMessage')
-  }).context(req).render());
+  if(!req.isAuthenticated()) {
+    res.send(edge.render('page.account.login', def({
+      context: req
+    })));
+  } else {
+    res.redirect('/');
+  }
 });
 
 app.post('/login', passport.authenticate('local-login', {
