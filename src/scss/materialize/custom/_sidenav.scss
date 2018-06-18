@@ -1,0 +1,16 @@
+ul.sidenav  ul.collapsible > li {
+  & > a.collapsible-header {
+    padding: 0 ($sidenav-padding * 2) !important;
+  }
+}
+
+ul.sidenav a > .material-icons {
+  color: $secondary-color !important;
+
+  &.left {
+    margin-left: 0 !important;
+  }
+  &.right {
+    margin-right: 0 !important;
+  }
+}

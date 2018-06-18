@@ -43,3 +43,10 @@
   margin: 0;
   margin-right: 1rem;
 }
+
+.sidenav a > .material-icons {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/*# sourceMappingURL=static/css/style.css.map */

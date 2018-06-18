@@ -5,9 +5,11 @@ var docSchema = mongoose.Schema({
   type        : String,
   content     : String,
   creator     : String,
+  description : String,
   topic       : String,
   created     : String,
   modified    : String,
+  color       : String,
   editors     : Array
 })
 

@@ -1,4 +1,5 @@
 {
+  "NAMESPACE_UUID": "e74f40a0-730d-11e8-922a-d1d434980626",
   "path": {
     "htmlComponent": "app/templates/components",
     "htmlTemplate": "app/templates"
@@ -18,6 +19,11 @@
         { "name": "Anime",
           "href": "/anime"}
         ] },
+    { "name": "Documents",
+      "subs": [
+        { "name": "List",
+          "href": "/docs/list"}
+        ]},
     { "name": "Awesome Art!",
       "subs": [
         { "name": "About",
@@ -27,7 +33,15 @@
   "docs": {
     "itemsPerPage": 20,
     "types": [
-      "markdown"
+      "markdown",
+      "plain-text"
+    ],
+    "colors": [
+      "red",
+      "green",
+      "blue",
+      "yellow",
+      "default"
     ]
   }
 }

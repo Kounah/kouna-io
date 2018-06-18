@@ -5142,6 +5142,7 @@ button.btn-floating {
 .dropdown-content li.divider {
   min-height: 0;
   height: 1px;
+  background-color: #37474f;
 }
 .dropdown-content li > a, .dropdown-content li > span {
   font-size: 16px;
@@ -8120,3 +8121,19 @@ footer {
   background-attachment: fixed;
   -webkit-backface-visibility: hidden;
 }
+
+ul.sidenav ul.collapsible > li > a.collapsible-header {
+  padding: 0 32px !important;
+}
+
+ul.sidenav a > .material-icons {
+  color: #ff9800 !important;
+}
+ul.sidenav a > .material-icons.left {
+  margin-left: 0 !important;
+}
+ul.sidenav a > .material-icons.right {
+  margin-right: 0 !important;
+}
+
+/*# sourceMappingURL=static/css/materialize.css.map */

@@ -1,0 +1,28 @@
+@if(subs)
+<a href="#" class="dropdown-trigger" data-target="dropdown-{{ uuid(subs) }}">
+  @!component('component.icon', {type: 'material', key: 'expand_more', position: 'right'})
+  {{ name }}</a>
+<ul class="dropdown-content" id="dropdown-{{ uuid(subs) }}">
+  @each(sub in subs)
+  <li>
+    @if(sub.subs)
+      @!component('component.nav.item', sub)
+    @else
+      <a href="{{ sub.href }}">
+        @if(sub.icon)
+          @!component('component.icon', sub.icon)
+        @endif
+        {{ sub.name }}
+      </a>
+    @endif
+  </li>
+  @endeach
+</ul>
+@else
+<a href="{{ href }}">
+  @if(sub.icon)
+    @!component('component.icon', icon)
+  @endif
+  {{ name }}
+</a>
+@endif

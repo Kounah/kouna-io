@@ -1,0 +1,101 @@
+@layout('layout.master')
+
+@section('title')
+Documents
+@endsection
+
+@section('content')
+  @if(docs)
+  <div class="row">
+    @each(doc in docs)
+    <div class="col s12 m4 l3">
+      <div class="card {{doc.color}}">
+        <div class="card-image">
+          <img src="/docs/preview/{{doc._id}}" alt="">
+          <span class="card-title truncate">
+            @!component('component.icon', {type: 'svg-file-icon', tag: doc.type, position: 'left'})
+            <b>{{doc.title}}</b><span class="user-popup" data-user="{{doc.creator}}"></span></span>
+          @if(doc.creator && context.user && doc.creator == context.user._id)
+          <a class="btn-floating halfway-fab" href="/docs/edit/{{doc._id}}"><i class="material-icons">mode_edit</i></a>
+          @endif
+        </div>
+        <div class="card-content">
+          {{doc.description}}
+        </div>
+      </div>
+    </div>
+    @endeach
+  </div>
+  @else
+    <div class="card red">
+      <div class="card-content">
+        There are no documents
+      </div>
+    </div>
+  @endif
+
+  @if(context && context.user)
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large modal-trigger" data-target="modal-add">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+  <form action="/docs" method="post">
+    <div class="modal" id="modal-add">
+      <div class="modal-content">
+        <h4>Add new Doc</h4>
+        <div class="row">
+          <div class="col s12 m6">
+            <div class="input-field">
+              <input type="text" name="title" value="">
+              <label for="title">Title</label>
+            </div>
+            <div class="input-field">
+              <input type="text" name="topic" value="">
+              <label for="topic">Topic</label>
+            </div>
+          </div>
+          <div class="col s12 m6">
+            <div class="input-field">
+              <textarea class="materialize-textarea" name="description"></textarea>
+              <label for="description">Description</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="input-field">
+              <h5>Type</h5>
+              @each(type in types)
+              <p>
+                <label>
+                  <input type="radio" name="type" value="{{type}}" checked>
+                  <span>{{type}}</span>
+                </label>
+              </p>
+              @endeach
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <div class="input-field">
+              <h5>Color</h5>
+              @each(color in colors)
+              <p>
+                <label>
+                  <input type="radio" name="color" value="{{color}}" checked>
+                  <span>{{color}}</span>
+                </label>
+              </p>
+              @endeach
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <input class="waves-effect btn-flat" type="submit" name="" value="submit">
+      </div>
+    </div>
+  </form>
+  @endif
+@endsection

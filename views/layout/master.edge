@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Style & Scripts -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/materialize.css">
+    <script src="/js/materialize.js" charset="utf-8"></script>
+    <script src="/jquery" charset="utf-8"></script>
+    <script src="/js/kouna-jax.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
+
+        var dropdowns  = M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
+          coverTrigger: false,
+          hover: true,
+          constrainWidth: false
+        })
+
+        var slider = M.Slider.init(document.querySelectorAll('.slider'), {
+
+        })
+
+        var sidenavs = M.Sidenav.init(document.querySelectorAll('.sidenav'), {
+
+        })
+
+        var selects = M.FormSelect.init(document.querySelectorAll('select'), {
+
+        });
+
+        var collapsible = M.Collapsible.init(document.querySelectorAll('.collapsible'), {
+
+        })
+      })
+    </script>
+    <link rel="stylesheet" href="/css/github-markdown.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+
+    @if(themecolor)
+      <meta name="themecolor" content="{{themecolor}}">
+    @else
+      <meta name="themecolor" content="#27373f">
+    @endif
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+      @!section('title')
+      ★ kouna.io
+    </title>
+  </head>
+  <body>
+    <header>
+      @if(nav)
+        @!component('component.nav', items = nav, context = context)
+      @endif
+    </header>
+
+    <main>
+      @!section('content')
+    </main>
+
+    @!section('modal')
+
+    <footer class="page-footer" id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m4">
+            <h4>Pages</h4>
+            <div class="collection">
+              <a href="https://github.com/Kounah/kouna-io" class="collection-item">this page on github</a>
+            </div>
+          </div>
+          <div class="col s12 m4">
+            <h4>Resources</h4>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          <div class="col s12">
+            &copy;Kouna {{ eval('(new Date()).getFullYear()') }}
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

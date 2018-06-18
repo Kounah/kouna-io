@@ -30,6 +30,7 @@
     &.divider {
       min-height: 0;
       height: 1px;
+      background-color: $dropdown-divider-color
     }
 
     & > a, & > span {
