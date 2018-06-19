@@ -10,8 +10,8 @@
         console.log($(this).attr('data-user'), data);
         if(data != undefined) {
           $(this).text(data.local.name);
-          $(document.createElement('span')).text(' by ').insertBefore(this);
           $(document.createElement('br')).insertBefore(this);
+          $(document.createElement('span')).text(' by ').insertBefore(this);
         }
       }.bind(this)).fail(function() {
         $(this).text('user-' + $(this).attr('data-user')).css({display: 'none'});

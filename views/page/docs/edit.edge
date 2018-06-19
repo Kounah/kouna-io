@@ -1,0 +1,116 @@
+@layout('layout.master')
+
+@section('title')
+Settings {{doc.title}}
+@endsection
+
+@section('content')
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <h3>Settings <a href="#" class="btn modal-trigger right" data-target="modal-settings">
+        @!component('component.icon', {
+          type: 'material',
+          key: 'settings',
+          position: 'left'
+        })
+        Settings</a></h3>
+      @if(isCreator == true)
+      <div class="modal modal-fixed-footer" id="modal-settings">
+        <form class="" action="/docs/edit/{{doc._id}}/settings" method="post">
+          <div class="modal-content">
+            <h4>Settings of {{doc.title}}</h4>
+              <div class="row">
+                <div class="col s12 l10 offset-l1">
+                  <div class="input-field hide">
+                    <input type="text" name="_id" value="{{doc._id}}" required>
+                    <label for="_id">ID</label>
+                  </div>
+                  <div class="input-field">
+                    <input type="text" name="title" value="{{doc.title}}" required>
+                    <label for="title">Title</label>
+                  </div>
+                  <div class="input-field">
+                    <input type="text" name="topic" value="{{doc.topic}}" required>
+                    <label for="topic">Topic</label>
+                  </div>
+                  <div class="input-field">
+                    <textarea class="materialize-textarea" name="description">{{doc.description}}</textarea>
+                    <label for="description">Description</label>
+                  </div>
+                  <div class="input-field">
+                    <p>
+                      <label>
+                        <input type="checkbox" name="public"
+                        @if(doc.public == true)
+                        checked="checked"
+                        @endif
+                        >
+                        <span>Public Visible?<span>
+                      </label>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12 l5 offset-l1">
+                  <div class="input-field">
+                    <h5>Type</h5>
+                    @each(type in types)
+                    <p>
+                      <label>
+                        <input type="radio" name="type" value="{{type}}"
+                        @if(doc.type == type)
+                        checked
+                        @endif
+                        >
+                        <span>{{type}}</span>
+                      </label>
+                    </p>
+                    @endeach
+                  </div>
+                </div>
+                <div class="col s12 l5">
+                  <div class="input-field">
+                    <h5>Color</h5>
+                    @each(color in colors)
+                    <p>
+                      <label>
+                        <input type="radio" name="color" value="{{color}}"
+                        @if(doc.color == color)
+                        checked
+                        @endif
+                        >
+                        <span>{{color}}</span>
+                      </label>
+                    </p>
+                    @endeach
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input class="btn-flat waves-effect" type="submit" name="" value="Submit">
+            </div>
+          </form>
+        </div>
+      @endif
+    </div>
+    <div class="col s12 l6">
+      <div class="card {{doc.color}}">
+        <div class="card-content">
+          <span class="card-title">Content</span>
+          <form class="" action="/docs/edit/{{doc._id}}/content" method="post">
+            <textarea name="content" class="materialize-textarea"></textarea>
+            <label for="content">Content</label>
+          </form>
+        </div>
+      </div>
+    </div>
+    @if(doc.type == 'markdown')
+    <div class="col hide-on-med-and-down l6">
+    </div>
+    @endif
+  </div>
+</div>
+@endsection

@@ -1,8 +1,8 @@
 const path = require('path');
 const process = require('process');
 
-const dir = process.cwd();
-const config = require('./config.json');
+const dir = path.join(__dirname, '../..');
+const config = require('./config')(dir);
 
 console.log(dir);
 

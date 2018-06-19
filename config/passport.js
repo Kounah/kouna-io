@@ -14,8 +14,8 @@ module.exports = function(passport) {
   });
 
   passport.use('local-register', new LocalStrategy({
-    usernameField : 'email',
-    passwordField : 'password',
+    usernameField   : 'email',
+    passwordField   : 'password',
     passReqToCallback : true // allows us to pass back the entire request to the callback
   },
 
@@ -31,14 +31,18 @@ module.exports = function(passport) {
 
           var newUser = new User();
 
-          newUser.local.email = email;
-          newUser.local.name = req.body.name;
-          newUser.local.password = newUser.generateHash(password);
+          console.log('body'.red, req.body);
+
+          newUser.local.email         = email;
+          newUser.local.password      = newUser.generateHash(password);
+          newUser.local.name          = req.body.username;
+          newUser.local.first_name    = req.body.first_name;
+          newUser.local.last_name     = req.body.last_name;
 
           newUser.save(function(err) {
-              if (err)
-                  throw err;
-              return done(null, newUser);
+            if (err)
+                throw err;
+            return done(null, newUser);
           });
         }
       });

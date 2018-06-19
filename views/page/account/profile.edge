@@ -23,30 +23,45 @@ Account
       </span>
       <h4>Local</h4>
       <div class="row">
-        <div class="col s6">
-          <b>ID</b>
-        </div>
-        <div class="col s6 right">
-          {{context.user._id}}
-        </div>
-        <div class="col s6">
-          <b>Email</b>
-        </div>
-        <div class="col s6 right">
-          {{context.user.local.email}}
-        </div>
-        <div class="col s6">
-          <b>Name</b>
-        </div>
-        <div class="col s6 right">
-          {{context.user.local.name}}
-        </div>
-        <div class="col s6">
-          <b>PW Hash</b>
-        </div>
-        <div class="col s6 right">
-          {{context.user.local.password}}
-        </div>
+
+        <ul class="collection">
+          <li class="collection-item">
+            <b>ID</b>
+            <span class="right">
+              {{context.user._id}}
+            </span>
+          </li>
+          <li class="collection-item">
+            <b>Email</b>
+            <span class="right">
+              {{context.user.local.email}}
+            </span>
+          </li>
+          <li class="collection-item">
+            <b>PW Hash</b>
+            <span class="right">
+              {{context.user.local.password}}
+            </span>
+          </li>
+          <li class="collection-item">
+            <b>Name</b>
+            <span class="right">
+              {{context.user.local.name}}
+            </span>
+          </li>
+          <li class="collection-item">
+            <b>First Name</b>
+            <span class="right">
+              {{context.user.local.first_name}}
+            </span>
+          </li>
+          <li class="collection-item">
+            <b>Last Name</b>
+            <span class="right">
+              {{context.user.local.last_name}}
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

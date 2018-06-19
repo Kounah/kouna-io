@@ -1,0 +1,38 @@
+@layout('layout.master')
+
+@section('title')
+My Docs
+@endsection
+
+@section('content')
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <h1>My Docs <span class="right">{{count}}</span></h1>
+    </div>
+    @each(doc in docs)
+    <div class="col s12 m6 l4">
+      <div class="card {{doc.color}}">
+        <div class="card-content">
+          <div class="card-title">
+            @!component('component.icon', {
+              type: 'svg-file-icon',
+              key: toFileIcon(doc.type),
+              position: 'left'
+            })
+            <b>{{doc.title}}</b>
+          </div>
+          <p>{{doc.description}}</p>
+        </div>
+        <div class="card-action">
+          <a href="/docs/edit/{{doc._id}}">Edit</a>
+          <a href="/docs/clone/{{doc._id}}">Clone</a>
+          <a href="/docs/delete/{{doc._id}}">Delete</a>
+        </div>
+      </div>
+    </div>
+    </li>
+    @endeach
+  </div>
+</div>
+@endsection

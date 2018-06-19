@@ -7,10 +7,12 @@ var docSchema = mongoose.Schema({
   creator     : String,
   description : String,
   topic       : String,
-  created     : String,
-  modified    : String,
+  public      : Boolean,
+  created     : Date,
+  modified    : Date,
   color       : String,
-  editors     : Array
+  editors     : Array,
+  media       : Array
 })
 
 module.exports = mongoose.model('Document', docSchema);
