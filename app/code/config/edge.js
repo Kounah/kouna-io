@@ -29,4 +29,13 @@ module.exports = function(edge) {
   edge.global('toFileIcon', function(docType) {
     return config.docs.fileIcons[docType];
   })
+
+  edge.global('propertyRange', function(o) {
+    return Object.keys(o).map(key => {
+      return {
+        key:    key,
+        value:  o[key]
+      }
+    });
+  })
 }

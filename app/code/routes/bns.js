@@ -29,7 +29,7 @@ module.exports = function(app, passport, edge) {
 
           } else {
             curl.getJSON(abilityUrl, {}, function(abilityErr, abilityResponse, abilityData) {
-              if(abilityResponse.statusCode === 404) {
+              if(abilityData.result === 'fail') {
 
               } else {
                 curl.get(gearUrl, {}, function(gearErr, gearResponse, gearData) {
@@ -38,7 +38,7 @@ module.exports = function(app, passport, edge) {
                   } else {
                     let char = require('../bns/character-profile-builder')(profileBody, abilityData, gearData);
 
-                    console.log(char);
+                    char.region = region;
 
                     callback(char);
                   }
@@ -56,15 +56,23 @@ module.exports = function(app, passport, edge) {
   }
 
   app.get('/bns/profile', (req, res) => {
-    res.send(edge.render('page.bns.profile', def({
-      context: req
-    })))
+    if(req.query.region !== undefined
+    && req.query.char !== undefined) {
+      res.redirect(`/bns/profile/${req.query.region}/${req.query.char}`);
+    } else {
+      res.send(edge.render('page.bns.profile', def({
+        context: req
+      })))
+    }
   });
 
-  app.get('/bns/profile/:char', (req, res) => {
-    res.send(edge.render('page.bns.profile', def({
-      context: req
-    })))
+  app.get('/bns/profile/:region/:char', (req, res) => {
+    getCharByName(req.params.char, req.params.region, char => {
+      res.send(edge.render('page.bns.profile', def({
+        context : req,
+        char    : char
+      })))
+    })
   })
 
   app.get('/bns/api/data/character/:region/:char', (req, res) => {

@@ -35,6 +35,15 @@
 
         })
 
+        var tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
+        })
+
+        var htmlTooltips = Array.prototype.slice.call(document.querySelectorAll('.tooltipped.html')).map(function (elem) {
+          return M.Tooltip.init(elem, {
+            html: elem.getAttribute('data-tooltip')
+          });
+        })
+
         document.querySelectorAll('.svg-icon').forEach(function(elem) {
           elem.style.backgroundImage = 'url(' + elem.getAttribute('data-src') + ')';
         })

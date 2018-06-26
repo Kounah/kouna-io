@@ -5,33 +5,208 @@
 @endsection
 
 @section('content')
+  @if(char)
   <div class="row">
-    <div class="col">
+    <div class="col s12 m6 l3">
       <div class="card">
+        <div class="card-image">
+          <img src="{{char.general.avatar}}" alt="">
+          <span class="card-title">
+            <span class="tooltipped" data-position="top" data-tooltip="Accountname">{{char.general.account}}'s</span>
+            <span class="tooltipped" data-position="top" data-tooltip="Charactername">{{char.general.name}}</span>
+          </span>
+        </div>
         <div class="card-content">
-          <span class="card-title">Query</span>
-          <pre><code>{{ toJSON(context.query) }}</code></pre>
+          <div class="tooltipped" data-position="right" data-tooltip="Class">
+            <span>{{char.general.class}}</span>
+            <a href="/bns/list/{{char.region}}/0?class={{char.general.class}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Level">
+            <span>Level {{char.general.level}} Hongmoon {{char.general.hm}}</span>
+            <a href="/bns/list/{{char.region}}/0?level={{char.general.level}}&hm={{char.general.hm}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Server">
+            <span>{{char.general.server}}</span>
+            <a href="/bns/list/{{char.region}}/0?server={{char.general.server}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Faction">
+            <span>{{char.general.faction}}</span>
+            <a href="/bns/list/{{char.region}}/0?faction={{char.general.faction}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Clan">
+            <span>{{char.general.clan}}</span>
+            <a href="/bns/list/{{char.region}}/0?clan={{char.general.clan}}" class="right">
+              [...]
+            </a>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="col">
-      <div class="card">
+    <div class="col s12 m6 l3">
+      <div class="card" style="background-image: url(/img/bns/bgStat-attack.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
         <div class="card-content">
-          <span class="card-title">Path</span>
-          <pre><code>{{ toJSON(context.path) }}</code></pre>
+          <span class="card-title">Attack</span>
+          <ul class="collapsible collapsible-accordion">
+            @each(prop in propertyRange(char.stats.attack))
+              <li>
+                <div class="collapsible-header">
+
+                  <span>{{prop.value.name}}</span>
+                  <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                </div>
+                <div class="collapsible-body">
+                  <div>
+                    <span><b>Total</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Base</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.base}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Equip</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.equip}}</b></span>
+                  </div>
+                  @each(rate in prop.value.rate)
+                    <div class="tooltipped html" data-position="right" data-tooltip="<!-- {{prop.key}} - {{rate.name}} -->
+                    <h5 class='center'>{{rate.name}}</h5>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><b>Total</b></td>
+                          <td class='right green-text'>{{rate.total}}%</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.base}}</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.equip}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    ">
+                      <span><b>{{rate.name}}</b></span>
+                      <span class="badge right green-text">{{rate.total}}%</span>
+                    </div>
+                  @endeach
+                </div>
+              </li>
+            @endeach
+          </ul>
         </div>
       </div>
     </div>
-
-    <div class="col">
-      <div class="card">
+    <div class="col s12 m6 l3">
+      <div class="card" style="background-image: url(/img/bns/bgStat-defense.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
         <div class="card-content">
-          <span class="card-title">Params</span>
-          <pre><code>{{ toJSON(context.params) }}</code></pre>
+          <span class="card-title">Defense</span>
+          <ul class="collapsible collapsible-accordion">
+            @each(prop in propertyRange(char.stats.defend))
+              <li>
+                <div class="collapsible-header">
+
+                  <span>{{prop.value.name}}</span>
+                  <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                </div>
+                <div class="collapsible-body">
+                  <div>
+                    <span><b>Total</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Base</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.base}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Equip</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.equip}}</b></span>
+                  </div>
+                  @each(rate in prop.value.rate)
+                    <div class="tooltipped html" data-position="right" data-tooltip="<!-- {{prop.key}} - {{rate.name}} -->
+                    <h5 class='center'>{{rate.name}}</h5>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><b>Total</b></td>
+                          <td class='right green-text'>{{rate.total}}%</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.base}}</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.equip}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    ">
+                      <span><b>{{rate.name}}</b></span>
+                      <span class="badge right green-text">{{rate.total}}%</span>
+                    </div>
+                  @endeach
+                </div>
+              </li>
+            @endeach
+          </ul>
         </div>
       </div>
     </div>
-
+    <div class="col s12 m6 l3">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Gear Coming Soon</span>
+        </div>
+      </div>
+    </div>
   </div>
+  @else
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Character Search</span>
+            <form action="/bns/profile" method="get">
+              <div class="row">
+                <div class="col s4 m3 l2">
+                  <div class="input-field">
+                    <p>
+                      <label>
+                        <input type="radio" name="region" value="eu" checked>
+                        <span>Europe</span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input type="radio" name="region" value="na">
+                        <span>North America</span>
+                      </label>
+                    </p>
+                  </div>
+                </div>
+                <div class="col s8 m9 l10">
+                  <div class="input-field">
+                    <input type="text" name="char" value="">
+                    <label for="char">Character Name</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
 @endsection

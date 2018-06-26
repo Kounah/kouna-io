@@ -22,6 +22,7 @@ var BnsStat   = {
 };
 
 var bnsCharSchema = mongoose.Schema({
+  region      : String,
   general: {
     account   : String,
     name      : String,
@@ -60,7 +61,7 @@ var bnsCharSchema = mongoose.Schema({
       aoe_power       : {type: BnsStat}, // Stat
       pvp_power       : {type: BnsStat}, // Stat
       boss_power      : {type: BnsStat}, // Stat
-      debuff_power    : {type: BnsStat}, // Stat
+      debuff          : {type: BnsStat}, // Stat
       dodge           : {type: BnsStat}, // Stat
       parry           : {type: BnsStat}, // Stat
       critical        : {type: BnsStat}, // Stat
@@ -85,7 +86,7 @@ var bnsCharSchema = mongoose.Schema({
     outfit          : Object, // Outfit
     adornment       : Object, // Outfit
     head_adornment  : Object, // Outfit
-    face_adornment  : Object  //Outfit
+    face_adornment  : Object  // Outfit
   }
 });
 

@@ -27,8 +27,9 @@ module.exports = function(html, abilities, gear) {
     newChar.general.hm      = level[2] | 0;
     newChar.general.server  = info[2].textContent;
 
-    newChar.general.faction = info[3].textContent;
-    newChar.general.clan    = info[4].textContent;
+    newChar.general.faction = info[3] !== undefined ? info[3].textContent : '';
+    newChar.general.clan    = info[4] !== undefined ? info[4].textContent : '';
+    newChar.general.avatar  = d.querySelector('div.charaterView>img').getAttribute('src');
   }
 
   function getValues(name, displayName) {
@@ -141,6 +142,7 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.defend.power = new Stat({
       name:   "Defense",
       value:  getValues("defend_power_value"),
+      rate:   getValues("defend_physical_damage_reduce_rate", "Damage Reduction")
     });
     newChar.stats.defend.boss_power = new Stat({
       name:   "Boss Defense",
@@ -179,8 +181,13 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.defend.critical = new Stat({
       name:   "Critical Defense",
       value:  getValues("defend_critical_value"),
-      rate:    getValues("defend_critical_damage_rate", "Damage Reduction")
+      rate:   getValues("defend_critical_damage_rate", "Damage Reduction")
     });
+    newChar.stats.defend.damage_reduction = new Stat({
+      name:   "Damage Reduction",
+      value:  getValues("defend_damage_modify_diff"),
+      rate:   getValues("defend_damage_modify_rate", "Rate")
+    })
     newChar.stats.defend.willpower = new Stat({
       name:   "Willpower",
       value:  getValues("defend_stiff_duration_level")
@@ -190,7 +197,7 @@ module.exports = function(html, abilities, gear) {
       value:  getValues("hp_regen")
     });
     newChar.stats.defend.hp_regen_combat = new Stat({
-      name:   "HP Regen (Combat)",
+      name:   "HP Regen Combat",
       value:  getValues("hp_regen_combat")
     });
     newChar.stats.defend.heal_power = new Stat({
