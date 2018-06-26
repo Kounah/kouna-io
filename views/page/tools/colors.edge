@@ -1,0 +1,56 @@
+@layout('layout.master')
+
+@section('title')
+  Colors
+@endsection
+
+@section('content')
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m6 l4">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Colors</span>
+            <div class="row">
+              <div class="col s12 m6">
+                <div class="input-field">
+                  <input type="text" name="color" id="input-color" value="#fff">
+                  <label for="color">Color</label>
+                </div>
+              </div>
+              <div class="col s12 m6">
+                <div class="input-field">
+                  <input type="text" name="bg-color" id="input-bg-color" value="#000">
+                  <label for="bg-color">Background Color</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l8">
+        <div class="card" id="preview">
+          <div class="card-content">
+            <span class="card-title">Preview</span>
+            <p class="flow-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var color     = document.getElementById('input-color');
+  var bgColor   = document.getElementById('input-bg-color');
+  var preview   = document.getElementById('preview');
+  function setColor() {
+    preview.style.backgroundColor = bgColor.value;
+    preview.style.color = color.value;
+  }
+
+  color.onchange = setColor;
+  bgColor.onchange = setColor;
+  </script>
+@endsection

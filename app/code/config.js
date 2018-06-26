@@ -28,7 +28,12 @@ module.exports = function(dir) {
       subs: [
         { name: "About",
           href: "/oko"}
-        ]}
+        ]},
+    { name: "Tools",
+      subs: [
+        { name: "Colors",
+          href: "/tools/colors" }
+      ]}
   ];
 
   result.docs = {
