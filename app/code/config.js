@@ -33,6 +33,11 @@ module.exports = function(dir) {
       subs: [
         { name: "Colors",
           href: "/tools/colors" }
+      ]},
+    { name: "Blade & Soul",
+      subs: [
+        { name: "Profile",
+          href: "/bns/profile" }
       ]}
   ];
 

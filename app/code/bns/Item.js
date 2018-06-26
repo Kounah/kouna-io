@@ -1,7 +1,6 @@
 module.exports = class Item {
   constructor (props) {
-    this.name   = "";
-    this.rarity = new Number(0);
-    if(props != undefined)
+    this.name   = props.name | "";
+    this.rarity = props.rarity | new Number(0);
   }
 }

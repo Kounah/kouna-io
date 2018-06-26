@@ -25,6 +25,36 @@ var edge = require('edge.js');
 require('./config/edge')(edge);
 
 // express setup
-var app = require('./config/express')(passport, edge)
+// import modules
+const express       = require('express');
+const cookieParser  = require('cookie-parser');
+const bodyParser    = require('body-parser');
+const serveStatic   = require('serve-static');
+const morgan        = require('morgan');
+const session       = require('express-session');
+const flash         = require('connect-flash');
 
+const port = process.env.port || 8080;
+
+// instanciate app
+var app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ secret: 'yattaneechansugoidesu' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use('/js', serveStatic(path.join(dir, 'static', 'js'), {}));
+app.use('/css', serveStatic(path.join(dir, 'static', 'css'), {}));
+app.use('/fonts', serveStatic(path.join(dir, 'static', 'fonts'), {}));
+app.use('/img', serveStatic(path.join(dir, 'static', 'img'), {}));
+
+require('./routes')(app, passport, edge);
+
+app.listen(port);
+
+console.log(`magic happens on port: ` + port);
+
+// other
 asciify('kouna.io', {font: 'basic'}, function(err, res) { console.log(res.cyan) });

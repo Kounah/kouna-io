@@ -1,9 +1,25 @@
 const mongoose = require('mongoose');
+const Float    = require('mongoose-float');
 
 const Stat    = require('../code/bns/Stat');
 const Weapon  = require('../code/bns/Weapon');
 const Gear    = require('../code/bns/Gear');
 const Outfit  = require('../code/bns/Outfit')
+
+var BnsStat   = {
+  name        : String,
+  value       : {
+    total     : Number,
+    base      : Number,
+    equip     : Number
+  },
+  rate        : [{
+    name      : String,
+    total     : {type: Float},
+    base      : {type: Float},
+    equip     : {type: Float}
+  }]
+};
 
 var bnsCharSchema = mongoose.Schema({
   general: {
@@ -19,40 +35,40 @@ var bnsCharSchema = mongoose.Schema({
   },
   stats: {
     attack: {
-      power           : Object, // Stat
-      pvp_power       : Object, // Stat
-      boss_power      : Object, // Stat
-      pierce          : Object, // Stat
-      hit             : Object, // Stat
-      critical        : Object, // Stat
-      critical_damage : Object, // Stat
-      damage_modify   : Object, // Stat
-      fire            : Object, // Stat
-      ice             : Object, // Stat
-      wind            : Object, // Stat
-      earth           : Object, // Stat
-      lightning       : Object, // Stat
-      void            : Object, // Stat
-      debuff          : Object, // Stat
-      mastery         : Object, // Stat
-      concentrate     : Object, // Stat
-      hate            : Object, // Stat
+      power           : {type: BnsStat}, // Stat
+      pvp_power       : {type: BnsStat}, // Stat
+      boss_power      : {type: BnsStat}, // Stat
+      pierce          : {type: BnsStat}, // Stat
+      hit             : {type: BnsStat}, // Stat
+      critical        : {type: BnsStat}, // Stat
+      critical_damage : {type: BnsStat}, // Stat
+      damage_modify   : {type: BnsStat}, // Stat
+      fire            : {type: BnsStat}, // Stat
+      ice             : {type: BnsStat}, // Stat
+      wind            : {type: BnsStat}, // Stat
+      earth           : {type: BnsStat}, // Stat
+      lightning       : {type: BnsStat}, // Stat
+      void            : {type: BnsStat}, // Stat
+      debuff          : {type: BnsStat}, // Stat
+      mastery         : {type: BnsStat}, // Stat
+      concentrate     : {type: BnsStat}, // Stat
+      hate            : {type: BnsStat}  // Stat
     },
     defend: {
-      max_hp          : Object, // Stat
-      power           : Object, // Stat
-      aoe_power       : Object, // Stat
-      pvp_power       : Object, // Stat
-      boss_power      : Object, // Stat
-      debuff_power    : Object, // Stat
-      dodge           : Object, // Stat
-      parry           : Object, // Stat
-      critical        : Object, // Stat
-      damage_reduction: Object, // Stat
-      willpower       : Object, // Stat
-      hp_regen        : Object, // Stat
-      hp_regen_combat : Object, // Stat
-      heal_power      : Object  // Stat
+      max_hp          : {type: BnsStat}, // Stat
+      power           : {type: BnsStat}, // Stat
+      aoe_power       : {type: BnsStat}, // Stat
+      pvp_power       : {type: BnsStat}, // Stat
+      boss_power      : {type: BnsStat}, // Stat
+      debuff_power    : {type: BnsStat}, // Stat
+      dodge           : {type: BnsStat}, // Stat
+      parry           : {type: BnsStat}, // Stat
+      critical        : {type: BnsStat}, // Stat
+      damage_reduction: {type: BnsStat}, // Stat
+      willpower       : {type: BnsStat}, // Stat
+      hp_regen        : {type: BnsStat}, // Stat
+      hp_regen_combat : {type: BnsStat}, // Stat
+      heal_power      : {type: BnsStat}  // Stat
     }
   },
   gear: {

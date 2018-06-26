@@ -1,8 +1,35 @@
 const BnsChar = require('../../models/bnschar');
 const Stat = require('./Stat');
+const {JSDOM} = require('jsdom');
+
+const Float    = require('mongoose-float');
 
 module.exports = function(html, abilities, gear) {
   var newChar = new BnsChar();
+
+  console.log(abilities)
+
+  if(typeof html === 'string') {
+    d = new JSDOM(html).window.document;
+    var match;
+
+    newChar.general.account =
+      d.querySelector('#header>dl.signature>dt>a').textContent;
+    newChar.general.name =
+      d.querySelector('#header>dl.signature>dt>span.name').textContent.split(/[\[|\]]/).join('');
+    var info =
+      d.querySelectorAll('#header>dl.signature>dd.desc>ul>li');
+
+    newChar.general.class   = info[0].textContent;
+    var level               =
+      info[1].textContent.match(/Level\ ([0-9]{1,3})[\ \•\ HongmoonLevel ]*([0-9]{0,3})/);
+    newChar.general.level   = level[1] | 0;
+    newChar.general.hm      = level[2] | 0;
+    newChar.general.server  = info[2].textContent;
+
+    newChar.general.faction = info[3].textContent;
+    newChar.general.clan    = info[4].textContent;
+  }
 
   function getValues(name, displayName) {
     let result = {
@@ -16,7 +43,7 @@ module.exports = function(html, abilities, gear) {
     return result;
   }
 
-  if(typeof abilities === 'Object') {
+  if(typeof abilities === 'object') {
     // attack
     newChar.stats.attack.power = new Stat({
       name:   "Attack Power",
@@ -24,7 +51,7 @@ module.exports = function(html, abilities, gear) {
     });
     newChar.stats.attack.pvp_power = new Stat({
       name:   "PvP Attack Power",
-      value:  getValues("pc_attack_power_rate")
+      value:  getValues("pc_attack_power_value")
     });
     newChar.stats.attack.boss_power = new Stat({
       name:   "Boss Attack Power",
@@ -33,7 +60,7 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.attack.pierce = new Stat({
       name:   "Piercing",
       value:  getValues("attack_pierce_value"),
-      rates:  [
+      rate:   [
         getValues("attack_defend_pierce_rate", "Defense Piercing"),
         getValues("attack_parry_pierce_rate", "Block Piercing")
       ]
@@ -41,57 +68,57 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.attack.hit = new Stat({
       name:   "Accuracy",
       value:  getValues("attack_hit_value"),
-      rate:   getValues("attack_hit_rate", "Hit Rate")
+      rate:    getValues("attack_hit_rate", "Hit Rate")
     });
     newChar.stats.attack.critical = new Stat({
       name:   "Critical Hit",
       value:  getValues("attack_critical_value"),
-      rate:   getValues("attack_critical_rate", "Critical Rate")
+      rate:    getValues("attack_critical_rate", "Critical Rate")
     });
     newChar.stats.attack.critical_damage = new Stat({
       name:   "Critical Damage",
       value:  getValues("attack_critical_damage_value"),
-      rate:   getValues("attack_critical_damage_rate", "Damage Bonus")
+      rate:    getValues("attack_critical_damage_rate", "Damage Bonus")
     });
     newChar.stats.attack.damage_modify = new Stat({
       name:   "Additional Damage",
       value:  getValues("attack_damage_modify_diff"),
-      rate:   getValues("attack_damage_modify_rate")
+      rate:    getValues("attack_damage_modify_rate")
     });
     newChar.stats.attack.fire = new Stat({
       name:   "Flame Elemental",
       value:  getValues("attack_attribute_fire_value"),
-      rate:   getValues("attack_attribute_fire_rate"),
+      rate:    getValues("attack_attribute_fire_rate"),
     });
     newChar.stats.attack.ice = new Stat({
       name:   "Frost Elemental",
       value:  getValues("attack_attribute_ice_value"),
-      rate:   getValues("attack_attribute_ice_rate"),
+      rate:    getValues("attack_attribute_ice_rate"),
     });
     newChar.stats.attack.wind = new Stat({
       name:   "Wind Elemental",
       value:  getValues("attack_attribute_wind_value"),
-      rate:   getValues("attack_attribute_wind_rate"),
+      rate:    getValues("attack_attribute_wind_rate"),
     });
     newChar.stats.attack.earth = new Stat({
       name:   "Earth Elemental",
       value:  getValues("attack_attribute_earth_value"),
-      rate:   getValues("attack_attribute_earth_rate"),
+      rate:    getValues("attack_attribute_earth_rate"),
     });
     newChar.stats.attack.lightning = new Stat({
       name:   "Lightning Elemental",
       value:  getValues("attack_attribute_lightning_value"),
-      rate:   getValues("attack_attribute_lightning_rate"),
+      rate:    getValues("attack_attribute_lightning_rate"),
     });
     newChar.stats.attack.void = new Stat({
       name:   "Shadow Elemental",
       value:  getValues("attack_attribute_void_value"),
-      rate:   getValues("attack_attribute_void_rate"),
-    });#
+      rate:    getValues("attack_attribute_void_rate"),
+    });
     newChar.stats.attack.debuff = new Stat({
       name:   "Debuff Damage",
       value:  getValues("abnormal_attack_power_value"),
-      rate:   getValues("abnormal_attack_power_rate", "Damage Bonus")
+      rate:    getValues("abnormal_attack_power_rate", "Damage Bonus")
     });
     newChar.stats.attack.concentrate = new Stat({
       name:   "Concentration",
@@ -104,7 +131,7 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.attack.hate = new Stat({
       name:   "Threat",
       value:  getValues("hate_power_value"),
-      rate:   getValues("hate_power_rate", "Threat Rate")
+      rate:    getValues("hate_power_rate", "Threat Rate")
     });
 
     newChar.stats.defend.max_hp = new Stat({
@@ -118,41 +145,41 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.defend.boss_power = new Stat({
       name:   "Boss Defense",
       value:  getValues("boss_defend_power_value"),
-      rate:   getValues("boss_defend_power_rate", "Damage Reduction")
+      rate:    getValues("boss_defend_power_rate", "Damage Reduction")
     });
     newChar.stats.defend.pvp_power = new Stat({
       name:   "PvP Defense",
       value:  getValues("pc_defend_power_value"),
-      rate:   getValues("pc_defend_power_rate", "Damage Reduction")
+      rate:    getValues("pc_defend_power_rate", "Damage Reduction")
     });
     newChar.stats.defend.aoe_power = new Stat({
-      name:   "AOE Defense",
+      name:   "AoE Defense",
       value:  getValues("aoe_defend_power_value"),
-      rate:   getValues("aoe_defend_power_rate", "Damage Reduction")
+      rate:    getValues("aoe_defend_damage_reduce_rate", "Damage Reduction")
     });
     newChar.stats.defend.debuff = new Stat({
       name:   "Debuff Defense",
       value:  getValues("abnormal_defend_power_value"),
-      rate:  getValues("abnormal_defend_power_rate", "Damage Reduction")
+      rate:   getValues("abnormal_defend_power_rate", "Damage Reduction")
     });
     newChar.stats.defend.dodge = new Stat({
       name:   "Evasion",
       value:  getValues("defend_dodge_value"),
-      rate:  getValues("defend_dodge_rate", "Evade Chance")
+      rate:   getValues("defend_dodge_rate", "Evade Chance")
     });
     newChar.stats.defend.parry = new Stat({
       name:   "Block",
       value:  getValues("defend_parry_value"),
-      rates: [
+      rate:  [
         getValues("defend_parry_reduce_rate", "Damage Reduction"),
         getValues("perfect_parry_damage_reduce_rate", "Improve Block"),
         getValues("defend_parry_rate", "Block Rate")
       ]
     });
     newChar.stats.defend.critical = new Stat({
-      name:   "Critical Defense"
+      name:   "Critical Defense",
       value:  getValues("defend_critical_value"),
-      rate:   getValues("defend_critical_damage_rate", "Damage Reduction")
+      rate:    getValues("defend_critical_damage_rate", "Damage Reduction")
     });
     newChar.stats.defend.willpower = new Stat({
       name:   "Willpower",
@@ -169,8 +196,9 @@ module.exports = function(html, abilities, gear) {
     newChar.stats.defend.heal_power = new Stat({
       name:   "Recovery",
       value:  getValues("heal_power_value"),
-      rate:   getValues("heal_power_rate", "Recovery Chance")
+      rate:    getValues("heal_power_rate", "Recovery Chance")
     });
   }
 
+  return newChar;
 }

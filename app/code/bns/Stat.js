@@ -1,14 +1,15 @@
-module.exports = class Stat() {
-
+module.exports = class Stat {
   constructor(props) {
-    if(typeof props === 'Object') {
+    console.log(props);
+
+    if(props instanceof Object) {
 
       if(props.name !== undefined) {
         this.name = props.name;
       }
 
       if(props.value !== undefined) {
-        this.value {
+        this.value = {
           total   : props.value.total | new Number(0),
           base    : props.value.base  | new Number(0),
           equip   : props.value.equip | new Number(0)
@@ -30,28 +31,25 @@ module.exports = class Stat() {
       } */
 
       if(props.rate !== undefined) {
-        this.rate {
-          name    : props.rate.name   | this.name | "";
-          total   : props.rate.total  | new Number(0.0),
-          base    : props.rate.base   | new Number(0.0),
-          equip   : props.rate.equip  | new Number(0.0)
-        }
-      }
+        this.rate = [];
 
-      if(props.rates !== undefined) {
-        this.rates = [];
-        if(props.rates instanceof Array) {
-          props.rates.forEach(rate => {
-            this.rates.push({
-              name  : rate.name | this.name | "",
-              total : rate.total | new Number(0.0),
-              base  : rate.base | new Number(0.0),
-              equip : rate.equip | new Number(0.0)
-            })
+        if(props.rate instanceof Array) {
+          props.rate.forEach(r => {
+            console.log(r);
+            if(r.total    !== undefined
+              && r.base   !== undefined
+              && r.equip  !== undefined) {
+              this.rate.push(r)
+            }
           })
+        } else {
+          if(props.rate.total   !== undefined
+            && props.rate.base  !== undefined
+            && props.rate.equip !== undefined) {
+            this.rate.push(props.rate);
+          }
         }
       }
-
     }
   }
 }
