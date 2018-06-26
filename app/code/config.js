@@ -69,5 +69,7 @@ module.exports = function(dir) {
     path: path.join(dir, 'node_modules', 'ace-code-editor', 'dist')
   }
 
+  result.pageBase = 'http://kouna.io:8080'
+
   return result;
 }

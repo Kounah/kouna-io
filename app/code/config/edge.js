@@ -22,6 +22,14 @@ module.exports = function(edge) {
     return result;
   })
 
+  edge.global('config', function() {
+    return config;
+  })
+
+  edge.global('concatenate', function(arr) {
+    return arr.join('');
+  })
+
   edge.global('uuid', function(o) {
     return uuid(JSON.stringify(o), config.NAMESPACE_UUID)
   })

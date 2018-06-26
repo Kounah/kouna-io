@@ -4,6 +4,16 @@
   BnS Profile
 @endsection
 
+@section('meta')
+  @if(char)
+    <meta property="og:title" content="{{char.general.account}}'s {{char.general.name}} | kouna.io bns-profile">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Class: {{char.general.class}} | Level {{char.general.level}} HM {{char.general.hm}} | Server:  {{char.general.server}} | Faction: {{char.general.faction}} | Clan: {{char.general.clan}} | Atack Power: {{char.stats.attack.power.value.total}} | Crit Rate: {{char.stats.attack.critical.rate[0].total}}% | Crit Damage: {{char.stats.attack.critical_damage.rate[0].total}}% | Hit Rate: {{char.stats.attack.hit.rate[0].total}}% | HP: {{char.stats.defend.max_hp.value.total}}">
+    <meta property="og:image" content="{{char.general.avatar}}">
+    <meta property="og:url" content="{{config().pageBase}}{{context.req.path}}">
+  @endif
+@endsection
+
 @section('content')
   @if(char)
   <div class="row">
