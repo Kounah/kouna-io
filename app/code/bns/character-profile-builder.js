@@ -1,26 +1,21 @@
-<<<<<<< HEAD
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
 const curl = require('curl');
+const shell = require('shelljs');
 
-const {dir} = require('../config');
+const {dir} = require('../context');
 
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
 const BnsChar = require('../../models/bnschar');
 const Stat = require('./Stat');
 const {JSDOM} = require('jsdom');
 
 const Float    = require('mongoose-float');
 
-<<<<<<< HEAD
 const Item = require('./Item');
 const Gear = require('./Gear');
 const Weapon = require('./Weapon');
 
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
 module.exports = function(html, abilities, gear) {
   var newChar = new BnsChar();
 
@@ -222,7 +217,6 @@ module.exports = function(html, abilities, gear) {
       value:  getValues("heal_power_value"),
       rate:    getValues("heal_power_rate", "Recovery Chance")
     });
-<<<<<<< HEAD
 
     newChar.stats.points.offense    = abilities.records.point_ability.offense_point;
     newChar.stats.points.ap         = abilities.records.point_ability.attack_power_value;
@@ -241,6 +235,29 @@ module.exports = function(html, abilities, gear) {
   }
 
   if(typeof gear === 'string') {
+    function getIcon(icoUrl) {
+      var icon = icoUrl;
+      console.log('icoUrl', icoUrl);
+      console.log('icon', icon);
+
+      console.log('dir', dir)
+      var base = path.parse(url.parse(icon).pathname).base;
+      console.log('base', base);
+      var iconPath = path.join(dir, '.ignore', 'img', 'bns', 'item', base);
+      console.log('iconPath', iconPath);
+      if(!fs.existsSync(iconPath)) {
+        curl.get(icon, (err, res) => {
+          if(err) throw err;
+
+          shell.mkdir('-p', path.dirname(iconPath))
+
+          fs.writeFileSync(iconPath, res.body);
+        })
+      }
+
+      return '/content/img/bns/item/' + base;
+    }
+
     let d = new JSDOM(gear).window.document;
 
     function getWeapon(elem) {
@@ -251,17 +268,6 @@ module.exports = function(html, abilities, gear) {
         max: durArr[1] | 0
       };
 
-      function getIcon(icoUrl) {
-        var icon = icoUrl;
-        var iconPath = path.join(dir, '.ignore', 'img', 'bns', 'icons', path.parse(url.parse(weap.icon).pathname));
-        if(!fs.existsSync(iconPath)) {
-          curl.get(icon, (err, res) => {
-            if(err) throw err;
-
-            fs.writeFileSync(iconPath, res.body);
-          })
-        }
-      }
 
 
 
@@ -280,8 +286,6 @@ module.exports = function(html, abilities, gear) {
     }
 
     newChar.gear.weapon = getWeapon(d.querySelector('div.wrapWeapon'));
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
   }
 
   return newChar;

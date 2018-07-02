@@ -1,23 +1,15 @@
 module.exports = {
   itemRarity: {
     '1': {
-<<<<<<< HEAD
       name:   'Trash',
       color:  '#6c6c6c'
     },
     '2': {
       name:   'Common',
-=======
-      name:   'Trash'
       color:  '#6c6c6c'
     },
-    '2': {
-      name:   'Common'
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
-      color:  '#fff'
-    },
     '3': {
-      name:   'Uncommen',
+      name:   'Uncommon',
       color:  '#58ff77'
     },
     '4': {
@@ -40,7 +32,6 @@ module.exports = {
       name:   'Unknown',
       color:  '#8a7aff'
     }
-<<<<<<< HEAD
   },
   statIcon: {
     'Attack Power'        : 'stat icon attackPower',
@@ -75,7 +66,5 @@ module.exports = {
     'HP Regen'            : 'stat icon defenseRegen',
     'HP Regen Combat'     : 'stat icon defenseRegen',
     'Recovery'            : 'stat icon defenseRecovery'
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
   }
 }

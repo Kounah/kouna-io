@@ -49,6 +49,7 @@ app.use('/js', serveStatic(path.join(dir, 'static', 'js'), {}));
 app.use('/css', serveStatic(path.join(dir, 'static', 'css'), {}));
 app.use('/fonts', serveStatic(path.join(dir, 'static', 'fonts'), {}));
 app.use('/img', serveStatic(path.join(dir, 'static', 'img'), {}));
+app.use('/content', serveStatic(path.join(dir, '.ignore')))
 
 require('./routes')(app, passport, edge);
 

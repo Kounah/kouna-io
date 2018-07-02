@@ -21,7 +21,6 @@ var BnsStat   = {
   }]
 };
 
-<<<<<<< HEAD
 var BnsStatPick = {
   slot        : Number,
   name        : String,
@@ -44,8 +43,6 @@ BnsWeapon.dura = {
 };
 BnsWeapon.gems = [Object]
 
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
 var bnsCharSchema = mongoose.Schema({
   region      : String,
   general: {
@@ -95,7 +92,6 @@ var bnsCharSchema = mongoose.Schema({
       hp_regen        : {type: BnsStat}, // Stat
       hp_regen_combat : {type: BnsStat}, // Stat
       heal_power      : {type: BnsStat}  // Stat
-<<<<<<< HEAD
     },
     points: {
       offense         : Number,
@@ -126,25 +122,6 @@ var bnsCharSchema = mongoose.Schema({
     adornment       : {type: BnsGear}, // Outfit
     head_adornment  : {type: BnsGear}, // Outfit
     face_adornment  : {type: BnsGear}  // Outfit
-=======
-    }
-  },
-  gear: {
-    weapon          : Object, // Weapon
-    ring            : Object, // Gear
-    earring         : Object, // Gear
-    necklace        : Object, // Gear
-    bracelet        : Object, // Gear
-    belt            : Object, // Gear
-    glove           : Object, // Gear
-    soul            : Object, // Gear
-    heart           : Object, // Gear
-    pet             : Object, // Gear
-    outfit          : Object, // Outfit
-    adornment       : Object, // Outfit
-    head_adornment  : Object, // Outfit
-    face_adornment  : Object  // Outfit
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
   }
 });
 

@@ -1,10 +1,7 @@
 const {def} = require('../fn')
 const {BnsChar, User} = require('../db')
 const curl = require('curl');
-<<<<<<< HEAD
 const querystring = require('querystring');
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
 
 module.exports = function(app, passport, edge) {
   function getCharByName(name, region, callback) {
@@ -22,19 +19,12 @@ module.exports = function(app, passport, edge) {
         throw err;
 
       if(count <= 0) {
-<<<<<<< HEAD
         let qs  = querystring.stringify({c: name});
         console.log(qs)
         let url = 'http://' + region + '-bns.ncsoft.com/ingame/bs/'
         var profileUrl = url + 'character/profile?' + qs;
         var abilityUrl = url + 'character/data/abilities.json?' + qs;
         var gearUrl    = url + 'character/data/equipments?' + qs;
-=======
-        let url = 'http://' + region + '-bns.ncsoft.com/ingame/bs/'
-        var profileUrl = url + 'character/profile?c=' + name;
-        var abilityUrl = url + 'character/data/abilities.json?c=' + name
-        var gearUrl    = url + 'character/data/equipments?c=Kouna'
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
         curl.get(profileUrl, {}, function(profileErr, profileResponse, profileBody) {
           if(err) throw err;
 
