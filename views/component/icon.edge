@@ -2,6 +2,9 @@
   @if(type == 'material')
     <i class="material-icons {{ position }} {{ color }}">{{ key }}</i>
   @endif
+  @if(type == 'img-icon')
+    <i class="svg-icon" data-src="/img/{{key}}">
+  @endif
   @if(type == 'svg-file-icon')
     <i class="svg-icon" data-src="/img/icons/filetypeicons/classic/{{key}}.svg"></i>
   @endif

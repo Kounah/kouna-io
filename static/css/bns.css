@@ -1,0 +1,156 @@
+.stat.icon2 {
+  border: 1pt lime solid;
+  border-radius: 1pt;
+  text-align: center;
+  background-color: rgba(0, 255, 0, 0.5);
+}
+.stat.icon2 span {
+  color: lime;
+  font-size: 1.5em;
+}
+.stat.icon2.disabled {
+  opacity: 0.75;
+  border-color: grey;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+.stat.icon2.disabled span {
+  color: grey;
+}
+.stat.icon2::before {
+  content: "";
+  background-image: url(/img/bns/icStatSplit_v2.png);
+  background-repeat: no-repeat;
+  transform: scale(2);
+  height: 20px;
+  width: 20px;
+  margin-top: 10px;
+  max-width: 100%;
+  display: inline-block;
+}
+.stat.icon2.ap::before {
+  background-position: 50% 0;
+}
+.stat.icon2.threat::before {
+  background-position: 50% -20px;
+}
+.stat.icon2.move_speed::before {
+  background-position: 50% -40px;
+}
+.stat.icon2.dp::before {
+  background-position: 50% -80px;
+}
+.stat.icon2.regen::before {
+  background-position: 50% -100px;
+}
+.stat.icon2.hm_focus::before {
+  background-position: 50% -120px;
+}
+.stat.icon2.debuff::before {
+  background-position: 50% -60px;
+}
+.stat.icon {
+  width: 18px;
+  height: 18px;
+  transform: scale(1.5);
+  background-image: url(/img/bns/icStat.png);
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+.stat.icon.iconAttack1, .stat.icon.attackPower {
+  background-position: 0 0;
+}
+.stat.icon.iconAttack2 {
+  background-position: 0 -23px;
+}
+.stat.icon.iconAttack3, .stat.icon.attackPierce {
+  background-position: 0 -46px;
+}
+.stat.icon.iconAttack4, .stat.icon.attackHit {
+  background-position: 0 -69px;
+}
+.stat.icon.iconAttack5, .stat.icon.attackConcentration {
+  background-position: 0 -92px;
+}
+.stat.icon.iconAttack6, .stat.icon.attackCritHit {
+  background-position: 0 -115px;
+}
+.stat.icon.iconAttack7, .stat.icon.attackCritDmg {
+  background-position: 0 -138px;
+}
+.stat.icon.iconAttack8, .stat.icon.attackMastery {
+  background-position: 0 -161px;
+}
+.stat.icon.iconAttack9, .stat.icon.attackAddDmg {
+  background-position: 0 -184px;
+}
+.stat.icon.iconAttack10, .stat.icon.attackThreat {
+  background-position: 0 -207px;
+}
+.stat.icon.iconAttack11, .stat.icon.elementalFlame {
+  background-position: 0 -230px;
+}
+.stat.icon.iconAttack12, .stat.icon.elementalFrost {
+  background-position: 0 -253px;
+}
+.stat.icon.iconAttack13, .stat.icon.elementalWind {
+  background-position: 0 -276px;
+}
+.stat.icon.iconAttack14, .stat.icon.elementalEarth {
+  background-position: 0 -299px;
+}
+.stat.icon.iconAttack15, .stat.icon.elementalLightning {
+  background-position: 0 -322px;
+}
+.stat.icon.iconAttack16, .stat.icon.elementalDark {
+  background-position: 0 -345px;
+}
+.stat.icon.iconAttack17, .stat.icon.attackDebuff {
+  background-position: 0 -368px;
+}
+.stat.icon.iconAttack18, .stat.icon.attackPvP {
+  background-position: 0 -391px;
+}
+.stat.icon.iconAttack19, .stat.icon.attackBoss {
+  background-position: 0 -414px;
+}
+.stat.icon.iconDefense1, .stat.icon.defenseHP {
+  background-position: -19px 0;
+}
+.stat.icon.iconDefense2, .stat.icon.defensePower {
+  background-position: -19px -23px;
+}
+.stat.icon.iconDefense3 {
+  background-position: -19px -46px;
+}
+.stat.icon.iconDefense4, .stat.icon.defenseDodge {
+  background-position: -19px -69px;
+}
+.stat.icon.iconDefense5, .stat.icon.defenseBlock {
+  background-position: -19px -92px;
+}
+.stat.icon.iconDefense6, .stat.icon.defenseCritDef {
+  background-position: -19px -115px;
+}
+.stat.icon.iconDefense7, .stat.icon.defenseWillpower {
+  background-position: -19px -138px;
+}
+.stat.icon.iconDefense8, .stat.icon.defenseDmgRed {
+  background-position: -19px -161px;
+}
+.stat.icon.iconDefense9, .stat.icon.defenseRegen {
+  background-position: -19px -184px;
+}
+.stat.icon.iconDefense10, .stat.icon.defenseRecovery {
+  background-position: -19px -207px;
+}
+.stat.icon.iconDefense11, .stat.icon.defenseDebuff {
+  background-position: -19px -230px;
+}
+.stat.icon.iconDefense12, .stat.icon.defensePvP {
+  background-position: -19px -253px;
+}
+.stat.icon.iconDefense13, .stat.icon.defenseBoss {
+  background-position: -19px -276px;
+}
+
+/*# sourceMappingURL=static/css/bns.css.map */

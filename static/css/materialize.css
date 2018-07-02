@@ -2613,7 +2613,7 @@ a {
 }
 
 /* 2dp elevation modified*/
-.z-depth-1, .sidenav, .collapsible, .dropdown-content, .btn-floating, .btn, .btn-small, .btn-large, .toast, .card, main h1, main h2, main h3, .card-panel, nav {
+.z-depth-1, .sidenav, .collapsible, .dropdown-content, .btn-floating, .btn, .btn-small, .btn-large, .toast, .card, main h1.block, main h2.block, main h3.block, main h4.block, main h5.block, main h6.block, .card-panel, nav {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -4472,7 +4472,7 @@ small {
   background-color: #37474f;
 }
 
-.card, main h1, main h2, main h3 {
+.card, main h1.block, main h2.block, main h3.block, main h4.block, main h5.block, main h6.block {
   position: relative;
   margin: 0.5rem 0 1rem 0;
   background-color: #37474f;
@@ -4480,81 +4480,81 @@ small {
   border-radius: 2px;
   color: #fff;
 }
-.card .card-title, main h1 .card-title, main h2 .card-title, main h3 .card-title {
+.card .card-title, main h1.block .card-title, main h2.block .card-title, main h3.block .card-title, main h4.block .card-title, main h5.block .card-title, main h6.block .card-title {
   font-size: 24px;
   font-weight: 300;
 }
-.card .card-title.activator, main h1 .card-title.activator, main h2 .card-title.activator, main h3 .card-title.activator {
+.card .card-title.activator, main h1.block .card-title.activator, main h2.block .card-title.activator, main h3.block .card-title.activator, main h4.block .card-title.activator, main h5.block .card-title.activator, main h6.block .card-title.activator {
   cursor: pointer;
 }
-.card.small, main h1.small, main h2.small, main h3.small, .card.medium, main h1.medium, main h2.medium, main h3.medium, .card.large, main h1.large, main h2.large, main h3.large {
+.card.small, main h1.small.block, main h2.small.block, main h3.small.block, main h4.small.block, main h5.small.block, main h6.small.block, .card.medium, main h1.medium.block, main h2.medium.block, main h3.medium.block, main h4.medium.block, main h5.medium.block, main h6.medium.block, .card.large, main h1.large.block, main h2.large.block, main h3.large.block, main h4.large.block, main h5.large.block, main h6.large.block {
   position: relative;
 }
-.card.small .card-image, main h1.small .card-image, main h2.small .card-image, main h3.small .card-image, .card.medium .card-image, main h1.medium .card-image, main h2.medium .card-image, main h3.medium .card-image, .card.large .card-image, main h1.large .card-image, main h2.large .card-image, main h3.large .card-image {
+.card.small .card-image, main h1.small.block .card-image, main h2.small.block .card-image, main h3.small.block .card-image, main h4.small.block .card-image, main h5.small.block .card-image, main h6.small.block .card-image, .card.medium .card-image, main h1.medium.block .card-image, main h2.medium.block .card-image, main h3.medium.block .card-image, main h4.medium.block .card-image, main h5.medium.block .card-image, main h6.medium.block .card-image, .card.large .card-image, main h1.large.block .card-image, main h2.large.block .card-image, main h3.large.block .card-image, main h4.large.block .card-image, main h5.large.block .card-image, main h6.large.block .card-image {
   max-height: 60%;
   overflow: hidden;
 }
-.card.small .card-image + .card-content, main h1.small .card-image + .card-content, main h2.small .card-image + .card-content, main h3.small .card-image + .card-content, .card.medium .card-image + .card-content, main h1.medium .card-image + .card-content, main h2.medium .card-image + .card-content, main h3.medium .card-image + .card-content, .card.large .card-image + .card-content, main h1.large .card-image + .card-content, main h2.large .card-image + .card-content, main h3.large .card-image + .card-content {
+.card.small .card-image + .card-content, main h1.small.block .card-image + .card-content, main h2.small.block .card-image + .card-content, main h3.small.block .card-image + .card-content, main h4.small.block .card-image + .card-content, main h5.small.block .card-image + .card-content, main h6.small.block .card-image + .card-content, .card.medium .card-image + .card-content, main h1.medium.block .card-image + .card-content, main h2.medium.block .card-image + .card-content, main h3.medium.block .card-image + .card-content, main h4.medium.block .card-image + .card-content, main h5.medium.block .card-image + .card-content, main h6.medium.block .card-image + .card-content, .card.large .card-image + .card-content, main h1.large.block .card-image + .card-content, main h2.large.block .card-image + .card-content, main h3.large.block .card-image + .card-content, main h4.large.block .card-image + .card-content, main h5.large.block .card-image + .card-content, main h6.large.block .card-image + .card-content {
   max-height: 40%;
 }
-.card.small .card-content, main h1.small .card-content, main h2.small .card-content, main h3.small .card-content, .card.medium .card-content, main h1.medium .card-content, main h2.medium .card-content, main h3.medium .card-content, .card.large .card-content, main h1.large .card-content, main h2.large .card-content, main h3.large .card-content {
+.card.small .card-content, main h1.small.block .card-content, main h2.small.block .card-content, main h3.small.block .card-content, main h4.small.block .card-content, main h5.small.block .card-content, main h6.small.block .card-content, .card.medium .card-content, main h1.medium.block .card-content, main h2.medium.block .card-content, main h3.medium.block .card-content, main h4.medium.block .card-content, main h5.medium.block .card-content, main h6.medium.block .card-content, .card.large .card-content, main h1.large.block .card-content, main h2.large.block .card-content, main h3.large.block .card-content, main h4.large.block .card-content, main h5.large.block .card-content, main h6.large.block .card-content {
   max-height: 100%;
   overflow: hidden;
 }
-.card.small .card-action, main h1.small .card-action, main h2.small .card-action, main h3.small .card-action, .card.medium .card-action, main h1.medium .card-action, main h2.medium .card-action, main h3.medium .card-action, .card.large .card-action, main h1.large .card-action, main h2.large .card-action, main h3.large .card-action {
+.card.small .card-action, main h1.small.block .card-action, main h2.small.block .card-action, main h3.small.block .card-action, main h4.small.block .card-action, main h5.small.block .card-action, main h6.small.block .card-action, .card.medium .card-action, main h1.medium.block .card-action, main h2.medium.block .card-action, main h3.medium.block .card-action, main h4.medium.block .card-action, main h5.medium.block .card-action, main h6.medium.block .card-action, .card.large .card-action, main h1.large.block .card-action, main h2.large.block .card-action, main h3.large.block .card-action, main h4.large.block .card-action, main h5.large.block .card-action, main h6.large.block .card-action {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
 }
-.card.small, main h1.small, main h2.small, main h3.small {
+.card.small, main h1.small.block, main h2.small.block, main h3.small.block, main h4.small.block, main h5.small.block, main h6.small.block {
   height: 300px;
 }
-.card.medium, main h1.medium, main h2.medium, main h3.medium {
+.card.medium, main h1.medium.block, main h2.medium.block, main h3.medium.block, main h4.medium.block, main h5.medium.block, main h6.medium.block {
   height: 400px;
 }
-.card.large, main h1.large, main h2.large, main h3.large {
+.card.large, main h1.large.block, main h2.large.block, main h3.large.block, main h4.large.block, main h5.large.block, main h6.large.block {
   height: 500px;
 }
-.card.horizontal, main h1.horizontal, main h2.horizontal, main h3.horizontal {
+.card.horizontal, main h1.horizontal.block, main h2.horizontal.block, main h3.horizontal.block, main h4.horizontal.block, main h5.horizontal.block, main h6.horizontal.block {
   display: flex;
 }
-.card.horizontal.small .card-image, main h1.horizontal.small .card-image, main h2.horizontal.small .card-image, main h3.horizontal.small .card-image, .card.horizontal.medium .card-image, main h1.horizontal.medium .card-image, main h2.horizontal.medium .card-image, main h3.horizontal.medium .card-image, .card.horizontal.large .card-image, main h1.horizontal.large .card-image, main h2.horizontal.large .card-image, main h3.horizontal.large .card-image {
+.card.horizontal.small .card-image, main h1.horizontal.small.block .card-image, main h2.horizontal.small.block .card-image, main h3.horizontal.small.block .card-image, main h4.horizontal.small.block .card-image, main h5.horizontal.small.block .card-image, main h6.horizontal.small.block .card-image, .card.horizontal.medium .card-image, main h1.horizontal.medium.block .card-image, main h2.horizontal.medium.block .card-image, main h3.horizontal.medium.block .card-image, main h4.horizontal.medium.block .card-image, main h5.horizontal.medium.block .card-image, main h6.horizontal.medium.block .card-image, .card.horizontal.large .card-image, main h1.horizontal.large.block .card-image, main h2.horizontal.large.block .card-image, main h3.horizontal.large.block .card-image, main h4.horizontal.large.block .card-image, main h5.horizontal.large.block .card-image, main h6.horizontal.large.block .card-image {
   height: 100%;
   max-height: none;
   overflow: visible;
 }
-.card.horizontal.small .card-image img, main h1.horizontal.small .card-image img, main h2.horizontal.small .card-image img, main h3.horizontal.small .card-image img, .card.horizontal.medium .card-image img, main h1.horizontal.medium .card-image img, main h2.horizontal.medium .card-image img, main h3.horizontal.medium .card-image img, .card.horizontal.large .card-image img, main h1.horizontal.large .card-image img, main h2.horizontal.large .card-image img, main h3.horizontal.large .card-image img {
+.card.horizontal.small .card-image img, main h1.horizontal.small.block .card-image img, main h2.horizontal.small.block .card-image img, main h3.horizontal.small.block .card-image img, main h4.horizontal.small.block .card-image img, main h5.horizontal.small.block .card-image img, main h6.horizontal.small.block .card-image img, .card.horizontal.medium .card-image img, main h1.horizontal.medium.block .card-image img, main h2.horizontal.medium.block .card-image img, main h3.horizontal.medium.block .card-image img, main h4.horizontal.medium.block .card-image img, main h5.horizontal.medium.block .card-image img, main h6.horizontal.medium.block .card-image img, .card.horizontal.large .card-image img, main h1.horizontal.large.block .card-image img, main h2.horizontal.large.block .card-image img, main h3.horizontal.large.block .card-image img, main h4.horizontal.large.block .card-image img, main h5.horizontal.large.block .card-image img, main h6.horizontal.large.block .card-image img {
   height: 100%;
 }
-.card.horizontal .card-image, main h1.horizontal .card-image, main h2.horizontal .card-image, main h3.horizontal .card-image {
+.card.horizontal .card-image, main h1.horizontal.block .card-image, main h2.horizontal.block .card-image, main h3.horizontal.block .card-image, main h4.horizontal.block .card-image, main h5.horizontal.block .card-image, main h6.horizontal.block .card-image {
   max-width: 50%;
 }
-.card.horizontal .card-image img, main h1.horizontal .card-image img, main h2.horizontal .card-image img, main h3.horizontal .card-image img {
+.card.horizontal .card-image img, main h1.horizontal.block .card-image img, main h2.horizontal.block .card-image img, main h3.horizontal.block .card-image img, main h4.horizontal.block .card-image img, main h5.horizontal.block .card-image img, main h6.horizontal.block .card-image img {
   border-radius: 2px 0 0 2px;
   max-width: 100%;
   width: auto;
 }
-.card.horizontal .card-stacked, main h1.horizontal .card-stacked, main h2.horizontal .card-stacked, main h3.horizontal .card-stacked {
+.card.horizontal .card-stacked, main h1.horizontal.block .card-stacked, main h2.horizontal.block .card-stacked, main h3.horizontal.block .card-stacked, main h4.horizontal.block .card-stacked, main h5.horizontal.block .card-stacked, main h6.horizontal.block .card-stacked {
   display: flex;
   flex-direction: column;
   flex: 1;
   position: relative;
 }
-.card.horizontal .card-stacked .card-content, main h1.horizontal .card-stacked .card-content, main h2.horizontal .card-stacked .card-content, main h3.horizontal .card-stacked .card-content {
+.card.horizontal .card-stacked .card-content, main h1.horizontal.block .card-stacked .card-content, main h2.horizontal.block .card-stacked .card-content, main h3.horizontal.block .card-stacked .card-content, main h4.horizontal.block .card-stacked .card-content, main h5.horizontal.block .card-stacked .card-content, main h6.horizontal.block .card-stacked .card-content {
   flex-grow: 1;
 }
-.card.sticky-action .card-action, main h1.sticky-action .card-action, main h2.sticky-action .card-action, main h3.sticky-action .card-action {
+.card.sticky-action .card-action, main h1.sticky-action.block .card-action, main h2.sticky-action.block .card-action, main h3.sticky-action.block .card-action, main h4.sticky-action.block .card-action, main h5.sticky-action.block .card-action, main h6.sticky-action.block .card-action {
   z-index: 2;
 }
-.card.sticky-action .card-reveal, main h1.sticky-action .card-reveal, main h2.sticky-action .card-reveal, main h3.sticky-action .card-reveal {
+.card.sticky-action .card-reveal, main h1.sticky-action.block .card-reveal, main h2.sticky-action.block .card-reveal, main h3.sticky-action.block .card-reveal, main h4.sticky-action.block .card-reveal, main h5.sticky-action.block .card-reveal, main h6.sticky-action.block .card-reveal {
   z-index: 1;
   padding-bottom: 64px;
 }
-.card .card-image, main h1 .card-image, main h2 .card-image, main h3 .card-image {
+.card .card-image, main h1.block .card-image, main h2.block .card-image, main h3.block .card-image, main h4.block .card-image, main h5.block .card-image, main h6.block .card-image {
   position: relative;
 }
-.card .card-image img, main h1 .card-image img, main h2 .card-image img, main h3 .card-image img {
+.card .card-image img, main h1.block .card-image img, main h2.block .card-image img, main h3.block .card-image img, main h4.block .card-image img, main h5.block .card-image img, main h6.block .card-image img {
   display: block;
   border-radius: 2px 2px 0 0;
   position: relative;
@@ -4564,7 +4564,7 @@ small {
   bottom: 0;
   width: 100%;
 }
-.card .card-image .card-title, main h1 .card-image .card-title, main h2 .card-image .card-title, main h3 .card-image .card-title {
+.card .card-image .card-title, main h1.block .card-image .card-title, main h2.block .card-image .card-title, main h3.block .card-image .card-title, main h4.block .card-image .card-title, main h5.block .card-image .card-title, main h6.block .card-image .card-title {
   color: #37474f;
   position: absolute;
   bottom: 0;
@@ -4572,40 +4572,40 @@ small {
   max-width: 100%;
   padding: 24px;
 }
-.card .card-content, main h1 .card-content, main h2 .card-content, main h3 .card-content {
+.card .card-content, main h1.block .card-content, main h2.block .card-content, main h3.block .card-content, main h4.block .card-content, main h5.block .card-content, main h6.block .card-content {
   padding: 24px;
   border-radius: 0 0 2px 2px;
 }
-.card .card-content p, main h1 .card-content p, main h2 .card-content p, main h3 .card-content p {
+.card .card-content p, main h1.block .card-content p, main h2.block .card-content p, main h3.block .card-content p, main h4.block .card-content p, main h5.block .card-content p, main h6.block .card-content p {
   margin: 0;
 }
-.card .card-content .card-title, main h1 .card-content .card-title, main h2 .card-content .card-title, main h3 .card-content .card-title {
+.card .card-content .card-title, main h1.block .card-content .card-title, main h2.block .card-content .card-title, main h3.block .card-content .card-title, main h4.block .card-content .card-title, main h5.block .card-content .card-title, main h6.block .card-content .card-title {
   display: block;
   line-height: 32px;
   margin-bottom: 8px;
 }
-.card .card-content .card-title i, main h1 .card-content .card-title i, main h2 .card-content .card-title i, main h3 .card-content .card-title i {
+.card .card-content .card-title i, main h1.block .card-content .card-title i, main h2.block .card-content .card-title i, main h3.block .card-content .card-title i, main h4.block .card-content .card-title i, main h5.block .card-content .card-title i, main h6.block .card-content .card-title i {
   line-height: 32px;
 }
-.card .card-action, main h1 .card-action, main h2 .card-action, main h3 .card-action {
+.card .card-action, main h1.block .card-action, main h2.block .card-action, main h3.block .card-action, main h4.block .card-action, main h5.block .card-action, main h6.block .card-action {
   background-color: inherit;
   border-top: 1px solid rgba(160, 160, 160, 0.2);
   position: relative;
   padding: 16px 24px;
 }
-.card .card-action:last-child, main h1 .card-action:last-child, main h2 .card-action:last-child, main h3 .card-action:last-child {
+.card .card-action:last-child, main h1.block .card-action:last-child, main h2.block .card-action:last-child, main h3.block .card-action:last-child, main h4.block .card-action:last-child, main h5.block .card-action:last-child, main h6.block .card-action:last-child {
   border-radius: 0 0 2px 2px;
 }
-.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h1 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h2 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h3 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
+.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h1.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h2.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h3.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h4.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h5.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating), main h6.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: #ffab40;
   margin-right: 24px;
   transition: color 0.3s ease;
   text-transform: uppercase;
 }
-.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h1 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h2 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h3 .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+.card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h1.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h2.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h3.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h4.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h5.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover, main h6.block .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
   color: #ffd8a6;
 }
-.card .card-reveal, main h1 .card-reveal, main h2 .card-reveal, main h3 .card-reveal {
+.card .card-reveal, main h1.block .card-reveal, main h2.block .card-reveal, main h3.block .card-reveal, main h4.block .card-reveal, main h5.block .card-reveal, main h6.block .card-reveal {
   padding: 24px;
   position: absolute;
   background-color: #37474f;
@@ -4617,7 +4617,7 @@ small {
   z-index: 3;
   display: none;
 }
-.card .card-reveal .card-title, main h1 .card-reveal .card-title, main h2 .card-reveal .card-title, main h3 .card-reveal .card-title {
+.card .card-reveal .card-title, main h1.block .card-reveal .card-title, main h2.block .card-reveal .card-title, main h3.block .card-reveal .card-title, main h4.block .card-reveal .card-title, main h5.block .card-reveal .card-title, main h6.block .card-reveal .card-title {
   cursor: pointer;
   display: block;
 }
@@ -5369,9 +5369,9 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 .collapsible {
-  border-top: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border-top: 1px solid #212121;
+  border-right: 1px solid #212121;
+  border-left: 1px solid #212121;
   margin: 0.5rem 0 1rem 0;
 }
 
@@ -5382,7 +5382,7 @@ body.keyboard-focused .dropdown-content li:focus {
   line-height: 1.5;
   padding: 1rem;
   background-color: #37474f;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #212121;
 }
 .collapsible-header:focus {
   outline: 0;
@@ -5401,7 +5401,7 @@ body.keyboard-focused .dropdown-content li:focus {
 
 .collapsible-body {
   display: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #212121;
   box-sizing: border-box;
   padding: 2rem;
 }
@@ -8105,11 +8105,11 @@ body.spectrum-background {
 main {
   min-height: calc(100vh - 64px);
 }
-main .card .card-image .card-title, main h1 .card-image .card-title, main h2 .card-image .card-title, main h3 .card-image .card-title {
+main .card .card-image .card-title, main h1.block .card-image .card-title, main h2.block .card-image .card-title, main h3.block .card-image .card-title, main h4.block .card-image .card-title, main h5.block .card-image .card-title, main h6.block .card-image .card-title {
   color: white;
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.75), 1px 2px 3px rgba(0, 0, 0, 0.5);
 }
-main h1, main h2, main h3 {
+main h1.block, main h2.block, main h3.block, main h4.block, main h5.block, main h6.block {
   border-top: solid 4px #ff9800;
   padding: 24px;
 }

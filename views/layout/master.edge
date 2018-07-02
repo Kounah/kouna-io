@@ -6,6 +6,7 @@
     <!-- Style & Scripts -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/materialize.css">
+    @!section('links')
     <script src="/js/materialize.js" charset="utf-8"></script>
     <script src="/jquery" charset="utf-8"></script>
     <script src="/js/kouna-jax.js" charset="utf-8"></script>
@@ -35,6 +36,15 @@
 
         })
 
+        var tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
+        })
+
+        var htmlTooltips = Array.prototype.slice.call(document.querySelectorAll('.tooltipped.html')).map(function (elem) {
+          return M.Tooltip.init(elem, {
+            html: elem.getAttribute('data-tooltip')
+          });
+        })
+
         document.querySelectorAll('.svg-icon').forEach(function(elem) {
           elem.style.backgroundImage = 'url(' + elem.getAttribute('data-src') + ')';
         })
@@ -57,6 +67,8 @@
     @endif
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @!section('meta')
 
     <title>
       @!section('title')

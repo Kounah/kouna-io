@@ -12,9 +12,11 @@ main {
     }
   }
 
-  h1, h2, h3 {
-    border-top: solid 4px $secondary-color;
-    @extend .card;
-    padding: $card-padding;
+  h1, h2, h3, h4, h5, h6 {
+    &.block {
+      border-top: solid 4px $secondary-color;
+      @extend .card;
+      padding: $card-padding;
+    }
   }
 }

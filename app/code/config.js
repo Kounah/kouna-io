@@ -28,7 +28,17 @@ module.exports = function(dir) {
       subs: [
         { name: "About",
           href: "/oko"}
-        ]}
+        ]},
+    { name: "Tools",
+      subs: [
+        { name: "Colors",
+          href: "/tools/colors" }
+      ]},
+    { name: "Blade & Soul",
+      subs: [
+        { name: "Profile",
+          href: "/bns/profile" }
+      ]}
   ];
 
   result.docs = {
@@ -58,6 +68,8 @@ module.exports = function(dir) {
   result.ace = {
     path: path.join(dir, 'node_modules', 'ace-code-editor', 'dist')
   }
+
+  result.pageBase = 'http://kouna.io:8080'
 
   return result;
 }

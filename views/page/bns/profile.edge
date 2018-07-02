@@ -1,0 +1,318 @@
+@layout('layout.master')
+
+@section('links')
+  <link rel="stylesheet" href="/css/bns.css">
+@endsection
+
+@section('title')
+  BnS Profile
+@endsection
+
+@section('meta')
+  @if(char)
+    <meta property="og:title" content="{{char.general.account}}'s {{char.general.name}} | kouna.io bns-profile">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Class: {{char.general.class}} | Level {{char.general.level}} HM {{char.general.hm}} | Server:  {{char.general.server}} | Faction: {{char.general.faction}} | Clan: {{char.general.clan}} | Atack Power: {{char.stats.attack.power.value.total}} | Crit Rate: {{char.stats.attack.critical.rate[0].total}}% | Crit Damage: {{char.stats.attack.critical_damage.rate[0].total}}% | Hit Rate: {{char.stats.attack.hit.rate[0].total}}% | HP: {{char.stats.defend.max_hp.value.total}}">
+    <meta property="og:image" content="{{char.general.avatar}}">
+    <meta property="og:url" content="{{config().pageBase}}{{context.req.path}}">
+  @endif
+@endsection
+
+@section('content')
+  @if(char)
+  <div class="row">
+    <div class="col s12 m12 l3">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{char.general.avatar}}" alt="">
+          <span class="card-title">
+            <span class="tooltipped" data-position="top" data-tooltip="Accountname">{{char.general.account}}'s</span>
+            <span class="tooltipped" data-position="top" data-tooltip="Charactername">{{char.general.name}}</span>
+          </span>
+        </div>
+        <div class="card-content">
+          <div class="tooltipped" data-position="right" data-tooltip="Class">
+            <span>{{char.general.class}}</span>
+            <a href="/bns/list/{{char.region}}/0?class={{char.general.class}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Level">
+            <span>Level {{char.general.level}} Hongmoon {{char.general.hm}}</span>
+            <a href="/bns/list/{{char.region}}/0?level={{char.general.level}}&hm={{char.general.hm}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Server">
+            <span>{{char.general.server}}</span>
+            <a href="/bns/list/{{char.region}}/0?server={{char.general.server}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Faction">
+            <span>{{char.general.faction}}</span>
+            <a href="/bns/list/{{char.region}}/0?faction={{char.general.faction}}" class="right">
+              [...]
+            </a>
+          </div>
+          <div class="tooltipped" data-position="right" data-tooltip="Clan">
+            <span>{{char.general.clan}}</span>
+            <a href="/bns/list/{{char.region}}/0?clan={{char.general.clan}}" class="right">
+              [...]
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6 l3">
+      <div class="card" style="background-image: url(/img/bns/bgStat-attack.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
+        <div class="card-content">
+          <span class="card-title">Offense</span>
+          <div class="row">
+            <div class="col s12 center">
+              <p class="flow-text">
+                Attack Power<br>
+                <h3 class="green-text" style="margin: 0">{{char.stats.attack.power.value.total}}</h3>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s3">
+              <div class="stat icon2 ap
+              @if(char.stats.points.offense <= 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="Offense Points">
+                <br>
+                <span>{{char.stats.points.offense}} P</span>
+              </div>
+            </div>
+            <div class="col s3 offset-s3">
+              <div class="stat icon2 threat
+              @if(char.stats.points.threat.tier == 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="{{char.stats.points.threat.name}}">
+                <br>
+                <span>{{char.stats.points.threat.point}} P</span>
+              </div>
+            </div>
+            <div class="col s3">
+              <div class="stat icon2 move_speed
+              @if(char.stats.points.move_speed.tier == 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="{{char.stats.points.move_speed.name}}">
+                <br>
+                <span>{{char.stats.points.move_speed.point}} P</span>
+              </div>
+            </div>
+          </div>
+          <ul class="collapsible collapsible-accordion">
+            @each(prop in propertyRange(char.stats.attack))
+              <li>
+                <div class="collapsible-header">
+
+                  <span>
+                    <i class="{{BnS_statIcon(prop.value.name)}}"></i>
+                    {{prop.value.name}}</span>
+                  <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                </div>
+                <div class="collapsible-body">
+                  <div>
+                    <span><b>Total</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Base</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.base}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Equip</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.equip}}</b></span>
+                  </div>
+                  @each(rate in prop.value.rate)
+                    <div class="tooltipped html" data-position="right" data-tooltip="<!-- {{prop.key}} - {{rate.name}} -->
+                    <h5 class='center'>{{rate.name}}</h5>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><b>Total</b></td>
+                          <td class='right green-text'>{{rate.total}}%</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.base}}</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.equip}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    ">
+                      <span><b>{{rate.name}}</b></span>
+                      <span class="badge right green-text">{{rate.total}}%</span>
+                    </div>
+                  @endeach
+                </div>
+              </li>
+            @endeach
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6 l3">
+      <div class="card" style="background-image: url(/img/bns/bgStat-defense.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
+        <div class="card-content">
+          <span class="card-title">Defense</span>
+          <div class="row">
+            <div class="col s12 center">
+              <p class="flow-text">
+                HP<br>
+                <h3 class="green-text" style="margin: 0">{{char.stats.defend.max_hp.value.total}}</h3>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s3">
+              <div class="stat icon2 dp
+              @if(char.stats.points.defense <= 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="Defense Points">
+                <br>
+                <span>{{char.stats.points.defense}} P</span>
+              </div>
+            </div>
+            <div class="col s3">
+              <div class="stat icon2 regen
+              @if(char.stats.points.regen.tier == 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="{{char.stats.points.regen.name}}">
+                <br>
+                <span>{{char.stats.points.regen.point}} P</span>
+              </div>
+            </div>
+            <div class="col s3">
+              <div class="stat icon2 hm_focus
+              @if(char.stats.points.hm_focus.tier == 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="{{char.stats.points.hm_focus.name}}">
+                <br>
+                <span>{{char.stats.points.hm_focus.point}} P</span>
+              </div>
+            </div>
+            <div class="col s3">
+              <div class="stat icon2 debuff
+              @if(char.stats.points.debuff.tier == 0)
+              disabled
+              @endif
+              tooltipped" data-position="top" data-tooltip="{{char.stats.points.debuff.name}}">
+                <br>
+                <span>{{char.stats.points.debuff.point}} P</span>
+              </div>
+            </div>
+          </div>
+          <ul class="collapsible collapsible-accordion">
+            @each(prop in propertyRange(char.stats.defend))
+              <li>
+                <div class="collapsible-header">
+
+                  <span>{{prop.value.name}}</span>
+                  <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                </div>
+                <div class="collapsible-body">
+                  <div>
+                    <span><b>Total</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Base</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.base}}</b></span>
+                  </div>
+                  <div>
+                    <span><b>Equip</b></span>
+                    <span class="badge right green-text"><b>{{prop.value.value.equip}}</b></span>
+                  </div>
+                  @each(rate in prop.value.rate)
+                    <div class="tooltipped html" data-position="right" data-tooltip="<!-- {{prop.key}} - {{rate.name}} -->
+                    <h5 class='center'>{{rate.name}}</h5>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td><b>Total</b></td>
+                          <td class='right green-text'>{{rate.total}}%</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.base}}</td>
+                        </tr>
+                        <tr>
+                          <td><b>Equip</b></td>
+                          <td class='right green-text'>{{rate.equip}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    ">
+                      <span><b>{{rate.name}}</b></span>
+                      <span class="badge right green-text">{{rate.total}}%</span>
+                    </div>
+                  @endeach
+                </div>
+              </li>
+            @endeach
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l3">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Gear Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  @else
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Character Search</span>
+            <form action="/bns/profile" method="get">
+              <div class="row">
+                <div class="col s4 m3 l2">
+                  <div class="input-field">
+                    <p>
+                      <label>
+                        <input type="radio" name="region" value="eu" checked>
+                        <span>Europe</span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input type="radio" name="region" value="na">
+                        <span>North America</span>
+                      </label>
+                    </p>
+                  </div>
+                </div>
+                <div class="col s8 m9 l10">
+                  <div class="input-field">
+                    <input type="text" name="char" value="">
+                    <label for="char">Character Name</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endif
+@endsection

@@ -1,0 +1,172 @@
+$ok: lime;
+$dis: grey;
+
+.stat {
+  &.icon2 {
+    border: 1pt $ok solid;
+    border-radius: 1pt;
+    text-align: center;
+
+    background-color: transparentize($ok, .5);
+
+    span {
+      color: $ok;
+      font-size: 1.5em;
+    }
+
+    &.disabled {
+      opacity: .75;
+      border-color: $dis;
+      background-color: transparentize($dis, .5);
+
+      span {
+        color: $dis;
+      }
+    }
+
+    &::before {
+      content: '';
+      background-image: url(/img/bns/icStatSplit_v2.png);
+      background-repeat: no-repeat;
+      transform: scale(2);
+      height: 20px;
+      width: 20px;
+      margin-top: 10px;
+      max-width: 100%;
+      display: inline-block;
+    }
+
+    &.ap::before {
+      background-position: 50% 0
+    }
+
+    &.threat::before {
+      background-position: 50% -20px
+    }
+
+    &.move_speed::before {
+      background-position: 50% -40px
+    }
+
+    &.dp::before {
+      background-position: 50% -80px
+    }
+
+    &.regen::before {
+      background-position: 50% -100px
+    }
+
+    &.hm_focus::before {
+      background-position: 50% -120px
+    }
+
+    &.debuff::before {
+      background-position: 50% -60px
+    }
+  }
+
+  &.icon {
+    width: 18px;
+    height: 18px;
+    transform: scale(1.5);
+    background-image: url(/img/bns/icStat.png);
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    &.iconAttack1, &.attackPower {
+      background-position: 0 0
+    }
+    &.iconAttack2 {
+      background-position: 0 -23px
+    }
+    &.iconAttack3, &.attackPierce {
+      background-position: 0 -46px
+    }
+    &.iconAttack4, &.attackHit {
+      background-position: 0 -69px
+    }
+    &.iconAttack5, &.attackConcentration {
+      background-position: 0 -92px
+    }
+    &.iconAttack6, &.attackCritHit {
+      background-position: 0 -115px
+    }
+    &.iconAttack7, &.attackCritDmg {
+      background-position: 0 -138px
+    }
+    &.iconAttack8, &.attackMastery {
+      background-position: 0 -161px
+    }
+    &.iconAttack9, &.attackAddDmg {
+      background-position: 0 -184px
+    }
+    &.iconAttack10, &.attackThreat {
+      background-position: 0 -207px
+    }
+    &.iconAttack11, &.elementalFlame {
+      background-position: 0 -230px
+    }
+    &.iconAttack12, &.elementalFrost {
+      background-position: 0 -253px
+    }
+    &.iconAttack13, &.elementalWind {
+      background-position: 0 -276px
+    }
+    &.iconAttack14, &.elementalEarth {
+      background-position: 0 -299px
+    }
+    &.iconAttack15, &.elementalLightning {
+      background-position: 0 -322px
+    }
+    &.iconAttack16, &.elementalDark {
+      background-position: 0 -345px
+    }
+    &.iconAttack17, &.attackDebuff {
+      background-position: 0 -368px
+    }
+    &.iconAttack18, &.attackPvP {
+      background-position: 0 -391px
+    }
+    &.iconAttack19, &.attackBoss {
+      background-position: 0 -414px
+    }
+    &.iconDefense1, &.defenseHP {
+      background-position: -19px 0
+    }
+    &.iconDefense2, &.defensePower {
+      background-position: -19px -23px
+    }
+    &.iconDefense3 {
+      background-position: -19px -46px
+    }
+    &.iconDefense4, &.defenseDodge {
+      background-position: -19px -69px
+    }
+    &.iconDefense5, &.defenseBlock {
+      background-position: -19px -92px
+    }
+    &.iconDefense6, &.defenseCritDef {
+      background-position: -19px -115px
+    }
+    &.iconDefense7, &.defenseWillpower {
+      background-position: -19px -138px
+    }
+    &.iconDefense8, &.defenseDmgRed {
+      background-position: -19px -161px
+    }
+    &.iconDefense9, &.defenseRegen {
+      background-position: -19px -184px
+    }
+    &.iconDefense10, &.defenseRecovery {
+      background-position: -19px -207px
+    }
+    &.iconDefense11, &.defenseDebuff {
+      background-position: -19px -230px
+    }
+    &.iconDefense12, &.defensePvP {
+      background-position: -19px -253px
+    }
+    &.iconDefense13, &.defenseBoss {
+      background-position: -19px -276px
+    }
+  }
+}
