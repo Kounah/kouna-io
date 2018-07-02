@@ -1,12 +1,9 @@
 @layout('layout.master')
 
-<<<<<<< HEAD
 @section('links')
   <link rel="stylesheet" href="/css/bns.css">
 @endsection
 
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
 @section('title')
   BnS Profile
 @endsection
@@ -24,11 +21,7 @@
 @section('content')
   @if(char)
   <div class="row">
-<<<<<<< HEAD
     <div class="col s12 m12 l3">
-=======
-    <div class="col s12 m6 l3">
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
       <div class="card">
         <div class="card-image">
           <img src="{{char.general.avatar}}" alt="">
@@ -74,7 +67,6 @@
     <div class="col s12 m6 l3">
       <div class="card" style="background-image: url(/img/bns/bgStat-attack.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
         <div class="card-content">
-<<<<<<< HEAD
           <span class="card-title">Offense</span>
           <div class="row">
             <div class="col s12 center">
@@ -116,21 +108,13 @@
               </div>
             </div>
           </div>
-=======
-          <span class="card-title">Attack</span>
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
           <ul class="collapsible collapsible-accordion">
             @each(prop in propertyRange(char.stats.attack))
               <li>
                 <div class="collapsible-header">
-
-<<<<<<< HEAD
                   <span>
                     <i class="{{BnS_statIcon(prop.value.name)}}"></i>
                     {{prop.value.name}}</span>
-=======
-                  <span>{{prop.value.name}}</span>
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
                   <span class="badge right green-text"><b>{{prop.value.value.total}}</b></span>
                 </div>
                 <div class="collapsible-body">
@@ -181,7 +165,6 @@
       <div class="card" style="background-image: url(/img/bns/bgStat-defense.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
         <div class="card-content">
           <span class="card-title">Defense</span>
-<<<<<<< HEAD
           <div class="row">
             <div class="col s12 center">
               <p class="flow-text">
@@ -232,8 +215,6 @@
               </div>
             </div>
           </div>
-=======
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
           <ul class="collapsible collapsible-accordion">
             @each(prop in propertyRange(char.stats.defend))
               <li>
@@ -286,11 +267,7 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
     <div class="col s12 m12 l3">
-=======
-    <div class="col s12 m6 l3">
->>>>>>> 8f156a481bab563698229615a9513982314b80b5
       <div class="card">
         <div class="card-content">
           <span class="card-title">Gear Coming Soon</span>
