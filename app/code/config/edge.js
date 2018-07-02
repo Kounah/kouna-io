@@ -46,6 +46,12 @@ module.exports = function(edge) {
       }
     });
   })
-  
+
+  edge.global('getPercentage', function(cur, max) {
+    console.log('getPercentage', cur, max)
+
+    return ((cur / max) * 100) + '%';
+  })
+
   require('../bns/edge.js')(edge);
 }

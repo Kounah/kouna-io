@@ -3,6 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const curl = require('curl');
 const shell = require('shelljs');
+const download = require('download');
+const colors = require('colors');
 
 const {dir} = require('../context');
 
@@ -15,11 +17,10 @@ const Float    = require('mongoose-float');
 const Item = require('./Item');
 const Gear = require('./Gear');
 const Weapon = require('./Weapon');
+const Soulshield = require('./Soulshield');
 
 module.exports = function(html, abilities, gear) {
   var newChar = new BnsChar();
-
-  console.log(abilities)
 
   if(typeof html === 'string') {
     d = new JSDOM(html).window.document;
@@ -235,58 +236,131 @@ module.exports = function(html, abilities, gear) {
   }
 
   if(typeof gear === 'string') {
+    let d = new JSDOM(gear).window.document;
+
     function getIcon(icoUrl) {
       var icon = icoUrl;
-      console.log('icoUrl', icoUrl);
-      console.log('icon', icon);
-
-      console.log('dir', dir)
       var base = path.parse(url.parse(icon).pathname).base;
-      console.log('base', base);
       var iconPath = path.join(dir, '.ignore', 'img', 'bns', 'item', base);
-      console.log('iconPath', iconPath);
       if(!fs.existsSync(iconPath)) {
-        curl.get(icon, (err, res) => {
-          if(err) throw err;
-
+        download(icon).catch(function(error) {
+          if(error) throw error;
+        }).then(data => {
           shell.mkdir('-p', path.dirname(iconPath))
 
-          fs.writeFileSync(iconPath, res.body);
+          fs.writeFileSync(iconPath, data);
         })
       }
 
       return '/content/img/bns/item/' + base;
     }
 
-    let d = new JSDOM(gear).window.document;
+
+    function getRarity(elem) {
+      return parseInt(elem
+      .getAttribute('class')
+      .split(' ')
+      .shift()
+      .split('grade_').filter(d => { return d !== ''}));
+    }
+
+    function getData(elem) {
+      return elem
+      .getAttribute('item-data')
+      .split('.').map(v => {
+        return parseInt(v) | 0
+      })
+    }
+
+    function getGem(elem) {
+      let pat = /equipgem_([0-9])phase/gm;
+      let img = elem.querySelector('img');
+      if(img == undefined) {
+        return undefined;
+      }
+
+      let gem = new Item({
+        name    : img.getAttribute('alt'),
+        rarity  : 2,
+        data    : getData(img),
+        icon    : getIcon(img.getAttribute('src'))
+      })
+
+      gem.rarity = gem.name.indexOf('Gilded') > -1 ? 7 : 5;
+
+      return gem;
+    }
 
     function getWeapon(elem) {
       var thumb = elem.querySelector('.thumb');
       var durArr = elem.querySelector('.quality .text').textContent.split(' / ');
+
+      console.log('durArr', durArr)
       var dur = {
         cur: durArr[0] | 0,
         max: durArr[1] | 0
       };
 
-
-
-
       var weap = new Weapon({
         name        : elem.querySelector('.name span').textContent,
-        rarity      : parseInt(elem.querySelector('.name span')
-        .getAttribute('class')
-        .split(' ')
-        .shift()
-        .split('grade_') | '0'),
-        data        : thumb.getAttribute('item-data').split('.').map(v => {return parseInt(v) | 0}),
-        icon        : getIcon(thumb.querySelector('img').getAttribute('src'))
+        rarity      : getRarity(elem.querySelector('.name span')),
+        data        : getData(thumb),
+        icon        : getIcon(thumb.querySelector('img').getAttribute('src')),
+        durability  : dur
       })
 
-      console.log(weap)
+      weap.gems = Array.prototype.slice.call(elem.querySelectorAll('span.iconGemSlot')).map(gem => {
+        return getGem(gem);
+      });
+
+      return weap;
     }
 
-    newChar.gear.weapon = getWeapon(d.querySelector('div.wrapWeapon'));
+    function getGear(elem) {
+      let res = { };
+      res.type  = elem.getAttribute('class').split(' ').pop();
+      res.obj   = new Item({
+        name    : elem.querySelector('.name span').textContent,
+        rarity  : getRarity(elem.querySelector('.name span'))
+      })
+
+      try {
+        let ico     = elem.querySelector('.icon img');
+        console.log(ico);
+        res.obj.icon    = getIcon(ico.getAttribute('src'));
+        res.obj.data    = getData(ico);
+      } catch (err) {
+        // console.log(`no image for ${res.type.underline} because of ${('' + err).bold}`.red);
+      }
+      return res;
+    }
+
+    newChar.weapon = getWeapon(d.querySelector('div.wrapWeapon'));
+
+    Array.prototype.slice.call(d.querySelectorAll('div.wrapAccessory')).forEach(elem => {
+      let gear = getGear(elem);
+      newChar.gear[gear.type] = gear.obj;
+    })
+
+    // ss = soulshield
+    let ssIcons = Array.prototype.slice.call(d.querySelectorAll('.gemIcon span'));
+    let ssAreas = Array.prototype.slice.call(d.querySelectorAll('.gemIcon map area'));
+
+    newChar.soulshield = ssIcons.map((elem, index) => {
+      let pos       = parseInt(elem.getAttribute('class').match('^pos([0-9])').pop());
+      let area      = ssAreas[pos - 1];
+
+      return new Soulshield({
+        name    : area.getAttribute('alt') + ' - No. ' + pos,
+        rarity  : 0,
+        icon    : getIcon(elem.querySelector('img').getAttribute('src')),
+        data    : getData(area),
+        pos     : pos
+      })
+    })
   }
+
+  console.log(newChar);
 
   return newChar;
 }

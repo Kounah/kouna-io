@@ -1,0 +1,149 @@
+/*.item-slot {
+  .icon {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+
+    &.empty {
+      // background-image: url(/img/bns/bgSlot.png);
+      background-repeat: no-repeat;
+      background-size: 200% auto;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    &.necklace {
+      background-position: 0 -85px
+    }
+
+    &.earring {
+      background-position: 0 -120px
+    }
+
+    &.tire {
+      background-position: 0 -155px
+    }
+
+    &.bracelet {
+      background-position: 0 -190px
+    }
+
+    &.faceDecoration {
+      background-position: 0 -225px
+    }
+
+    &.ring {
+      background-position: 0 -260px
+    }
+
+    &.clothes {
+      background-position: 0 -295px
+    }
+
+    &.belt {
+      background-position: 0 -330px
+    }
+
+    &.soul {
+      background-position: 0 -365px
+    }
+
+    &.guard {
+      background-position: 0 -400px
+    }
+
+    &.clothesDecoration {
+      background-position: 0 -435px
+    }
+
+    &.singonpae {
+      background-position: 0 -470px
+    }
+
+    &.rune {
+      background-position: 0 -505px
+    }
+
+    &.gloves {
+      background-position: 0 -540px
+    }
+
+    &.soul-2 {
+      background-position: 0 -575px
+    }
+  }
+}*/
+
+@mixin cardByColor($color) {
+  border-color: $color;
+
+  .rarity-text {
+    color: $color;
+  }
+
+  .rarity {
+    background-color: $color;
+  }
+
+  img.rarity-border {
+    border-color: $color;
+  }
+}
+
+.gemslot {
+  width: 15% !important;
+  padding: 0 !important;
+  display: inline-block;
+}
+
+.gear {
+  border: solid 1pt;
+
+  &.empty {
+    opacity: .25;
+  }
+
+  img {
+    width: 100%;
+    &.rarity-border {
+      border: solid 1pt;
+      border-radius: 2px;
+    }
+  }
+
+  .card-content {
+    margin: 0;
+  }
+
+  &.rarity-1 {
+    @include cardByColor(#6c6c6c);
+  }
+
+  &.rarity-2 {
+    @include cardByColor(#6c6c6c);
+  }
+
+  &.rarity-3 {
+    @include cardByColor(#58ff77);
+  }
+
+  &.rarity-4 {
+    @include cardByColor(#46bee1);
+  }
+
+  &.rarity-5 {
+    @include cardByColor(#d739ff);
+  }
+
+  &.rarity-6 {
+    @include cardByColor(#f1b248);
+  }
+
+  &.rarity-7 {
+    @include cardByColor(#ff770a);
+  }
+
+  &.rarity-8 {
+    @include cardByColor(#8a7aff);
+  }
+}

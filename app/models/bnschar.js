@@ -34,14 +34,16 @@ var BnsGear = {
   data        : Array,
   icon        : String,
   rarity      : Number
-}
+};
 
 var BnsWeapon = BnsGear;
-BnsWeapon.dura = {
+
+BnsWeapon.durability = {
   cur         : Number,
   max         : Number
 };
 BnsWeapon.gems = [Object]
+
 
 var bnsCharSchema = mongoose.Schema({
   region      : String,
@@ -107,22 +109,25 @@ var bnsCharSchema = mongoose.Schema({
       debuff          : {type: BnsStatPick}
     }
   },
+  weapon                : {type: BnsWeapon}, // Weapon
   gear: {
-    weapon          : {type: BnsWeapon}, // Weapon
-    ring            : {type: BnsGear}, // Gear
-    earring         : {type: BnsGear}, // Gear
-    necklace        : {type: BnsGear}, // Gear
-    bracelet        : {type: BnsGear}, // Gear
-    belt            : {type: BnsGear}, // Gear
-    glove           : {type: BnsGear}, // Gear
-    soul            : {type: BnsGear}, // Gear
-    heart           : {type: BnsGear}, // Gear
-    pet             : {type: BnsGear}, // Gear
-    outfit          : {type: BnsGear}, // Outfit
-    adornment       : {type: BnsGear}, // Outfit
-    head_adornment  : {type: BnsGear}, // Outfit
-    face_adornment  : {type: BnsGear}  // Outfit
-  }
+    'ring'              : {type: BnsGear}, // Gear
+    'earring'           : {type: BnsGear}, // Gear
+    'necklace'          : {type: BnsGear}, // Gear
+    'bracelet'          : {type: BnsGear}, // Gear
+    'belt'              : {type: BnsGear}, // Gear
+    'gloves'            : {type: BnsGear}, // Gear
+    'soul'              : {type: BnsGear}, // Gear
+    'soul-2'            : {type: BnsGear}, // Gear
+    'guard'             : {type: BnsGear}, // Gear
+    'singongpae'        : {type: BnsGear}, // Gear
+    'rune'              : {type: BnsGear}, // Gear
+    'clothes'           : {type: BnsGear}, // Outfit
+    'clothesDecoration' : {type: BnsGear}, // Outfit
+    'tire'              : {type: BnsGear}, // Outfit
+    'faceDecoration'    : {type: BnsGear}  // Outfit
+  },
+  soulshield: [Object]
 });
 
 module.exports = mongoose.model('BnsChar', bnsCharSchema);

@@ -1,12 +1,8 @@
 module.exports = class Item {
   constructor (props) {
-    console.log(props);
-
-    this.name   = props.name    || "";
-    this.rarity = props.rarity  || new Number(0);
-    this.data   = props.data    || new Array();
-    this.icon   = props.icon    || ""
-    this.name   = props.name | "";
-    this.rarity = props.rarity | new Number(0);
+    this.name   = props.name    ? props.name    : "";
+    this.rarity = props.rarity  ? props.rarity  : 0;
+    this.data   = props.data    ? props.data    : new Array();
+    this.icon   = props.icon    ? props.icon    : ""
   }
 }

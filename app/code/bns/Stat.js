@@ -1,7 +1,5 @@
 module.exports = class Stat {
   constructor(props) {
-    console.log(props);
-
     if(props instanceof Object) {
 
       if(props.name !== undefined) {
@@ -35,7 +33,6 @@ module.exports = class Stat {
 
         if(props.rate instanceof Array) {
           props.rate.forEach(r => {
-            console.log(r);
             if(r.total    !== undefined
               && r.base   !== undefined
               && r.equip  !== undefined) {

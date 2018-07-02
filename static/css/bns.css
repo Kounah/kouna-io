@@ -153,4 +153,198 @@
   background-position: -19px -276px;
 }
 
+/*.item-slot {
+  .icon {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+
+    &.empty {
+      // background-image: url(/img/bns/bgSlot.png);
+      background-repeat: no-repeat;
+      background-size: 200% auto;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    &.necklace {
+      background-position: 0 -85px
+    }
+
+    &.earring {
+      background-position: 0 -120px
+    }
+
+    &.tire {
+      background-position: 0 -155px
+    }
+
+    &.bracelet {
+      background-position: 0 -190px
+    }
+
+    &.faceDecoration {
+      background-position: 0 -225px
+    }
+
+    &.ring {
+      background-position: 0 -260px
+    }
+
+    &.clothes {
+      background-position: 0 -295px
+    }
+
+    &.belt {
+      background-position: 0 -330px
+    }
+
+    &.soul {
+      background-position: 0 -365px
+    }
+
+    &.guard {
+      background-position: 0 -400px
+    }
+
+    &.clothesDecoration {
+      background-position: 0 -435px
+    }
+
+    &.singonpae {
+      background-position: 0 -470px
+    }
+
+    &.rune {
+      background-position: 0 -505px
+    }
+
+    &.gloves {
+      background-position: 0 -540px
+    }
+
+    &.soul-2 {
+      background-position: 0 -575px
+    }
+  }
+}*/
+.gemslot {
+  width: 15% !important;
+  padding: 0 !important;
+  display: inline-block;
+}
+
+.gear {
+  border: solid 1pt;
+}
+.gear.empty {
+  opacity: 0.25;
+}
+.gear img {
+  width: 100%;
+}
+.gear img.rarity-border {
+  border: solid 1pt;
+  border-radius: 2px;
+}
+.gear .card-content {
+  margin: 0;
+}
+.gear.rarity-1 {
+  border-color: #6c6c6c;
+}
+.gear.rarity-1 .rarity-text {
+  color: #6c6c6c;
+}
+.gear.rarity-1 .rarity {
+  background-color: #6c6c6c;
+}
+.gear.rarity-1 img.rarity-border {
+  border-color: #6c6c6c;
+}
+.gear.rarity-2 {
+  border-color: #6c6c6c;
+}
+.gear.rarity-2 .rarity-text {
+  color: #6c6c6c;
+}
+.gear.rarity-2 .rarity {
+  background-color: #6c6c6c;
+}
+.gear.rarity-2 img.rarity-border {
+  border-color: #6c6c6c;
+}
+.gear.rarity-3 {
+  border-color: #58ff77;
+}
+.gear.rarity-3 .rarity-text {
+  color: #58ff77;
+}
+.gear.rarity-3 .rarity {
+  background-color: #58ff77;
+}
+.gear.rarity-3 img.rarity-border {
+  border-color: #58ff77;
+}
+.gear.rarity-4 {
+  border-color: #46bee1;
+}
+.gear.rarity-4 .rarity-text {
+  color: #46bee1;
+}
+.gear.rarity-4 .rarity {
+  background-color: #46bee1;
+}
+.gear.rarity-4 img.rarity-border {
+  border-color: #46bee1;
+}
+.gear.rarity-5 {
+  border-color: #d739ff;
+}
+.gear.rarity-5 .rarity-text {
+  color: #d739ff;
+}
+.gear.rarity-5 .rarity {
+  background-color: #d739ff;
+}
+.gear.rarity-5 img.rarity-border {
+  border-color: #d739ff;
+}
+.gear.rarity-6 {
+  border-color: #f1b248;
+}
+.gear.rarity-6 .rarity-text {
+  color: #f1b248;
+}
+.gear.rarity-6 .rarity {
+  background-color: #f1b248;
+}
+.gear.rarity-6 img.rarity-border {
+  border-color: #f1b248;
+}
+.gear.rarity-7 {
+  border-color: #ff770a;
+}
+.gear.rarity-7 .rarity-text {
+  color: #ff770a;
+}
+.gear.rarity-7 .rarity {
+  background-color: #ff770a;
+}
+.gear.rarity-7 img.rarity-border {
+  border-color: #ff770a;
+}
+.gear.rarity-8 {
+  border-color: #8a7aff;
+}
+.gear.rarity-8 .rarity-text {
+  color: #8a7aff;
+}
+.gear.rarity-8 .rarity {
+  background-color: #8a7aff;
+}
+.gear.rarity-8 img.rarity-border {
+  border-color: #8a7aff;
+}
+
 /*# sourceMappingURL=static/css/bns.css.map */

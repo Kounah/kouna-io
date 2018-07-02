@@ -268,11 +268,57 @@
       </div>
     </div>
     <div class="col s12 m12 l3">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">Gear Coming Soon</span>
+      <div class="card gear rarity-{{char.weapon.rarity}}">
+        <div class="card-content row">
+          <div class="col s3 center">
+            <img class="rarity-border" src="{{char.weapon.icon}}" alt="">
+            <span class="rarity-text">{{char.weapon.durability.cur}} / {{char.weapon.durability.max}}</span>
+            <div class="progress">
+              <div class="determinate" style="width: {{getPercentage(char.weapon.durability.cur, char.weapon.durability.max)}}"></div>
+            </div>
+          </div>
+          <div class="col s9">
+            <div class="row">
+              <p class="flow-text rarity-text">
+                {{char.weapon.name}}
+              </p>
+            </div>
+            <div class="row">
+              @each(gem in char.weapon.gems)
+                <div class="gemslot tooltipped" data-tooltip="{{gem.name}}">
+                  @if(gem)
+                  <img src="{{gem.icon}}" alt="">
+                  @endif
+                </div>
+              @endeach
+            </div>
+          </div>
         </div>
       </div>
+
+    </div>
+    <div class="col s12 m12 l3">
+      @each(prop in propertyRange(char.gear))
+      <div class="card gear rarity-{{prop.value.rarity}}
+      @if(!prop.value.icon)
+        empty
+      @endif
+      ">
+        <div class="card-content row">
+          @if(prop.value.icon)
+          <div class="col s3 {{prop.key}}">
+            <img class="rarity-border" src="{{prop.value.icon}}" alt="">
+          </div>
+          @else
+          <div class="col s3">
+          </div>
+          @endif
+          <div class="col s9">
+            <p class="flow-text rarity-text">{{prop.value.name}}</p>
+          </div>
+        </div>
+      </div>
+      @endeach
     </div>
   </div>
   @else
