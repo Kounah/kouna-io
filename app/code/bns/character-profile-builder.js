@@ -42,7 +42,9 @@ module.exports = function(html, abilities, gear) {
 
     newChar.general.faction = info[3] !== undefined ? info[3].textContent : '';
     newChar.general.clan    = info[4] !== undefined ? info[4].textContent : '';
-    newChar.general.avatar  = d.querySelector('div.charaterView>img').getAttribute('src');
+    let img = d.querySelector('div.charaterView img');
+
+    newChar.general.avatar  = img ? img.getAttribute('src') : undefined;
   }
 
   function getValues(name, displayName) {
