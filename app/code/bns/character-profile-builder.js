@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
@@ -5,16 +6,21 @@ const curl = require('curl');
 
 const {dir} = require('../config');
 
+=======
+>>>>>>> 8f156a481bab563698229615a9513982314b80b5
 const BnsChar = require('../../models/bnschar');
 const Stat = require('./Stat');
 const {JSDOM} = require('jsdom');
 
 const Float    = require('mongoose-float');
 
+<<<<<<< HEAD
 const Item = require('./Item');
 const Gear = require('./Gear');
 const Weapon = require('./Weapon');
 
+=======
+>>>>>>> 8f156a481bab563698229615a9513982314b80b5
 module.exports = function(html, abilities, gear) {
   var newChar = new BnsChar();
 
@@ -216,6 +222,7 @@ module.exports = function(html, abilities, gear) {
       value:  getValues("heal_power_value"),
       rate:    getValues("heal_power_rate", "Recovery Chance")
     });
+<<<<<<< HEAD
 
     newChar.stats.points.offense    = abilities.records.point_ability.offense_point;
     newChar.stats.points.ap         = abilities.records.point_ability.attack_power_value;
@@ -273,6 +280,8 @@ module.exports = function(html, abilities, gear) {
     }
 
     newChar.gear.weapon = getWeapon(d.querySelector('div.wrapWeapon'));
+=======
+>>>>>>> 8f156a481bab563698229615a9513982314b80b5
   }
 
   return newChar;

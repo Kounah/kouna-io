@@ -46,6 +46,9 @@ module.exports = function(edge) {
       }
     });
   })
+<<<<<<< HEAD
 
   require('../bns/edge.js')(edge);
+=======
+>>>>>>> 8f156a481bab563698229615a9513982314b80b5
 }
