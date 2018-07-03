@@ -32,7 +32,9 @@ module.exports = function(dir) {
     { name: "Tools",
       subs: [
         { name: "Colors",
-          href: "/tools/colors" }
+          href: "/tools/colors" },
+        { name: "Box",
+          href: "/tools/box"}
       ]},
     { name: "Blade & Soul",
       subs: [
