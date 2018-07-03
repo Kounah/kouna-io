@@ -44,6 +44,13 @@ $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
 $link-color: color("light-blue", "darken-1") !default;
 
+.secondary-text {
+  color: $secondary-color;
+}
+
+.secondary {
+  background-color: $secondary-color;
+}
 
 // 2. Badges
 // ==========================================================================

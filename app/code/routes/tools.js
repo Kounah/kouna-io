@@ -1,17 +1,20 @@
 const {def} = require('../fn');
+const process = require('process');
 
 function boxify(o) {
   var
+  sl      = ' ',
+  sr      = ' ',
   l       = '\u2574',
   u       = '\u2575',
   r       = '\u2576',
   d       = '\u2577',
   h       = '\u2500',
   v       = '\u2502',
-  lu      = '\u256f',
-  ld      = '\u256e',
-  ru      = '\u2570',
-  rd      = '\u256d',
+  lu      = '\u2518',
+  ld      = '\u2510',
+  ru      = '\u2514',
+  rd      = '\u250c',
   hu      = '\u2534',
   hd      = '\u252c',
   vl      = '\u2524',
@@ -24,11 +27,72 @@ function boxify(o) {
     lines.forEach(l => {
       if (l.length > max) max = l.length
     });
-    let text = lines.map(l => {
-      return v + ' ' + l + ' '.repeat(max - l.length) + ' ' + v
+
+    var limit = undefined;
+    if(o.max === undefined) {
+      if(max > process.stdout.columns) {
+        max = process.stdout.columns - 2 - sl.length + sr.length;
+        limit = process.stdout.columns;
+      }
+    } else {
+      if(max > o.max) {
+        max = o.max;
+        limit
+      }
+    }
+
+    if(o.ln === true) {
+      o.lnLength = ('' + (lines.length + 1)).length;
+      if(limit != undefined) {
+        max = limit - o.lnLength - 3 - sr.length - sl.length;
+      }
+    }
+
+    let text = lines.map((l, li) => {
+      var ln = o.ln === true ? (' '.repeat(o.lnLength - ('' + li).length) + li + v) : '';
+      var lnDummy = o.ln === true ? (' '.repeat(o.lnLength - 1) + '•' + v) : '';
+
+      if(l.length > max + o.lnLength + 1) {
+        let com = "";
+        let cur = "";
+
+        l.split(' ').forEach((w, wi) => {
+          if(w.length > max) {
+            com += cur + '\n';
+            cur  = '';
+
+            let rep = Math.trunc(w.length / max);
+            if(w.length % max != 0) rep++;
+
+            for(i = 0; i < rep; i++) {
+              com += w.substring(i*max, (i+1)*max) + '\n';
+            }
+          } else {
+            if(cur.length + w.length < max) {
+              cur += (cur != '' && wi > 0 ? ' ' : '') + w;
+            } else {
+              console.log('!', l, w)
+              com += cur + '\n';
+              cur  = w;
+            }
+          }
+        })
+
+        if(cur != '') com += cur;
+
+        return com.split(/\n/).map((cl, cli) => {
+          return v + (cli > 0 ? lnDummy : ln) + sl + cl + ' '.repeat(max - cl.length) + sr + v;
+        }).join('\n');
+      } else {
+        return v + ln + sl + l + ' '.repeat(max - l.length) + sr + v;
+      }
     })
     .join('\n');
-    return rd + h.repeat(2 + max) + ld + '\n' + text + '\n' + ru + h.repeat(2 + max) + lu;
+
+    return '' +
+    rd + (o.ln === true ? (h.repeat(o.lnLength) + hd) : '') + h.repeat(sl.length + sr.length + max) + ld + '\n'
+    + text + '\n' +
+    ru + (o.ln === true ? (h.repeat(o.lnLength) + hu) : '') + h.repeat(sl.length + sr.length + max) + lu;
   }
 }
 
@@ -40,7 +104,6 @@ module.exports = function(app, passport, edge) {
   })
 
   app.get('/tools/box', (req, res) => {
-    console.log('notice me sucker')
     if(req.params.text !== undefined) {
       res.send(edge.render('page.tools.box', def({
         context: req,

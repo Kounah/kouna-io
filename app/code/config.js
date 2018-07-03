@@ -68,8 +68,20 @@ module.exports = function(dir) {
   }
 
   result.ace = {
-    path: path.join(dir, 'node_modules', 'ace-code-editor', 'dist')
+    path: path.join(dir, 'node_modules', 'ace-builds', 'src-noconflict')
   }
+
+  result.ace.modules = fs.readdirSync(result.ace.path).map(o => {
+    let match = o.match(/([a-z].*?)\-([a-z|A-Z|_].*?)\.js/);
+    if(match === null) {
+      return undefined
+    } else {
+      return {
+        type: match[1],
+        name: match[2]
+      }
+    }
+  }).filter(d => d != undefined);
 
   result.pageBase = 'http://kouna.io:8080'
 

@@ -8,7 +8,7 @@ Documents
 @section('content')
   @if(docs)
   <div class="row">
-    <h1>Public Docs <span class="right">{{count}}</h1>
+    <h1 class="block">Public Docs <span class="right">{{count}}</h1>
     @each(doc in docs)
     <div class="col s12 m4 l3">
       <div class="card {{doc.color}}">
