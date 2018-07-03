@@ -14,7 +14,7 @@
           <div class="collection">
             @if(modules)
             @each(module in modules)
-            <a class="collection-item" href="/ace/module/{{module.type}}/{{module.name}}">[{{module.type}}] {{module.name}}</a>
+            <a class="collection-item" href="/ace/{{module.type}}/{{module.name}}">[{{module.type}}] {{module.name}}</a>
             @endeach
             @endif
           </div>

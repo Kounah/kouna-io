@@ -17,7 +17,7 @@ module.exports = function (app, passport, edge) {
     res.sendFile(path.join(config.ace.path, 'ace.js'))
   })
 
-  app.get('/ace/module/:type/:name', (req, res) => {
+  app.get('/ace/:type/:name', (req, res) => {
     console.log(req.params);
     if(req.params.type && req.params.name) {
       let p = path.join(config.ace.path, `${req.params.type}-${req.params.name}.js`);

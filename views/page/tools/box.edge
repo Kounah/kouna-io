@@ -19,8 +19,15 @@ Box
                 </div>
               </div>
               <div class="col s12">
-                <textarea class="materialize textarea" name="text" rows="8" cols="80" required></textarea>
-                <label for="text">Text (required)</label>
+                <h4>Text</h4>
+                <div class="ace" id="editor">
+
+                </div>
+                <script type="text/javascript">
+                  var editor = ace.edit('editor');
+                  editor.setTheme('ace/theme/eclipse');
+                  editor.setMode('ace/mode/plain_text');
+                </script>
               </div>
             </div>
           </form>
