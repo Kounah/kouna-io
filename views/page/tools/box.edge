@@ -7,27 +7,67 @@ Box
 @section('content')
 <div class="container">
   <div class="row">
+    @if(result)
     <div class="col s12">
       <div class="card">
         <div class="card-content">
-          <form class="" action="/tools/box" method="get">
+          <span class="card-title">Result</span>
+          <pre><code>{{result}}</code></pre>
+        </div>
+      </div>
+    </div>
+    @endif
+
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Create New</span>
+          <form class="" action="/tools/box" method="get" id="form-setBox">
             <div class="row">
+              <textarea class="hide" name="text" rows="0" cols="0" id="textarea-text"></textarea>
               <div class="col s12">
                 <div class="input-field">
                   <input type="text" name="title" value="">
                   <label for="title">Title</label>
                 </div>
               </div>
+              <div class="col s12 m6">
+                <p>
+                  <label>
+                    <input type="checkbox" name="ln">
+                    <span>Show Line Numbers?</span>
+                  </label>
+                </p>
+              </div>
+              <div class="col s12 m6">
+                <input type="number" name="max" value="-1">
+                <label for="max">Maximum Line length</label>
+              </div>
               <div class="col s12">
                 <h4>Text</h4>
-                <div class="ace" id="editor">
-
-                </div>
+                <div class="ace" id="editor"></div>
                 <script type="text/javascript">
+                  ace.config.set('basePath', '/ace/module')
+
                   var editor = ace.edit('editor');
-                  editor.setTheme('ace/theme/eclipse');
-                  editor.setMode('ace/mode/plain_text');
+
+                  editor.setOptions({
+                      autoScrollEditorIntoView: true,
+                      copyWithEmptySelection: true,
+                  });
+
+                  editor.setTheme('ace/theme/tomorrow_night');
+                  editor.session.setMode('ace/mode/plain_text');
+
+                  document.getElementById('form-setBox').onsubmit = function() {
+                    document.getElementById('textarea-text').value = editor.getValue();
+                  }
                 </script>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input type="submit" class="btn" value="Submit">
+                </div>
               </div>
             </div>
           </form>

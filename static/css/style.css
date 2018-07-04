@@ -44,9 +44,10 @@
   margin-right: 1rem;
 }
 
-.sidenav a > .material-icons {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+.ace {
+  position: relative;
+  width: 100%;
+  min-height: 10em;
 }
 
 /*# sourceMappingURL=static/css/style.css.map */

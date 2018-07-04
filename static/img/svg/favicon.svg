@@ -1,0 +1,14 @@
+<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg">
+  <style>/* <![CDATA[ */polygon {fill: white; stroke: white; stroke-width: 32px;}/* ]]> */</style>
+  <g>
+    <title>background</title>
+    <rect fill="none" id="canvas_background" height="256" width="256" y="-1" x="-1"/>
+  </g>
+  <g>
+    <title>Layer 1</title>
+    <polygon points="128,136 128,228 28,128 128,28 174,74 182,66 128,12 12,128 128,244 140,244 140,148 128,136" stroke-width="1" shape-rendering="geometricPrecision"/>
+    <!-- 186,70 194,78 144,128 -->
+    <polygon points="228,228 128,128 186,70 202,70 144,128 244,228 228,244 228,228" stroke-width="1" shape-rendering="geometricPrecision"/>
+    <polygon points="128,120 140,108 128,96 128,120" stroke-width="1"  shape-rendering="geometricPrecision"/>
+  </g>
+</svg>

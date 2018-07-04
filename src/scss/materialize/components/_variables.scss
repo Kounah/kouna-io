@@ -35,14 +35,15 @@
 // 1. Colors
 // ==========================================================================
 
-$primary-color: color("blue-grey", "darken-3") !default;
+$primary-color: color("grey", "lighten-4") !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
-$secondary-color: color("orange", "base") !default;
+$secondary-color: color("cyan", "base") !default;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
-$link-color: color("light-blue", "darken-1") !default;
+$link-color: color("orange", "darken-1") !default;
+$font-color: #000 !default;
 
 .secondary-text {
   color: $secondary-color;
@@ -108,9 +109,9 @@ $button-floating-radius: 50% !default;
 // ==========================================================================
 
 $card-padding: 24px !default;
-$card-color: #fff !default;
-$card-bg-color: color("blue-grey", "darken-3") !default;
-$card-link-color: color("orange", "accent-2") !default;
+$card-color: $font-color !default;
+$card-bg-color: $primary-color !default;
+$card-link-color: desaturate($secondary-color, 25%) !default;
 $card-link-color-light: lighten($card-link-color, 20%) !default;
 
 
@@ -127,8 +128,8 @@ $carousel-item-width: $carousel-item-height !default;
 
 $collapsible-height: 3rem !default;
 $collapsible-line-height: $collapsible-height !default;
-$collapsible-header-color: color("blue-grey", "darken-3") !default;
-$collapsible-border-color: color("grey", "darken-4") !default;
+$collapsible-header-color: $primary-color !default;
+$collapsible-border-color: $primary-color-dark !default;
 
 
 // 7. Chips
@@ -162,11 +163,11 @@ $timepicker-clock-plate-bg: #eee !default;
 // 9. Dropdown
 // ==========================================================================
 
-$dropdown-bg-color: color("blue-grey", "darken-4") !default;
-$dropdown-hover-bg-color: color("blue-grey", "darken-1") !default;
+$dropdown-bg-color: $primary-color !default;
+$dropdown-hover-bg-color: $primary-color-dark !default;
 $dropdown-color: $secondary-color !default;
 $dropdown-item-height: 50px !default;
-$dropdown-divider-color: color("blue-grey", "darken-3") !default;
+$dropdown-divider-color: $primary-color-dark !default;
 
 
 // 10. Forms
@@ -176,7 +177,7 @@ $dropdown-divider-color: color("blue-grey", "darken-3") !default;
 $input-height: 3rem !default;
 $input-border-color: color("grey", "lighten-2") !default;
 $input-border: 1px solid $input-border-color !default;
-$input-background: color("blue-grey", "darken-4") !default;
+$input-background: $primary-color-dark !default;
 $input-error-color: $error-color !default;
 $input-success-color: $success-color !default;
 $input-focus-color: $secondary-color !default;
@@ -191,7 +192,7 @@ $input-disabled-border: 1px dotted $input-disabled-color !default;
 $input-invalid-border: 1px solid $input-error-color !default;
 $input-icon-size: 2rem;
 $placeholder-text-color: lighten($input-border-color, 20%) !default;
-$input-font-color: #fff !default;
+$input-font-color: $font-color !default;
 
 // Radio Buttons
 $radio-fill-color: $secondary-color !default;
@@ -258,7 +259,7 @@ $navbar-line-height: $navbar-height !default;
 $navbar-height-mobile: 56px !default;
 $navbar-line-height-mobile: $navbar-height-mobile !default;
 $navbar-font-size: 1rem !default;
-$navbar-font-color: #fff !default;
+$navbar-font-color: $font-color !default;
 $navbar-brand-font-size: 2.1rem !default;
 
 // 14. Side Navigation
@@ -266,8 +267,8 @@ $navbar-brand-font-size: 2.1rem !default;
 
 $sidenav-width: 300px !default;
 $sidenav-font-size: 14px !default;
-$sidenav-font-color: color("grey", "lighten-2") !default;
-$sidenav-bg-color: color("blue-grey", "darken-3") !default;
+$sidenav-font-color: $font-color !default;
+$sidenav-bg-color: $primary-color !default;
 $sidenav-padding: 16px !default;
 $sidenav-item-height: 48px !default;
 $sidenav-line-height: $sidenav-item-height !default;
@@ -328,9 +329,9 @@ $h6-fontsize: 1.15rem !default;
 // 21. Footer
 // ==========================================================================
 
-$footer-font-color: #fff !default;
+$footer-font-color: $font-color !default;
 $footer-bg-color: $primary-color !default;
-$footer-copyright-font-color: rgba(255,255,255,.8) !default;
+$footer-copyright-font-color: $secondary-color !default;
 $footer-copyright-bg-color: rgba(51,51,51,.08) !default;
 
 
@@ -346,10 +347,10 @@ $interval-size: $range / $intervals !default;
 // ==========================================================================
 
 $collection-border-color: color("grey", "darken-4") !default;
-$collection-bg-color: color("blue-grey", "darken-4") !default;
+$collection-bg-color: darken($primary-color, 5%) !default;
 $collection-active-bg-color: $secondary-color !default;
-$collection-active-color: color("blue-grey", "darken-4") !default;
-$collection-hover-bg-color: color("blue-grey", "darken-2") !default;
+$collection-active-color: $primary-color-dark !default;
+$collection-hover-bg-color: $primary-color-light !default;
 $collection-link-color: $secondary-color !default;
 $collection-line-height: 1.5rem !default;
 
@@ -360,5 +361,5 @@ $collection-line-height: 1.5rem !default;
 $progress-bar-color: $secondary-color !default;
 
 // 25. Modal
-$modal-background-color: color("blue-grey", "darken-3") !default;
-$modal-font-color: #fff;
+$modal-background-color: $primary-color !default;
+$modal-font-color: $font-color;
