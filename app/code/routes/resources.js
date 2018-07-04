@@ -4,8 +4,6 @@ const {dir, config} = require('../context');
 const {def} = require('../fn');
 
 module.exports = function (app, passport, edge) {
-  console.log(config.ace);
-
   app.get('/ace/info', (req, res) => {
     res.send(edge.render('page.ace.info', def({
       context: req,

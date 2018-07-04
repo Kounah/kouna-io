@@ -48,8 +48,6 @@ module.exports = function(app, passport, edge) {
   app.get('/user/:userid/short', (req, res) => {
     if(req.isAuthenticated()) {
       User.findOne({'_id': req.params.userid}).select('local.name local.email').exec((err, user) => {
-        console.log(user);
-
         res.json(user);
       })
     } else {
@@ -82,8 +80,6 @@ module.exports = function(app, passport, edge) {
           return;
         }
 
-        console.log(req.body);
-
         if(user.settings === undefined) {
           user.settings = {};
         }
@@ -95,8 +91,6 @@ module.exports = function(app, passport, edge) {
         user.settings.ace.fontFamily = req.body.fontFamily;
         user.settings.ace.fontSize = req.body.fontSize;
         user.settings.ace.theme = req.body.theme;
-
-        console.log(user);
 
         user.save(function (err) {
           if(err) {
