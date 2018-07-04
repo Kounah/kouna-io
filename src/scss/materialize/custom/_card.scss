@@ -1,0 +1,15 @@
+.card.colorful {
+  color: white;
+
+  .card-content a[href] {
+    color: rgba(255,255,255,.4);
+  }
+
+  .card-action {
+    border-top-color: rgba(255,255,255,.2) !important;
+
+    a {
+      color: white !important;
+    }
+  }
+}

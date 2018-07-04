@@ -148,4 +148,15 @@ module.exports = function(app, passport, edge) {
       })));
     }
   });
+
+  app.get('/tools/api/box', (req, res) => {
+    res.json({
+      result : boxify({
+        text  : req.query.text,
+        title : req.query.title,
+        ln    : req.query.ln == 'on',
+        max   : parseInt(req.query.max) > 0 ? parseInt(req.query.max) : undefined
+      })
+    })
+  })
 }

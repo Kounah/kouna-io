@@ -65,6 +65,54 @@ module.exports = function(app, passport, edge) {
     } else { res.redirect('/') }
   });
 
+  app.get('/account/settings', (req, res) => {
+    if(req.isAuthenticated()) {
+      res.send(edge.render('page.account.settings', def({
+        context: req
+      })))
+    } else { res.redirect('/') }
+  })
+
+  app.post('/account/settings/ace', (req, res) => {
+    if(req.isAuthenticated()) {
+      User.findOne({'_id': req.user._id}).exec((err, user) => {
+        if(err) {
+          console.log(err);
+          res.send(err);
+          return;
+        }
+
+        console.log(req.body);
+
+        if(user.settings === undefined) {
+          user.settings = {};
+        }
+
+        if(user.settings.ace === undefined) {
+          user.settings.ace = {}
+        }
+
+        user.settings.ace.fontFamily = req.body.fontFamily;
+        user.settings.ace.fontSize = req.body.fontSize;
+        user.settings.ace.theme = req.body.theme;
+
+        console.log(user);
+
+        user.save(function (err) {
+          if(err) {
+            console.log(err);
+            res.send(err);
+            return;
+          }
+
+          res.redirect('/account/settings');
+        })
+      })
+    } else {
+      res.redirect('/')
+    }
+  })
+
 
   app.post('/account/edit', (req, res) => {
     User.findById(req.user._id, (err, user) => {

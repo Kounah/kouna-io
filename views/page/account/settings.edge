@@ -8,7 +8,83 @@ Account Settings
 <div class="container">
   <div class="row">
     <div class="col s12">
-      
+      <h1 class="block">Account Settings</h1>
+    </div>
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">General</span>
+          <p>nothing here yet</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Ace Editor</span>
+          <form class="" action="/account/settings/ace" method="post">
+            <div class="row">
+              <div class="col s12 m8">
+                <div class="input-field">
+                  <input type="text" name="fontFamily" value="{{context.user.settings.ace.fontFamily}}">
+                  <label for="fontFamily">Font Family</label>
+                  <span>We will not serve the font family, please write the name of a font family that is installed on your computer.</span>
+                </div>
+              </div>
+              <div class="col s12 m4">
+                <div class="input-field">
+                  <input type="text" name="fontSize" value="{{context.user.settings.ace.fontSize}}">
+                  <label for="fontSize">Font Size</label>
+                  <span>CSS Font Size</span>
+                </div>
+              </div>
+              <div class="col s12 m4">
+                <div class="input-field center">
+                  <h4>Theme</h4>
+                  <a class="btn btn-large modal-trigger" href="#modal-chooseTheme">
+                    Choose Theme
+                    <i class="material-icons left">palette</i>
+                  </a>
+                </div>
+
+                <div class="modal modal-fixed-footer" id="modal-chooseTheme">
+                  <div class="modal-content">
+                    <h4>Ace Themes</h4>
+                    @each(theme in aceThemes)
+                    <p>
+                      <label>
+                        <input type="radio" name="theme" value="{{theme.name}}"
+                        @if(context.user.settings.ace.theme == theme.name)
+                        checked
+                        @endif
+                        >
+                        <span>{{theme.name}}</span>
+                      </label>
+                    </p>
+                    @endeach
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#" class="modal-close waves-effect btn-flat">
+                      okay
+                      <i class="material-icons left">check</i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="divider"></div>
+                <div class="input-field center">
+
+                  <button type="submit" class="btn btn-large waves-effect">
+                    Save
+                    <i class="material-icons left">save</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

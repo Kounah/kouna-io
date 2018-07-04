@@ -4733,7 +4733,7 @@ small {
   text-transform: uppercase;
 }
 .tabs .tab a {
-  color: rgba(245, 245, 245, 0.7);
+  color: rgba(0, 188, 212, 0.7);
   display: block;
   width: 100%;
   height: 100%;
@@ -4749,10 +4749,10 @@ small {
 }
 .tabs .tab a:hover, .tabs .tab a.active {
   background-color: transparent;
-  color: #f5f5f5;
+  color: #00bcd4;
 }
 .tabs .tab.disabled a, .tabs .tab.disabled a:hover {
-  color: rgba(245, 245, 245, 0.4);
+  color: rgba(0, 188, 212, 0.4);
   cursor: default;
 }
 .tabs .indicator {
@@ -5409,6 +5409,7 @@ body.keyboard-focused .dropdown-content li:focus {
 
 .collapsible-body {
   display: none;
+  background-color: #f5f5f5;
   border-bottom: 1px solid #cfcfcf;
   box-sizing: border-box;
   padding: 2rem;
@@ -5596,14 +5597,14 @@ button:focus {
 
 label {
   font-size: 0.8rem;
-  color: #e0e0e0;
+  color: #757575;
 }
 
 /* Text Inputs + Textarea
    ========================================================================== */
 /* Style Placeholders */
 ::placeholder {
-  color: white;
+  color: #a8a8a8;
 }
 
 /* Text inputs */
@@ -5623,7 +5624,7 @@ textarea.materialize-textarea {
   color: #000;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #757575;
   border-radius: 0;
   outline: none;
   height: 3rem;
@@ -5937,7 +5938,7 @@ textarea.materialize-textarea + label:after {
   width: calc(100% - 3rem - 1.5rem);
 }
 .input-field > label {
-  color: #e0e0e0;
+  color: #757575;
   position: absolute;
   top: 0;
   left: 0;
@@ -6480,7 +6481,7 @@ select {
   cursor: pointer;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #757575;
   outline: none;
   height: 3rem;
   line-height: 3rem;
@@ -8151,6 +8152,19 @@ ul.sidenav a > .material-icons.right {
   background-size: contain;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+}
+
+.card.colorful, main h1.colorful.block, main h2.colorful.block, main h3.colorful.block, main h4.colorful.block, main h5.colorful.block, main h6.colorful.block {
+  color: white;
+}
+.card.colorful .card-content a[href], main h1.colorful.block .card-content a[href], main h2.colorful.block .card-content a[href], main h3.colorful.block .card-content a[href], main h4.colorful.block .card-content a[href], main h5.colorful.block .card-content a[href], main h6.colorful.block .card-content a[href] {
+  color: rgba(255, 255, 255, 0.4);
+}
+.card.colorful .card-action, main h1.colorful.block .card-action, main h2.colorful.block .card-action, main h3.colorful.block .card-action, main h4.colorful.block .card-action, main h5.colorful.block .card-action, main h6.colorful.block .card-action {
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+.card.colorful .card-action a, main h1.colorful.block .card-action a, main h2.colorful.block .card-action a, main h3.colorful.block .card-action a, main h4.colorful.block .card-action a, main h5.colorful.block .card-action a, main h6.colorful.block .card-action a {
+  color: white !important;
 }
 
 /*# sourceMappingURL=static/css/materialize.css.map */

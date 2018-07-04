@@ -129,6 +129,7 @@ $carousel-item-width: $carousel-item-height !default;
 $collapsible-height: 3rem !default;
 $collapsible-line-height: $collapsible-height !default;
 $collapsible-header-color: $primary-color !default;
+$collapsible-body-color: $primary-color !default;
 $collapsible-border-color: $primary-color-dark !default;
 
 
@@ -175,7 +176,7 @@ $dropdown-divider-color: $primary-color-dark !default;
 
 // Text Inputs + Textarea
 $input-height: 3rem !default;
-$input-border-color: color("grey", "lighten-2") !default;
+$input-border-color: color("grey", "darken-1") !default;
 $input-border: 1px solid $input-border-color !default;
 $input-background: $primary-color-dark !default;
 $input-error-color: $error-color !default;
@@ -292,7 +293,7 @@ $spinner-default-color: $secondary-color !default;
 // ==========================================================================
 
 $tabs-underline-color: $primary-color-light !default;
-$tabs-text-color: $primary-color !default;
+$tabs-text-color: $secondary-color !default;
 $tabs-bg-color: #fff !default;
 
 

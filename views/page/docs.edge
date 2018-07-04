@@ -8,23 +8,49 @@ Documents
 @section('content')
   @if(docs)
   <div class="row">
-    <h1 class="block">Public Docs <span class="right">{{count}}</h1>
+    <div class="col s12">
+      <h1 class="block">Public Docs <span class="right">{{count}}</h1>
+    </div>
+  </div>
+  <div class="row">
     @each(doc in docs)
     <div class="col s12 m4 l3">
-      <div class="card {{doc.color}}">
-        <div class="card-image">
-          <img src="/docs/preview/{{doc._id}}" alt="">
+      <div class="card {{doc.color}}
+      @if(doc.color != 'default')
+      colorful
+      @endif
+      ">
+        <div class="card-content">
           <span class="card-title truncate">
             @!component('component.icon', {type: 'svg-file-icon', key: toFileIcon(doc.type), position: 'left'})
-            <a href="/docs/list?type={{doc.type}}">[{{doc.type}}]</a>
-            <br>
-            <b>{{doc.title}}</b><a href="/docs/list?topic={{doc.topic}}"><i>#{{doc.topic}}</i></a><a href="/docs/list?creator={{doc.creator}}" class="user-popup" data-user="{{doc.creator}}"></a></span>
-          @if(doc.creator && context.user && doc.creator == context.user._id)
-          <a class="btn-floating halfway-fab" href="/docs/edit/{{doc._id}}"><i class="material-icons">mode_edit</i></a>
-          @endif
+            <b>{{doc.title}}</b>
+            <a href="/docs/list?creator={{doc.creator}}" class="user-popup" data-user="{{doc.creator}}"></a>
+          </span>
+          <p>
+            <div>
+              <b>Type: </b>
+              <span class="right">
+                <a class="{{doc.color}}-text text-lighten-4" href="/docs/list?type={{doc.type}}">[{{doc.type}}]</a><br>
+              </span>
+            </div>
+            <div>
+              <b>Topic: </b>
+              <span class="right">
+                <a class="{{doc.color}}-text text-lighten-4" href="/docs/list?topic={{doc.topic}}">
+                  <i>{{doc.topic}}</i>
+                </a>
+              </span>
+            </div>
+          </p>
         </div>
         <div class="card-content">
           {{doc.description}}
+        </div>
+        <div class="card-action">
+          @if(doc.creator && context.user && doc.creator == context.user._id)
+            <a href="/docs/edit/{{doc._id}}"><!--<i class="material-icons">mode_edit</i>-->Edit</a>
+          @endif
+          <a href="/docs/view/{{doc._id}}"><!--<i class="material-icons">open_in_new</i>-->View Full</a>
         </div>
       </div>
     </div>

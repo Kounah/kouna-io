@@ -2,9 +2,14 @@ const {dir, config} = require('./context');
 
 function def(o) {
   let result = {};
+
   let copyFrom = [{
-    nav: config.links
+    nav: config.links,
+    aceThemes: config.ace.modules.filter(d => d.type == 'theme')
   }];
+
+
+// .filter(d => d.type == 'theme')
   copyFrom.push(o);
   copyFrom.forEach(item => {
     Object.keys(item).forEach(key => {

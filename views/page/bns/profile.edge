@@ -21,7 +21,7 @@
 @section('content')
   @if(char)
   <div class="row">
-    <div class="col s12 m12 l3">
+    <div class="col s12 m6 offset-m3 l3">
       <div class="card">
         @if(char.general.avatar)
         <div class="card-image">
@@ -75,10 +75,10 @@
     <div class="col s12 m6 l3">
       <div class="card" style="background-image: url(/img/bns/bgStat-attack.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
         <div class="card-content">
-          <span class="card-title">Offense</span>
+          <span class="card-title white-text">Offense</span>
           <div class="row">
             <div class="col s12 center">
-              <p class="flow-text">
+              <p class="flow-text white-text">
                 Attack Power<br>
                 <h3 class="green-text" style="margin: 0">{{char.stats.attack.power.value.total}}</h3>
               </p>
@@ -159,7 +159,7 @@
                     </table>
                     ">
                       <span><b>{{rate.name}}</b></span>
-                      <span class="badge right green-text">{{rate.total}}%</span>
+                      <span class="badge right green-text"><b>{{rate.total}}%</b></span>
                     </div>
                   @endeach
                 </div>
@@ -172,10 +172,10 @@
     <div class="col s12 m6 l3">
       <div class="card" style="background-image: url(/img/bns/bgStat-defense.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
         <div class="card-content">
-          <span class="card-title">Defense</span>
+          <span class="card-title white-text">Defense</span>
           <div class="row">
             <div class="col s12 center">
-              <p class="flow-text">
+              <p class="flow-text white-text">
                 HP<br>
                 <h3 class="green-text" style="margin: 0">{{char.stats.defend.max_hp.value.total}}</h3>
               </p>
@@ -265,7 +265,7 @@
                     </table>
                     ">
                       <span><b>{{rate.name}}</b></span>
-                      <span class="badge right green-text">{{rate.total}}%</span>
+                      <span class="badge right green-text"><i>{{rate.total}}%</i></span>
                     </div>
                   @endeach
                 </div>
@@ -276,7 +276,7 @@
       </div>
     </div>
     <div class="col s12 m12 l3">
-      <div class="card gear rarity-{{char.weapon.rarity}}">
+      <div class="card gear rarity-{{char.weapon.rarity}} rarity-border">
         <div class="card-content row">
           <div class="col s3 center">
             <img class="rarity-border" src="{{char.weapon.icon}}" alt="">
@@ -306,27 +306,22 @@
 
     </div>
     <div class="col s12 m12 l3">
-      @each(prop in propertyRange(char.gear))
-      <div class="card gear rarity-{{prop.value.rarity}}
+      <div class="card
       @if(!prop.value.icon)
         empty
       @endif
       ">
-        <div class="card-content row">
-          @if(prop.value.icon)
-          <div class="col s3 {{prop.key}}">
-            <img class="rarity-border" src="{{prop.value.icon}}" alt="">
+      <div class="card-content">
+        <span class="card-title">Gear</span>
+        <div class="row">
+          @each(prop in propertyRange(char.gear))
+          <div class="col s3 {{prop.key}} center" style="overflow: hidden">
+            <img class="rarity-{{prop.value.rarity}} rarity-border gear-icon tooltipped html" src="{{prop.value.icon}}" alt="{{prop.value.name}}" data-position="top" data-tooltip="<span class='rarity-{{prop.value.rarity}} rarity-text'>{{prop.value.name}}</span>">
           </div>
-          @else
-          <div class="col s3">
-          </div>
-          @endif
-          <div class="col s9">
-            <p class="flow-text rarity-text">{{prop.value.name}}</p>
-          </div>
+          @endeach
+        </div>
         </div>
       </div>
-      @endeach
     </div>
   </div>
   @else

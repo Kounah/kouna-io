@@ -33,6 +33,7 @@
 
 .collapsible-body {
   display: none;
+  background-color: $collapsible-body-color;
   border-bottom: 1px solid $collapsible-border-color;
   box-sizing: border-box;
   padding: 2rem;

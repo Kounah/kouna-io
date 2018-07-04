@@ -98,6 +98,33 @@ module.exports = function(app, passport, edge) {
     } else { res.redirect('/docs/list') }
   })
 
+  app.post('/docs/edit/:docId/content', (req, res) => {
+    if(req.isAuthenticated()) {
+      Document.findById(req.params.docId, (err, doc) => {
+        if(err) {
+          res.sendStatus(404);
+        }
+
+        if(doc.creator == req.user._id) {
+          doc.content = req.body.content;
+
+          doc.save(function(err) {
+            if(err) {
+              console.log(err);
+              res.send(err);
+              return;
+            }
+            res.redirect('/docs/edit/' + doc._id);
+          });
+        } else {
+          res.sendStatus(403);
+        }
+      })
+    } else {
+      res.sendStatus(401)
+    }
+  })
+
   app.get('/docs/preview/:docId', (req, res) => {
     res.send(fs.readFileSync(path.join(dir, 'static', 'img', 'coming-soon.png')))
   });

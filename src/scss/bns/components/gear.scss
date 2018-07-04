@@ -75,17 +75,18 @@
 }*/
 
 @mixin cardByColor($color) {
-  border-color: $color;
-
+  &.rarity-text,
   .rarity-text {
     color: $color;
   }
 
+  &.rarity,
   .rarity {
     background-color: $color;
   }
 
-  img.rarity-border {
+  &.rarity-border,
+  .rarity-border {
     border-color: $color;
   }
 }
@@ -97,7 +98,7 @@
 }
 
 .gear {
-  border: solid 1pt;
+  border: solid 1px;
 
   &.empty {
     opacity: .25;
@@ -106,7 +107,7 @@
   img {
     width: 100%;
     &.rarity-border {
-      border: solid 1pt;
+      border: solid 1px;
       border-radius: 2px;
     }
   }
@@ -146,4 +147,41 @@
   &.rarity-8 {
     @include cardByColor(#8a7aff);
   }
+}
+
+.rarity-1 {
+  @include cardByColor(#6c6c6c);
+}
+
+.rarity-2 {
+  @include cardByColor(#6c6c6c);
+}
+
+.rarity-3 {
+  @include cardByColor(#58ff77);
+}
+
+.rarity-4 {
+  @include cardByColor(#46bee1);
+}
+
+.rarity-5 {
+  @include cardByColor(#d739ff);
+}
+
+.rarity-6 {
+  @include cardByColor(#f1b248);
+}
+
+.rarity-7 {
+  @include cardByColor(#ff770a);
+}
+
+.rarity-8 {
+  @include cardByColor(#8a7aff);
+}
+
+.gear-icon {
+  border: solid 1px;
+  max-width: 100%;
 }

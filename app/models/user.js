@@ -32,9 +32,8 @@ var userSchema = mongoose.Schema({
   settings          : {
     ace             : {
       theme         : String,
-      font          : String,
+      fontFamily    : String,
       fontSize      : String,
-      lineHeight    : String
     }
   }
 })

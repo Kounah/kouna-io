@@ -10,11 +10,11 @@
 }
 .stat.icon2.disabled {
   opacity: 0.75;
-  border-color: grey;
-  background-color: rgba(128, 128, 128, 0.5);
+  border-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .stat.icon2.disabled span {
-  color: grey;
+  color: black;
 }
 .stat.icon2::before {
   content: "";
@@ -235,7 +235,7 @@
 }
 
 .gear {
-  border: solid 1pt;
+  border: solid 1px;
 }
 .gear.empty {
   opacity: 0.25;
@@ -244,107 +244,216 @@
   width: 100%;
 }
 .gear img.rarity-border {
-  border: solid 1pt;
+  border: solid 1px;
   border-radius: 2px;
 }
 .gear .card-content {
   margin: 0;
 }
-.gear.rarity-1 {
-  border-color: #6c6c6c;
-}
+.gear.rarity-1.rarity-text,
 .gear.rarity-1 .rarity-text {
   color: #6c6c6c;
 }
+.gear.rarity-1.rarity,
 .gear.rarity-1 .rarity {
   background-color: #6c6c6c;
 }
-.gear.rarity-1 img.rarity-border {
+.gear.rarity-1.rarity-border,
+.gear.rarity-1 .rarity-border {
   border-color: #6c6c6c;
 }
-.gear.rarity-2 {
-  border-color: #6c6c6c;
-}
+.gear.rarity-2.rarity-text,
 .gear.rarity-2 .rarity-text {
   color: #6c6c6c;
 }
+.gear.rarity-2.rarity,
 .gear.rarity-2 .rarity {
   background-color: #6c6c6c;
 }
-.gear.rarity-2 img.rarity-border {
+.gear.rarity-2.rarity-border,
+.gear.rarity-2 .rarity-border {
   border-color: #6c6c6c;
 }
-.gear.rarity-3 {
-  border-color: #58ff77;
-}
+.gear.rarity-3.rarity-text,
 .gear.rarity-3 .rarity-text {
   color: #58ff77;
 }
+.gear.rarity-3.rarity,
 .gear.rarity-3 .rarity {
   background-color: #58ff77;
 }
-.gear.rarity-3 img.rarity-border {
+.gear.rarity-3.rarity-border,
+.gear.rarity-3 .rarity-border {
   border-color: #58ff77;
 }
-.gear.rarity-4 {
-  border-color: #46bee1;
-}
+.gear.rarity-4.rarity-text,
 .gear.rarity-4 .rarity-text {
   color: #46bee1;
 }
+.gear.rarity-4.rarity,
 .gear.rarity-4 .rarity {
   background-color: #46bee1;
 }
-.gear.rarity-4 img.rarity-border {
+.gear.rarity-4.rarity-border,
+.gear.rarity-4 .rarity-border {
   border-color: #46bee1;
 }
-.gear.rarity-5 {
-  border-color: #d739ff;
-}
+.gear.rarity-5.rarity-text,
 .gear.rarity-5 .rarity-text {
   color: #d739ff;
 }
+.gear.rarity-5.rarity,
 .gear.rarity-5 .rarity {
   background-color: #d739ff;
 }
-.gear.rarity-5 img.rarity-border {
+.gear.rarity-5.rarity-border,
+.gear.rarity-5 .rarity-border {
   border-color: #d739ff;
 }
-.gear.rarity-6 {
-  border-color: #f1b248;
-}
+.gear.rarity-6.rarity-text,
 .gear.rarity-6 .rarity-text {
   color: #f1b248;
 }
+.gear.rarity-6.rarity,
 .gear.rarity-6 .rarity {
   background-color: #f1b248;
 }
-.gear.rarity-6 img.rarity-border {
+.gear.rarity-6.rarity-border,
+.gear.rarity-6 .rarity-border {
   border-color: #f1b248;
 }
-.gear.rarity-7 {
-  border-color: #ff770a;
-}
+.gear.rarity-7.rarity-text,
 .gear.rarity-7 .rarity-text {
   color: #ff770a;
 }
+.gear.rarity-7.rarity,
 .gear.rarity-7 .rarity {
   background-color: #ff770a;
 }
-.gear.rarity-7 img.rarity-border {
+.gear.rarity-7.rarity-border,
+.gear.rarity-7 .rarity-border {
   border-color: #ff770a;
 }
-.gear.rarity-8 {
-  border-color: #8a7aff;
-}
+.gear.rarity-8.rarity-text,
 .gear.rarity-8 .rarity-text {
   color: #8a7aff;
 }
+.gear.rarity-8.rarity,
 .gear.rarity-8 .rarity {
   background-color: #8a7aff;
 }
-.gear.rarity-8 img.rarity-border {
+.gear.rarity-8.rarity-border,
+.gear.rarity-8 .rarity-border {
   border-color: #8a7aff;
+}
+
+.rarity-1.rarity-text,
+.rarity-1 .rarity-text {
+  color: #6c6c6c;
+}
+.rarity-1.rarity,
+.rarity-1 .rarity {
+  background-color: #6c6c6c;
+}
+.rarity-1.rarity-border,
+.rarity-1 .rarity-border {
+  border-color: #6c6c6c;
+}
+
+.rarity-2.rarity-text,
+.rarity-2 .rarity-text {
+  color: #6c6c6c;
+}
+.rarity-2.rarity,
+.rarity-2 .rarity {
+  background-color: #6c6c6c;
+}
+.rarity-2.rarity-border,
+.rarity-2 .rarity-border {
+  border-color: #6c6c6c;
+}
+
+.rarity-3.rarity-text,
+.rarity-3 .rarity-text {
+  color: #58ff77;
+}
+.rarity-3.rarity,
+.rarity-3 .rarity {
+  background-color: #58ff77;
+}
+.rarity-3.rarity-border,
+.rarity-3 .rarity-border {
+  border-color: #58ff77;
+}
+
+.rarity-4.rarity-text,
+.rarity-4 .rarity-text {
+  color: #46bee1;
+}
+.rarity-4.rarity,
+.rarity-4 .rarity {
+  background-color: #46bee1;
+}
+.rarity-4.rarity-border,
+.rarity-4 .rarity-border {
+  border-color: #46bee1;
+}
+
+.rarity-5.rarity-text,
+.rarity-5 .rarity-text {
+  color: #d739ff;
+}
+.rarity-5.rarity,
+.rarity-5 .rarity {
+  background-color: #d739ff;
+}
+.rarity-5.rarity-border,
+.rarity-5 .rarity-border {
+  border-color: #d739ff;
+}
+
+.rarity-6.rarity-text,
+.rarity-6 .rarity-text {
+  color: #f1b248;
+}
+.rarity-6.rarity,
+.rarity-6 .rarity {
+  background-color: #f1b248;
+}
+.rarity-6.rarity-border,
+.rarity-6 .rarity-border {
+  border-color: #f1b248;
+}
+
+.rarity-7.rarity-text,
+.rarity-7 .rarity-text {
+  color: #ff770a;
+}
+.rarity-7.rarity,
+.rarity-7 .rarity {
+  background-color: #ff770a;
+}
+.rarity-7.rarity-border,
+.rarity-7 .rarity-border {
+  border-color: #ff770a;
+}
+
+.rarity-8.rarity-text,
+.rarity-8 .rarity-text {
+  color: #8a7aff;
+}
+.rarity-8.rarity,
+.rarity-8 .rarity {
+  background-color: #8a7aff;
+}
+.rarity-8.rarity-border,
+.rarity-8 .rarity-border {
+  border-color: #8a7aff;
+}
+
+.gear-icon {
+  border: solid 1px;
+  max-width: 100%;
 }
 
 /*# sourceMappingURL=static/css/bns.css.map */

@@ -8,13 +8,7 @@ Settings {{doc.title}}
 <div class="container">
   <div class="row">
     <div class="col s12">
-      <h3>Settings <a href="#" class="btn modal-trigger right" data-target="modal-settings">
-        @!component('component.icon', {
-          type: 'material',
-          key: 'settings',
-          position: 'left'
-        })
-        Settings</a></h3>
+      <h3 class="block">Settings</h3>
       @if(isCreator == true)
       <div class="modal modal-fixed-footer" id="modal-settings">
         <form class="" action="/docs/edit/{{doc._id}}/settings" method="post">
@@ -96,14 +90,101 @@ Settings {{doc.title}}
         </div>
       @endif
     </div>
-    <div class="col s12 l6">
+    <div class="col s12">
       <div class="card {{doc.color}}">
         <div class="card-content">
-          <span class="card-title">Content</span>
-          <form class="" action="/docs/edit/{{doc._id}}/content" method="post">
-            <textarea name="content" class="materialize-textarea"></textarea>
-            <label for="content">Content</label>
+          <form class="" action="/docs/edit/{{doc._id}}/content" method="post" id="form-content">
+            <span class="card-title">Contents
+              <div class="input-field right">
+                <button type="submit" class="btn right">
+                  Save
+                  <i class="material-icons left">save</i>
+                </button>
+              </div>
+            </span>
+            <ul class="tabs">
+              <li class="tab"><a href="#content-common-editor">Common</a></li>
+              <li class="tab"><a href="#content-ace-editor">Advanced (ace)</a></li>
+            </ul>
+            <section id="content-common-editor">
+              <div class="input-field">
+                <textarea name="content" class="materialize-textarea" id="textarea-content">{{doc.content}}</textarea>
+                <label for="content">Content</label>
+              </div>
+            </section>
+            <section id="content-ace-editor">
+              <div class="col s12">
+                <div class="input-field">
+                  <p>
+                    <label>
+                      <input type="checkbox" id="editQuickConfig-showInvisibles">
+                      <span>Show Invisibles?</span>
+                    </label>
+                  </p>
+                </div>
+              </div>
+              <div class="ace" id="editor" style="height: 70vh"></div>
+
+              <script type="text/javascript">
+              ace.config.set('basePath', '/ace/module')
+
+              var editor = ace.edit('editor');
+
+              editor.setValue(document.getElementById('textarea-content').value);
+
+              editor.setOptions({
+                autoScrollEditorIntoView: true,
+                copyWithEmptySelection: true,
+                @if(context.user.settings.ace)
+                fontFamily: '{{context.user.settings.ace.fontFamily}}',
+                fontSize: '{{context.user.settings.ace.fontSize}}',
+                @else
+                fontFamily: 'monospaced',
+                fontSize: '1em',
+                @endif
+                displayIntentGuide: true,
+              });
+
+              editor.session.setUseSoftTabs(true);
+              editor.session.setTabSize(2);
+
+              document.getElementById('editQuickConfig-showInvisibles').addEventListener('change', function() {
+                editor.setShowInvisibles(this.checked);
+              })
+
+              @if(context.user.settings.ace.theme)
+                editor.setTheme('ace/theme/{{context.user.settings.ace.theme}}');
+              @else
+                editor.setTheme('ace/theme/chrome');
+              @endif
+              editor.session.setMode('ace/mode/{{doc.type}}');
+
+              editor.session.on('change', function() {
+                document.getElementById('textarea-content').value = editor.getValue();
+              })
+
+              document.getElementById('form-content').onsubmit = function() {
+                document.getElementById('textarea-content').value = editor.getValue();
+              }
+              </script>
+            </section>
           </form>
+        </div>
+      </div>
+    </div>
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">More Settigns</span>
+          <p class="center">
+            <a href="#" class="btn btn-large modal-trigger" data-target="modal-settings">
+              @!component('component.icon', {
+                type: 'material',
+                key: 'settings',
+                position: 'left'
+              })
+              Open</a>
+          </p>
         </div>
       </div>
     </div>
