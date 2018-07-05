@@ -66,5 +66,8 @@ module.exports = {
     'HP Regen'            : 'stat icon defenseRegen',
     'HP Regen Combat'     : 'stat icon defenseRegen',
     'Recovery'            : 'stat icon defenseRecovery'
+  },
+  char: {
+    dateFormat: 'YYYY-MM-DD : hh'
   }
 }

@@ -1,3 +1,4 @@
+const moment = require('moment');
 var config = require('./config');
 
 var prefix = 'BnS';

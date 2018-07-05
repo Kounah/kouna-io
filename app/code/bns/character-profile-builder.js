@@ -240,8 +240,10 @@ module.exports = function(html, abilities, gear) {
   if(typeof gear === 'string') {
     let d = new JSDOM(gear).window.document;
 
-    function getIcon(icoUrl) {
-      var icon = icoUrl;
+    function getIcon(ico) {
+      if(ico == undefined)
+        return '';
+      var icon = ico.getAttribute('src');
       var base = path.parse(url.parse(icon).pathname).base;
       var iconPath = path.join(dir, '.ignore', 'img', 'bns', 'item', base);
       if(!fs.existsSync(iconPath)) {
@@ -267,11 +269,15 @@ module.exports = function(html, abilities, gear) {
     }
 
     function getData(elem) {
-      return elem
-      .getAttribute('item-data')
-      .split('.').map(v => {
-        return parseInt(v) | 0
-      })
+      try {
+        return elem
+        .getAttribute('item-data')
+        .split('.').map(v => {
+          return parseInt(v) | 0
+        })
+      } catch (err) {
+        return [];
+      }
     }
 
     function getGem(elem) {
@@ -282,10 +288,10 @@ module.exports = function(html, abilities, gear) {
       }
 
       let gem = new Item({
-        name    : img.getAttribute('alt'),
+        name    : img != null ? img.getAttribute('alt') : '',
         rarity  : 2,
-        data    : getData(img),
-        icon    : getIcon(img.getAttribute('src'))
+        data    : img != null ? getData(img) : '',
+        icon    : img != null ? getIcon(img) : ''
       })
 
       gem.rarity = gem.name.indexOf('Gilded') > -1 ? 7 : 5;
@@ -297,7 +303,6 @@ module.exports = function(html, abilities, gear) {
       var thumb = elem.querySelector('.thumb');
       var durArr = elem.querySelector('.quality .text').textContent.split(' / ');
 
-      console.log('durArr', durArr)
       var dur = {
         cur: durArr[0] | 0,
         max: durArr[1] | 0
@@ -306,8 +311,8 @@ module.exports = function(html, abilities, gear) {
       var weap = new Weapon({
         name        : elem.querySelector('.name span').textContent,
         rarity      : getRarity(elem.querySelector('.name span')),
-        data        : getData(thumb),
-        icon        : getIcon(thumb.querySelector('img').getAttribute('src')),
+        data        : thumb != null ? getData(thumb) : [],
+        icon        : thumb != null ? getIcon(thumb.querySelector('img')) : '',
         durability  : dur
       })
 
@@ -328,9 +333,8 @@ module.exports = function(html, abilities, gear) {
 
       try {
         let ico     = elem.querySelector('.icon img');
-        console.log(ico);
-        res.obj.icon    = getIcon(ico.getAttribute('src'));
-        res.obj.data    = getData(ico);
+        res.obj.icon    = ico != null ? getIcon(ico) : '';
+        res.obj.data    = ico != null ? getData(ico) : [];
       } catch (err) {
         // console.log(`no image for ${res.type.underline} because of ${('' + err).bold}`.red);
       }
@@ -348,21 +352,21 @@ module.exports = function(html, abilities, gear) {
     let ssIcons = Array.prototype.slice.call(d.querySelectorAll('.gemIcon span'));
     let ssAreas = Array.prototype.slice.call(d.querySelectorAll('.gemIcon map area'));
 
-    newChar.soulshield = ssIcons.map((elem, index) => {
-      let pos       = parseInt(elem.getAttribute('class').match('^pos([0-9])').pop());
-      let area      = ssAreas[pos - 1];
+    if(ssIcons != undefined && ssAreas != undefined) {
+      newChar.soulshield = ssIcons.map((elem, index) => {
+        let pos       = parseInt(elem.getAttribute('class').match('^pos([0-9])').pop());
+        let area      = ssAreas[pos - 1];
 
-      return new Soulshield({
-        name    : area.getAttribute('alt') + ' - No. ' + pos,
-        rarity  : 0,
-        icon    : getIcon(elem.querySelector('img').getAttribute('src')),
-        data    : getData(area),
-        pos     : pos
+        return new Soulshield({
+          name    : area.getAttribute('alt') + ' - No. ' + pos,
+          rarity  : 0,
+          icon    : elem != null ? getIcon(elem.querySelector('img')) : '',
+          data    : elem != null ? getData(area) : [],
+          pos     : pos
+        })
       })
-    })
+    }
   }
-
-  console.log(newChar);
 
   return newChar;
 }

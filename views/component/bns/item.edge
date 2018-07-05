@@ -1,0 +1,11 @@
+@if(_key != '$init')
+  @if(icon)
+  <img class="rarity-{{rarity}} rarity-border gear-icon tooltipped html z-depth-1" src="{{icon}}" alt="{{name}}" data-position="top" data-tooltip="<span class='rarity-{{rarity}} rarity-text'>{{name}}</span>">
+  @else
+  <div class="empty-slot gear-icon center">
+    <span class="truncate">
+      {{name}}
+    </span>
+  </div>
+  @endif
+@endif

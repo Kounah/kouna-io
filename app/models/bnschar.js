@@ -46,6 +46,7 @@ BnsWeapon.gems = [Object]
 
 
 var bnsCharSchema = mongoose.Schema({
+  date        : String,
   region      : String,
   general: {
     account   : String,
@@ -127,7 +128,7 @@ var bnsCharSchema = mongoose.Schema({
     'tire'              : {type: BnsGear}, // Outfit
     'faceDecoration'    : {type: BnsGear}  // Outfit
   },
-  soulshield: [Object]
+  soulshield: []
 });
 
 module.exports = mongoose.model('BnsChar', bnsCharSchema);

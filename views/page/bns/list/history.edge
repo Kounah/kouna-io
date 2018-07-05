@@ -1,0 +1,177 @@
+@layout('layout.bns')
+
+@section('title')
+{{region}}-history: {{name}}
+@endsection
+
+@section('content')
+<div class="container">
+  <div class="row">
+    @each(char in chars)
+    <div class="col s12 m6 l4">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{char.date}}</span>
+          <b>{{char.general.account}} [{{char.general.name}}]</b> #{{camelCase(char.general.class)}}
+        </div>
+        <ul class="tabs transparent">
+          <li class="tab"><a href="#{{uuid(char)}}-general">General</a></li>
+          <li class="tab"><a href="#{{uuid(char)}}-gear">Gear</a></li>
+          <li class="tab"><a href="#{{uuid(char)}}-stats-offense">ATK</a></li>
+          <li class="tab"><a href="#{{uuid(char)}}-stats-defense">DEF</a></li>
+        </ul>
+        <div class="card-content" id="{{uuid(char)}}-general">
+          <table>
+            <tbody>
+              <tr>
+                <th>Level</th>
+                <td>{{char.general.level}} HM{{char.general.hm}}</td>
+              </tr>
+              <tr>
+                <th>Clan</th>
+                <td>{{char.general.clan}}</td>
+              </tr>
+              <tr>
+                <th>Faction</th>
+                <td>{{char.general.faction}}</td>
+              </tr>
+              <tr>
+                <th>Server</th>
+                <td>{{char.general.server}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-content" id="{{uuid(char)}}-gear">
+          <div class="row">
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.ring)
+            </div>
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.earring)
+            </div>
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.necklace)
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.bracelet)
+            </div>
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.gloves)
+            </div>
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.belt)
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.soul)
+            </div>
+            <div class="col s4">
+              @!component('component.bns.item', char.gear.guard)
+            </div>
+            <div class="col s4">
+              @!component('component.bns.item', char.gear['soul-2'])
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s6">
+              @!component('component.bns.item', char.gear.singongpae)
+            </div>
+            <div class="col s6">
+              @!component('component.bns.item', char.gear.rune)
+            </div>
+          </div>
+        </div>
+        <div class="card-content" id="{{uuid(char)}}-stats-offense">
+          <div class="row">
+            @each(prop in propertyRange(char.stats.attack))
+            @if(prop.key != '$init')
+            <div class="col s2 l4">
+              <div class="card center tooltipped html" data-position="bottom" data-tooltip="
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Total</th>
+                    <th>Base</th>
+                    <th>Equip<Th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Value</th>
+                    <td>{{prop.value.value.total}}</td>
+                    <td>{{prop.value.value.base}}</td>
+                    <td>{{prop.value.value.equip}}</td>
+                  </tr>
+                  @each(rate in prop.value.rate)
+                  <tr>
+                    <th>{{rate.name}}</th>
+                    <td>{{rate.total}}</td>
+                    <td>{{rate.base}}</td>
+                    <td>{{rate.equip}}</td>
+                  </tr>
+                  @endeach
+                </tbody>
+              </table>
+              ">
+                <h5 class="green-text">{{prop.value.value.total}}</h5>
+                <div class="divider"></div>
+                <span>{{prop.value.name}}</span>
+              </div>
+            </div>
+            @endif
+            @endeach
+          </div>
+        </div>
+        <div class="card-content" id="{{uuid(char)}}-stats-defense">
+          <div class="row">
+            @each(prop in propertyRange(char.stats.defend))
+            @if(prop.key != '$init')
+            <div class="col s2 l4">
+              <div class="card center tooltipped html" data-position="bottom" data-tooltip="
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Total</th>
+                    <th>Base</th>
+                    <th>Equip<Th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Value</th>
+                    <td>{{prop.value.value.total}}</td>
+                    <td>{{prop.value.value.base}}</td>
+                    <td>{{prop.value.value.equip}}</td>
+                  </tr>
+                  @each(rate in prop.value.rate)
+                  <tr>
+                    <th>{{rate.name}}</th>
+                    <td>{{rate.total}}</td>
+                    <td>{{rate.base}}</td>
+                    <td>{{rate.equip}}</td>
+                  </tr>
+                  @endeach
+                </tbody>
+              </table>
+              ">
+                <h5 class="green-text">{{prop.value.value.total}}</h5>
+                <div class="divider"></div>
+                <span>{{prop.value.name}}</span>
+              </div>
+            </div>
+            @endif
+            @endeach
+          </div>
+        </div>
+      </div>
+    </div>
+    @endeach
+  </div>
+</div>
+@endsection
