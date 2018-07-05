@@ -68,6 +68,6 @@ module.exports = {
     'Recovery'            : 'stat icon defenseRecovery'
   },
   char: {
-    dateFormat: 'YYYY-MM-DD : hh'
+    dateFormat: 'YYYY-MM-DD : H'
   }
 }
