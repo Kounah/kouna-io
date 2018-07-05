@@ -67,6 +67,17 @@
           </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">About This</span>
+
+          <div class="collection">
+            <a class="collection-item" href="/bns/list/{{char.region}}/{{char.general.name}}/history">
+              <b>History</b>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col s12 m6 l3">
       <div class="card" style="background-image: url(/img/bns/bgStat-attack.png); background-size: 100% auto; background-position: top; background-repeat: no-repeat">
@@ -274,8 +285,8 @@
         </div>
       </div>
     </div>
-    @if(char.weapon.icon !== 'undefined')
     <div class="col s12 m12 l3">
+    @if(char.weapon.icon !== 'undefined')
       <div class="card gear rarity-{{char.weapon.rarity}} rarity-border">
         <div class="card-content row">
           <div class="col s3 center">
@@ -303,9 +314,9 @@
           </div>
         </div>
       </div>
-    </div>
+    <!--</div>-->
     @endif
-    <div class="col s12 m12 l3">
+    <!--<div class="col s12 m12 l3">-->
       <div class="card">
         <div class="card-content">
           <span class="card-title">Gear</span>
@@ -352,8 +363,40 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col s12 m12 l3">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Soulshield</span>
+          <div class="row">
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[7])
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[0])
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[1])
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[6])
+            </div>
+            <div class="col s4">
+
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[2])
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[5])
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[4])
+            </div>
+            <div class="col s4">
+              @!component('component.bns.soulshield', char.soulshield[3])
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-content">
           <span class="card-title">Outfit</span>
@@ -375,20 +418,6 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">About This</span>
-          <div class="col s12 m6 l4">
-            <b>Information Date</b>
-            <span class="right">{{char.date}}</span>
-            <a href="/bns/list/{{char.region}}/{{char.general.name}}/history">View History</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   @else
   <div class="container">
     <div class="row">
@@ -396,6 +425,9 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">Character Search</span>
+
+            <a class="bns-character" data-name="Kouna" data-region="eu">Kouna</a>
+
             <form action="/bns/profile" method="get">
               <div class="row">
                 <div class="col s4 m3 l2">

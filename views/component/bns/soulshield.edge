@@ -1,0 +1,9 @@
+@if(icon)
+<img class="gear-icon tooltipped html" src="{{icon}}" alt="{{name}}" data-position="top" data-tooltip="<span class='rarity-{{rarity}} rarity-text'>{{name}}</span>">
+@else
+<div class="empty-slot gear-icon center">
+  <span class="truncate">
+    {{pos}}
+  </span>
+</div>
+@endif

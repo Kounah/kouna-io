@@ -163,10 +163,15 @@ module.exports = function(app, passport, edge) {
         console.log(char)
       }
 
-      res.send(edge.render('page.bns.profile', def({
-        context : req,
-        char    : char
-      })))
+      console.log(req.query);
+      if(req.query && req.query.compact != undefined) {
+        res.send(edge.render('component.bns.compact.char', char))
+      } else {
+        res.send(edge.render('page.bns.profile', def({
+          context : req,
+          char    : char
+        })))
+      }
     });
   })
 

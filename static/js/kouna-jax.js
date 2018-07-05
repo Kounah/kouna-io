@@ -1,5 +1,4 @@
 (function($) {
-
   document.addEventListener('DOMContentLoaded', function() {
     $('.user-popup[data-user]').each(function() {
       $.ajax({
