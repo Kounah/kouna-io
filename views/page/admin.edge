@@ -8,28 +8,24 @@
 <script type="text/javascript">
   (function($, M) {
     $(document).ready(function() {
-      $('#update').click(function() {
+      function _do(something) {
         $.ajax({
           method    : 'get',
-          url       : '/admin/update',
+          url       : '/admin/' + something,
           dataType  : 'json'
         }).done(function(data) {
-          M.toast({html: data.stdout});
+          M.toast({html: data.stdout.split('\n').join('<br>')});
         }).fail(function() {
-          console.log('failed ajax call to /admin/update');
+          console.log('failed ajax call to /admin/' + something);
         })
+      }
+
+      $('#update').click(function() {
+        _do('update')
       })
 
       $('#restart').click(function() {
-        $.ajax({
-          method    : 'get',
-          url       : '/admin/restart',
-          dataType  : 'json'
-        }).done(function(data) {
-          M.toast({html: data.stdout});
-        }).fail(function() {
-          console.log('failed ajax call to /admin/restart');
-        })
+        _do('restart')
       })
     })
   })(jQuery, M)
