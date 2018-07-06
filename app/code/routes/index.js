@@ -11,7 +11,7 @@ module.exports = function(app, passport, edge) {
     try {
       res.send(edge.render('page.', req.path.substring(1, req.path.length -1).split('/').join('.'), def({
         context: req
-      }))
+      })))
     } catch(err) {
       res.send(edge.render('page.code.404', def({
         context: req
