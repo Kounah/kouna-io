@@ -58,4 +58,62 @@ app.listen(port);
 console.log(`magic happens on port: ` + port);
 
 // other
-asciify('kouna.io', {font: 'basic'}, function(err, res) { console.log(res.cyan) });
+
+var creativeText = 'Some creative text will be added here as soon as I made one up.'
+
+text: asciify('kouna.io', {font: 'univers'}, function(err, res) {
+  console.log(require('./tools/boxify')({
+    text: res + '\n' + ('\u259e'.repeat(res.split('\n')[0].length) + '\n').repeat(3) + '\n' + creativeText,
+    title: 'Welcome',
+    ln: true,
+    // max: res.split('\n')[0].length
+  }).rainbow.bold)
+});
+
+var chars = [
+  // '  \u2590\u2596 ',
+  // '  \u2590\u2598 ',
+  // '   \u259d\u258c ',
+  // '   \u2597\u258c ',
+  '  ▏',
+  '  ▎',
+  '  ▍',
+  '  ▌',
+  '  ▋',
+  '  ▊',
+  '  ▉',
+  '  █',
+
+  // '   ▏',
+  // '   ▎',
+  // '   ▍',
+  // '   ▌',
+  // '   ▋',
+  // '   ▊',
+  // '   ▉',
+  // '   █',
+  //
+  '  ▉',
+  '  ▊',
+  '  ▋',
+  '  ▌',
+  '  ▍',
+  '  ▎',
+  '  ▏',
+
+  // '  \u259c',
+  // '  \u259f',
+  // '  \u2599',
+  // '  \u259b',
+]
+var i = 0;
+var charLoop = function() {
+  process.stdout.write(chars[i] + '\r')
+  if(i == chars.length -1) {
+    i = 0;
+  } else {
+    i++;
+  }
+  setTimeout(charLoop, 1000/60)
+}
+charLoop();
