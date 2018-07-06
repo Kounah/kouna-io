@@ -164,8 +164,17 @@ module.exports = function(app, passport, edge) {
       }
 
       console.log(req.query);
-      if(req.query && req.query.compact != undefined) {
-        res.send(edge.render('component.bns.compact.char', char))
+
+      if(Object.keys(req.query).length > 0) {
+        console.log('?')
+        if(req.query.gist != undefined) {
+          res.set('Content-Type', 'text/html')
+          res.send(edge.render('component.bns.gist.char', char))
+        }
+        if(req.query.compact != undefined) {
+          res.set('Content-Type', 'text/html')
+          res.send(edge.render('component.bns.compact.char', char))
+        }
       } else {
         res.send(edge.render('page.bns.profile', def({
           context : req,

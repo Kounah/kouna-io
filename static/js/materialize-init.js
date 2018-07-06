@@ -24,11 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 
   var tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'), {
+    enterDelay: 400
   })
 
   var htmlTooltips = Array.prototype.slice.call(document.querySelectorAll('.tooltipped.html')).map(function (elem) {
     return M.Tooltip.init(elem, {
-      html: elem.getAttribute('data-tooltip')
+      html: elem.getAttribute('data-tooltip'),
+      enterDelay: 400
     });
   })
 
@@ -36,3 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.backgroundImage = 'url(' + elem.getAttribute('data-src') + ')';
   })
 })
+
+window.selfInitSlider = function() {
+  console.log(this);
+  var slider = M.Slider.init(this, {
+  })
+}

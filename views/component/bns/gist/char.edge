@@ -1,0 +1,55 @@
+<div style="
+background-image: url({{general.avatar}});
+background-color: rgba(255,255,255,.8);
+background-blend-mode: overlay;
+background-size: cover;
+background-position: 50% 0%;
+background-repeat: no-repeat">
+  <div class="card-content">
+    <span class="card-title"><b>{{general.account}}</b>'s {{general.class}} <b>{{general.name}}</b></span>
+    <div class="divider"></div>
+    <h6>PvE Whale-Score
+      <span class="secondary-text right">
+        {{BnS_pveWhaleScore(stats.attack)}}
+      </span>
+    </h6>
+    <h6>Attack Power
+      <span class="secondary-text right">{{stats.attack.power.value.total}}</span>
+    </h6>
+    <h6>Critical Rate
+      <span class="secondary-text right">{{stats.attack.critical.rate[0].total}}%</span>
+    </h6>
+    <h6>Critical Damage
+      <span class="secondary-text right">{{stats.attack.critical_damage.rate[0].total}}%</span>
+    </h6>
+    <h6>{{BnS_mainElement(stats.attack).name}}
+      <span class="secondary-text right">{{BnS_mainElement(stats.attack).rate[0].total}}%</span>
+    </h6>
+    <h6>Accuracy
+      <span class="secondary-text right">{{stats.attack.hit.rate[0].total}}%</span>
+    </h6>
+    <h6>Piercing
+      <span class="secondary-text right">{{stats.attack.pierce.rate[0].total}}%</span>
+    </h6>
+
+    <h6>Weapon</h6>
+    @!component('component.bns.gist.weapon', weapon)
+    <h6>Gear</h6>
+    @!component('component.bns.gist.item', gear.ring)
+    @!component('component.bns.gist.item', gear.earring)
+    @!component('component.bns.gist.item', gear.necklace)
+    <br>
+    @!component('component.bns.gist.item', gear.bracelet)
+    @!component('component.bns.gist.item', gear.gloves)
+    @!component('component.bns.gist.item', gear.belt)
+    <br>
+    @!component('component.bns.gist.item', gear.soul)
+    @!component('component.bns.gist.item', gear['soul-2'])
+    @!component('component.bns.gist.item', gear.guard)
+    <br>
+    @!component('component.bns.gist.item', gear.singongpae)
+    @!component('component.bns.gist.item', gear.rune)
+
+
+  </div>
+</div>

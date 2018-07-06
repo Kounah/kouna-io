@@ -1,0 +1,18 @@
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <img src="{{icon}}" alt=""><br />
+        {{durability.cur}} / {{durability.max}}
+      </td>
+      <td>
+        <span class="rarity-{{rarity}} rarity-text">{{name}}</span><br />
+        @each(gem in gems)
+        @!component('component.bns.gist.item', gem, size = 24)
+        @endeach
+      </td>
+    </tr>
+    <tr>
+    </tr>
+  </tbody>
+</table>

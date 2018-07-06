@@ -8167,4 +8167,43 @@ ul.sidenav a > .material-icons.right {
   color: white !important;
 }
 
+@keyframes kouna-loader {
+  from {
+    transform: scale(0.1);
+    opacity: 1;
+    border-color: #00bcd4;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+    border-color: #15acbf;
+  }
+}
+.kouna-loader {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  overflow-y: hidden;
+  box-sizing: border-box;
+}
+.kouna-loader div {
+  display: block;
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: solid 0.1em;
+  border-color: transparent;
+}
+.kouna-loader div:nth-child(2n) {
+  animation: kouna-loader 1s infinite ease;
+}
+.kouna-loader div:nth-child(2n+1) {
+  animation: kouna-loader 1s infinite ease 0.33s;
+}
+.kouna-loader div:nth-child(2n+1) {
+  animation: kouna-loader 1s infinite ease 0.66s;
+}
+
 /*# sourceMappingURL=static/css/materialize.css.map */

@@ -1,0 +1,40 @@
+@keyframes kouna-loader {
+  from {
+    transform: scale(.1);
+    opacity: 1;
+    border-color: $secondary-color;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+    border-color: desaturate($secondary-color, 20%);
+  }
+}
+
+.kouna-loader {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  div {
+    &:nth-child(2n) {
+      animation: kouna-loader 1s infinite ease;
+    }
+    &:nth-child(2n+1) {
+      animation: kouna-loader 1s infinite ease .33s;
+    }
+    &:nth-child(2n+1) {
+      animation: kouna-loader 1s infinite ease .66s;
+    }
+
+    display: block;
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: solid .1em;
+    border-color: transparent;
+  }
+}
