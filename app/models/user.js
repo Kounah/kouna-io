@@ -35,7 +35,8 @@ var userSchema = mongoose.Schema({
       fontFamily    : String,
       fontSize      : String,
     }
-  }
+  },
+  admin             : Boolean
 })
 
 userSchema.methods.generateHash = function(password) {

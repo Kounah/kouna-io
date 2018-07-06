@@ -13,7 +13,7 @@ const {dir, config} = require('./context');
 const {def}         = require('./fn')
 
 // require local
-const configDB  = require(path.join(dir, 'config', 'database.js'));
+const configDB  = require('../../config/database');
 
 // configuration
 mongoose.connect(configDB.url);

@@ -4,6 +4,7 @@ const uuid = require('uuid/v5');
 const path = require('path');
 const fs = require('fs');
 const {def} = require('../fn')
+const {exec, spawn} = require('child_process');
 
 module.exports = function(app, passport, edge) {
   app.get('/', (req, res) => {
@@ -107,7 +108,6 @@ module.exports = function(app, passport, edge) {
     }
   })
 
-
   app.post('/account/edit', (req, res) => {
     User.findById(req.user._id, (err, user) => {
       if(err)
@@ -120,5 +120,70 @@ module.exports = function(app, passport, edge) {
         res.redirect('/account/profile')
       })
     })
+  })
+
+  app.get('/admin', (req, res) => {
+    if(req.isAuthenticated()) {
+      User.findOne({'_id': req.user.id}).exec((err, user) => {
+        if(err) {
+          res.send(err);
+        }
+
+        if(user == undefined) {
+          res.sendStatus(403);
+          return;
+        }
+
+        if(user.admin) {
+          res.send(edge.render('page.admin', def({
+            context: req
+          })));
+        } else {
+          res.sendStatus(403)
+        }
+      })
+    } else {
+      res.sendStatus(401);
+    }
+  })
+
+  app.get('/admin/:command', (req, res) => {
+    if(req.isAuthenticated()) {
+      User.findOne({'_id': req.user.id}).exec((err, user) => {
+        if(err) {
+          res.send(err);
+        }
+
+        if(user == undefined) {
+          res.sendStatus(403);
+          return;
+        }
+
+        if(user.admin) {
+          console.log(req.params.command)
+
+          switch (req.params.command) {
+            case 'update':
+              exec(`git -C '${dir}' pull`, (err, stdout, stderr) => {
+                res.json({
+                  err: err,
+                  stdout: stdout,
+                  stderr: stderr
+                })
+              })
+              break;
+            case 'restart':
+              process.exit()
+            default:
+              res.sendStatus(404);
+          }
+
+        } else {
+          res.sendStatus(403)
+        }
+      })
+    } else {
+      res.sendStatus(401);
+    }
   })
 }

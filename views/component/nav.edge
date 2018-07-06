@@ -71,6 +71,13 @@
             @!component('component.icon', {type: 'material', key: 'settings'})
             Settings
           </a></li>
+          @if(context.user.admin)
+          <li class="divider"></li>
+          <li><a href="/admin">
+            @!component('component.icon', {type: 'material', key: 'code'})
+            Admin Tools
+          </a></li>
+          @endif
           <li class="divider"></li>
           <li><a href="/logout">
             @!component('component.icon', {type: 'material', key: 'power_settings_new'})
