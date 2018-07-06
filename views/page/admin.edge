@@ -14,7 +14,7 @@
           url       : '/admin/' + something,
           dataType  : 'json'
         }).done(function(data) {
-          M.toast({html: data.stdout.split('\n').join('<br>')});
+          M.toast({html: data.stdout.split('\\n').join('<br>')});
         }).fail(function() {
           console.log('failed ajax call to /admin/' + something);
         })
