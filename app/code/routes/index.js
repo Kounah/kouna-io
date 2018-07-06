@@ -8,8 +8,15 @@ module.exports = function(app, passport, edge) {
   require('./resources')(app, passport, edge);
 
   app.get('/*', (req, res) => {
-    res.send(edge.render('page.code.404', def({
-      context: req
-    })))
+    try {
+      res.send(edge.render('page.', req.path.substring(1, req.path.length -1).split('/').join('.'), def({
+        context: req
+      }))
+    } catch(err) {
+      res.send(edge.render('page.code.404', def({
+        context: req
+      })))
+    }
+
   });
 }
