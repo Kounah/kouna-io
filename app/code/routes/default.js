@@ -12,7 +12,7 @@ module.exports = function(app, passport, edge) {
   });
 
   app.get('/jquery', (req, res) => {
-    res.sendfile(path.join(dir, 'node_modules', 'jquery', 'dist', 'jquery.min.js'));
+    res.sendFile(path.join(dir, 'node_modules', 'jquery', 'dist', 'jquery.min.js'));
   })
 
   app.get('/login', (req, res) => {

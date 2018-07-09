@@ -46,7 +46,8 @@ BnsWeapon.gems = [Object]
 
 
 var bnsCharSchema = mongoose.Schema({
-  date        : String,
+  createdOn   : Date,
+  lastMod     : Date,
   region      : String,
   general: {
     account   : String,

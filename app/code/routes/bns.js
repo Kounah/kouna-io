@@ -1,141 +1,12 @@
 const {def} = require('../fn');
 const {BnsChar, User} = require('../db');
 const config = require('../bns/config');
-const curl = require('curl');
-const querystring = require('querystring');
-const moment = require('moment');
-
-
 const dateFormat = config.char.dateFormat;
+const getChar = require('../bns/getChar');
+
 
 module.exports = function(app, passport, edge) {
-  function getCharByName(name, region, callback, options) {
-    if(name == undefined || name == 'undefined' || region == undefined || callback == undefined) {
-      console.log('friggin wrong params');
-      callback(undefined, undefined);
-      return;
-    }
-
-    var q = {'general.name': name, 'region': region, 'date': moment().format(dateFormat)};
-
-    console.log(q);
-
-    if(!['eu', 'na'].includes(region)) {
-      callback(null);
-      return;
-    }
-
-    BnsChar.count(q, (err, count) => {
-      if(err) {
-        console.log(err);
-        return;
-      }
-
-      if(count <= 0) {
-        console.log('found none');
-
-        let qs  = querystring.stringify({c: name});
-        console.log(qs)
-        let url = 'http://' + region + '-bns.ncsoft.com/ingame/bs/'
-        var profileUrl = url + 'character/profile?' + qs;
-        var abilityUrl = url + 'character/data/abilities.json?' + qs;
-        var gearUrl    = url + 'character/data/equipments?' + qs;
-        curl.get(profileUrl, {}, function(profileErr, profileResponse, profileBody) {
-          if(err) throw err;
-
-          if(profileResponse.statusCode === 404) {
-
-          } else {
-            curl.getJSON(abilityUrl, {}, function(abilityErr, abilityResponse, abilityData) {
-              if(abilityData.result === 'fail') {
-
-              } else {
-                curl.get(gearUrl, {}, function(gearErr, gearResponse, gearData) {
-                  if(gearErr) {
-                    console.log(gearErr)
-                  } else {
-                    let char = require('../bns/character-profile-builder')(profileBody, abilityData, gearData);
-
-                    char.region = region;
-                    char.date   = moment().format(dateFormat);
-
-                    BnsChar.findOne({
-                      'region'          : char.region,
-                      'general.account' : char.general.account,
-                      'general.name'    : char.general.name,
-                      'date'            : moment().format(dateFormat)
-                    }).exec((err, existingChar) => {
-                      if(err) {
-                        console.log(err);
-                        callback(err, char);
-                        return;
-                      }
-
-                      if(existingChar !== null) {
-                        if(options && options.forceUpdate === true) {
-                          existingChar = char;
-                          existingChar.save(err => {
-                            if(err) {
-                              console.log(err);
-                              callback(err, existingChar)
-                              return;
-                            }
-
-                            callback(undefined, existingChar)
-                          })
-                        }
-                      } else {
-                        char.save(err => {
-                          if(err) {
-                            console.log(err);
-                            callback(err, char);
-                            return;
-                          }
-
-                          callback(undefined, char)
-                        })
-                      }
-                    })
-
-                    // callback(undefined, char);
-                  }
-                })
-              }
-            })
-          }
-        })
-      } else {
-        console.log('found ' + count);
-
-        BnsChar.find(q).exec((err, chars) => {
-          if(err) {
-            console.log(err);
-            callback(err, undefined);
-            return;
-          }
-
-          var latest  = undefined;
-          var latestI = 0;
-          chars.forEach((c, i) => {
-            if(latest == undefined) {
-              latest = moment(c.date, dateFormat);
-            } else {
-              if(moment(c.data, dateFormat).isAfter(latest)) {
-                latestI = i;
-                latest  = moment(c.date, dateFormat)
-              }
-            }
-          })
-
-          callback(undefined, chars[latestI])
-        });
-      }
-    })
-  }
-
-
   app.get('/bns/profile', (req, res) => {
-    console.log(req.query);
     if(req.query.region !== undefined
     && req.query.char !== undefined) {
       res.redirect(`/bns/profile/${req.query.region}/${req.query.char}`);
@@ -146,27 +17,15 @@ module.exports = function(app, passport, edge) {
     }
   });
 
-  app.get('/bns/profile/:region', (req, res) => {
-    res.sendStatus(404);
-  })
-
   app.get('/bns/profile/:region/:charName', (req, res) => {
-    console.log(req.params);
-
-    getCharByName(req.params.charName, req.params.region, (err, char) => {
+    getChar(req.params.charName, req.params.region, (err, char) => {
       if(err) {
         res.send(err);
         throw err;
       }
 
-      if(char) {
-        console.log(char)
-      }
-
-      console.log(req.query);
-
       if(Object.keys(req.query).length > 0) {
-        console.log('?')
+        // console.log('?')
         if(req.query.gist != undefined) {
           res.set('Content-Type', 'text/html')
           res.send(edge.render('component.bns.gist.char', char))
@@ -185,27 +44,92 @@ module.exports = function(app, passport, edge) {
   })
 
   app.get('/bns/api/data/character/:region/:char', (req, res) => {
-    getCharByName(req.params.char, req.params.region, (err, char) => {
+    getChar(req.params.char, req.params.region, (err, char) => {
       res.json(char)
     })
   })
 
-  app.get('/bns/list/:region/:name/history', (req, res) => {
-    BnsChar.find({
-      'region'      : req.params.region,
-      'general.name': req.params.name
-    }).sort('+date').exec((err, chars) => {
-      if(err) {
-        console.log(err);
-        res.send(err);
-      }
+  app.get('/bns/list/:region', (req, res) => {
+    let query = {};
 
-      res.send(edge.render('page.bns.list.history', def({
-        context: req,
-        region: req.params.region,
-        name: req.params.name,
-        chars: chars
+    console.log(`${'[BNS]'.blue} ${'/list'.magenta} request query: `, req.query);
+
+    var q = {};
+    Object.keys(req.query).forEach(key => {
+      console.log(key)
+      let keys = key.split('-');
+      let isArray = req.query[key] instanceof Array;
+      console.log(isArray);
+      var curQ;
+      try {
+        console.log(keys, keys.length)
+        if(keys[0] === 'c') {
+          if(keys.length === 1) return;
+          if(keys.length === 2) {
+            console.log('cat 2')
+            // equals
+            if(isArray) {
+              curQ = {'$in': req.query[key]}
+            } else {
+              curQ = req.query[key]
+            }
+          }
+          if(keys.length === 3) {
+            if(keys[2] === 'gt') {
+              curQ = {'$gt': JSON.parse(req.query[key])}
+            }
+            if(keys[2] === 'lt') {
+              curQ = {'$lt': JSON.parse(req.query[key])}
+            }
+            if(keys[2] === 'in') {
+              curQ = {'$in': req.query[key].split(',')}
+            }
+            if(keys[2] === 'bt') {
+              console.log('cat');
+              var m = req.query[key].match(/([0-9]+\.{0,1}[0-9]*),([0-9]+\.{0,1}[0-9]*)/m);
+              curQ = {'$gt': parseInt(m[1]), '$lt': parseInt(m[2])}
+            }
+          }
+
+          q[keys[1]] = curQ;
+        }
+      } catch (err) { console.log(err.message.red); }
+    })
+
+    let page = req.query.page | req.query.p | 0;
+
+    BnsChar.find(q)
+    .sort({'general.account': 1, 'general.name': 1})
+    .skip(page * config.list.itemsPerPage)
+    .limit(config.list.itemsPerPage)
+    .exec((err, chars) => {
+      res.send(edge.render('page.bns.list', def({
+        context: res,
+        chars: chars,
+        query: query,
+        page: page
       })))
     })
+  });
+
+  app.get('/bns/list/:region/:name/history', (req, res) => {
+    res.sendStatus(404);
+    // BnsChar.find({
+    //   'region'      : req.params.region,
+    //   'general.name': req.params.name
+    // }).sort('+date').exec((err, chars) => {
+    //   if(err) {
+    //     console.log(err);
+    //     res.send(err);
+    //   }
+    //
+    //   res.send(edge.render('page.bns.list.history', def({
+    //     context: req,
+    //     region: req.params.region,
+    //     name: req.params.name,
+    //     chars: chars
+    //   })))
+    // })
   })
+
 }

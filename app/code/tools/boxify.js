@@ -45,7 +45,6 @@ module.exports = function(o) {
         if(cur.length + w.length < max) {
           cur += (cur != '' && wi > 0 ? ' ' : '') + w;
         } else {
-          console.log('!', l, w)
           com += cur + '\n';
           cur  = w;
         }
@@ -91,8 +90,6 @@ module.exports = function(o) {
       var ln = o.ln === true ? (' '.repeat(o.lnLength - ('' + li).length) + li + v) : '';
       var lnDummy = o.ln === true ? (' '.repeat(o.lnLength - 1) + '•' + v) : '';
 
-      console.log('max', max);
-      console.log('l.length', l.length);
       if(l.length > max + (o.lnLength ? o.lnLength : 0) + 1) {
         return splitLineByMax(l, ln, lnDummy, max)
       } else {

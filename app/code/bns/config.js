@@ -69,5 +69,7 @@ module.exports = {
   },
   char: {
     dateFormat: 'YYYY-MM-DD : H'
+  },
+  list: {
   }
 }

@@ -48,9 +48,17 @@ module.exports = function(edge) {
   })
 
   edge.global('getPercentage', function(cur, max) {
-    console.log('getPercentage', cur, max)
-
     return ((cur / max) * 100) + '%';
+  })
+
+  edge.global('renderDoc', function(doc) {
+    switch(doc.type) {
+      case 'markdown':
+          return require('../markdown').render(doc.content);
+        break;
+      default:
+        return doc.content;
+    }
   })
 
   require('../bns/edge.js')(edge);

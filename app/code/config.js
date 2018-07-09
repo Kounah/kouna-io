@@ -39,7 +39,9 @@ module.exports = function(dir) {
     { name: "Blade & Soul",
       subs: [
         { name: "Profile",
-          href: "/bns/profile" }
+          href: "/bns/profile" },
+        { name: "List",
+          href: "/bns/list" }
       ]}
   ];
 

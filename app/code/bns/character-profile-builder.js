@@ -19,32 +19,35 @@ const Gear = require('./Gear');
 const Weapon = require('./Weapon');
 const Soulshield = require('./Soulshield');
 
-module.exports = function(html, abilities, gear) {
-  var newChar = new BnsChar();
+module.exports = function(html, abilities, gear, char) {
+  if(char == null) {
+    char = new BnsChar();
+    char.createdOn = new Date();
+  }
 
   if(typeof html === 'string') {
     d = new JSDOM(html).window.document;
     var match;
 
-    newChar.general.account =
+    char.general.account =
       d.querySelector('#header>dl.signature>dt>a').textContent;
-    newChar.general.name =
+    char.general.name =
       d.querySelector('#header>dl.signature>dt>span.name').textContent.split(/[\[|\]]/).join('');
     var info =
       d.querySelectorAll('#header>dl.signature>dd.desc>ul>li');
 
-    newChar.general.class   = info[0].textContent;
+    char.general.class   = info[0].textContent;
     var level               =
       info[1].textContent.match(/Level\ ([0-9]{1,3})[\ \•\ HongmoonLevel ]*([0-9]{0,3})/);
-    newChar.general.level   = level[1] | 0;
-    newChar.general.hm      = level[2] | 0;
-    newChar.general.server  = info[2].textContent;
+    char.general.level   = level[1] | 0;
+    char.general.hm      = level[2] | 0;
+    char.general.server  = info[2].textContent;
 
-    newChar.general.faction = info[3] !== undefined ? info[3].textContent : '';
-    newChar.general.clan    = info[4] !== undefined ? info[4].textContent : '';
+    char.general.faction = info[3] !== undefined ? info[3].textContent : '';
+    char.general.clan    = info[4] !== undefined ? info[4].textContent : '';
     let img = d.querySelector('div.charaterView img');
 
-    newChar.general.avatar  = img ? img.getAttribute('src') : undefined;
+    char.general.avatar  = img ? img.getAttribute('src') : undefined;
   }
 
   function getValues(name, displayName) {
@@ -61,19 +64,19 @@ module.exports = function(html, abilities, gear) {
 
   if(typeof abilities === 'object') {
     // attack
-    newChar.stats.attack.power = new Stat({
+    char.stats.attack.power = new Stat({
       name:   "Attack Power",
       value:  getValues("attack_power_value")
     });
-    newChar.stats.attack.pvp_power = new Stat({
+    char.stats.attack.pvp_power = new Stat({
       name:   "PvP Attack Power",
       value:  getValues("pc_attack_power_value")
     });
-    newChar.stats.attack.boss_power = new Stat({
+    char.stats.attack.boss_power = new Stat({
       name:   "Boss Attack Power",
       value:  getValues("boss_attack_power_value")
     });
-    newChar.stats.attack.pierce = new Stat({
+    char.stats.attack.pierce = new Stat({
       name:   "Piercing",
       value:  getValues("attack_pierce_value"),
       rate:   [
@@ -81,110 +84,110 @@ module.exports = function(html, abilities, gear) {
         getValues("attack_parry_pierce_rate", "Block Piercing")
       ]
     });
-    newChar.stats.attack.hit = new Stat({
+    char.stats.attack.hit = new Stat({
       name:   "Accuracy",
       value:  getValues("attack_hit_value"),
       rate:    getValues("attack_hit_rate", "Hit Rate")
     });
-    newChar.stats.attack.critical = new Stat({
+    char.stats.attack.critical = new Stat({
       name:   "Critical Hit",
       value:  getValues("attack_critical_value"),
       rate:    getValues("attack_critical_rate", "Critical Rate")
     });
-    newChar.stats.attack.critical_damage = new Stat({
+    char.stats.attack.critical_damage = new Stat({
       name:   "Critical Damage",
       value:  getValues("attack_critical_damage_value"),
       rate:    getValues("attack_critical_damage_rate", "Damage Bonus")
     });
-    newChar.stats.attack.damage_modify = new Stat({
+    char.stats.attack.damage_modify = new Stat({
       name:   "Additional Damage",
       value:  getValues("attack_damage_modify_diff"),
       rate:    getValues("attack_damage_modify_rate")
     });
-    newChar.stats.attack.fire = new Stat({
+    char.stats.attack.fire = new Stat({
       name:   "Flame Elemental",
       value:  getValues("attack_attribute_fire_value"),
       rate:    getValues("attack_attribute_fire_rate"),
     });
-    newChar.stats.attack.ice = new Stat({
+    char.stats.attack.ice = new Stat({
       name:   "Frost Elemental",
       value:  getValues("attack_attribute_ice_value"),
       rate:    getValues("attack_attribute_ice_rate"),
     });
-    newChar.stats.attack.wind = new Stat({
+    char.stats.attack.wind = new Stat({
       name:   "Wind Elemental",
       value:  getValues("attack_attribute_wind_value"),
       rate:    getValues("attack_attribute_wind_rate"),
     });
-    newChar.stats.attack.earth = new Stat({
+    char.stats.attack.earth = new Stat({
       name:   "Earth Elemental",
       value:  getValues("attack_attribute_earth_value"),
       rate:    getValues("attack_attribute_earth_rate"),
     });
-    newChar.stats.attack.lightning = new Stat({
+    char.stats.attack.lightning = new Stat({
       name:   "Lightning Elemental",
       value:  getValues("attack_attribute_lightning_value"),
       rate:    getValues("attack_attribute_lightning_rate"),
     });
-    newChar.stats.attack.void = new Stat({
+    char.stats.attack.void = new Stat({
       name:   "Shadow Elemental",
       value:  getValues("attack_attribute_void_value"),
       rate:    getValues("attack_attribute_void_rate"),
     });
-    newChar.stats.attack.debuff = new Stat({
+    char.stats.attack.debuff = new Stat({
       name:   "Debuff Damage",
       value:  getValues("abnormal_attack_power_value"),
       rate:    getValues("abnormal_attack_power_rate", "Damage Bonus")
     });
-    newChar.stats.attack.concentrate = new Stat({
+    char.stats.attack.concentrate = new Stat({
       name:   "Concentration",
       value:  getValues("attack_concentrate_value")
     });
-    newChar.stats.attack.mastery = new Stat({
+    char.stats.attack.mastery = new Stat({
       name:   "Mastery",
       value:  getValues("attack_stiff_duration_level")
     });
-    newChar.stats.attack.hate = new Stat({
+    char.stats.attack.hate = new Stat({
       name:   "Threat",
       value:  getValues("hate_power_value"),
       rate:    getValues("hate_power_rate", "Threat Rate")
     });
 
-    newChar.stats.defend.max_hp = new Stat({
+    char.stats.defend.max_hp = new Stat({
       name:   "Max. HP",
       value:  getValues("max_hp")
     });
-    newChar.stats.defend.power = new Stat({
+    char.stats.defend.power = new Stat({
       name:   "Defense",
       value:  getValues("defend_power_value"),
       rate:   getValues("defend_physical_damage_reduce_rate", "Damage Reduction")
     });
-    newChar.stats.defend.boss_power = new Stat({
+    char.stats.defend.boss_power = new Stat({
       name:   "Boss Defense",
       value:  getValues("boss_defend_power_value"),
       rate:    getValues("boss_defend_power_rate", "Damage Reduction")
     });
-    newChar.stats.defend.pvp_power = new Stat({
+    char.stats.defend.pvp_power = new Stat({
       name:   "PvP Defense",
       value:  getValues("pc_defend_power_value"),
       rate:    getValues("pc_defend_power_rate", "Damage Reduction")
     });
-    newChar.stats.defend.aoe_power = new Stat({
+    char.stats.defend.aoe_power = new Stat({
       name:   "AoE Defense",
       value:  getValues("aoe_defend_power_value"),
       rate:    getValues("aoe_defend_damage_reduce_rate", "Damage Reduction")
     });
-    newChar.stats.defend.debuff = new Stat({
+    char.stats.defend.debuff = new Stat({
       name:   "Debuff Defense",
       value:  getValues("abnormal_defend_power_value"),
       rate:   getValues("abnormal_defend_power_rate", "Damage Reduction")
     });
-    newChar.stats.defend.dodge = new Stat({
+    char.stats.defend.dodge = new Stat({
       name:   "Evasion",
       value:  getValues("defend_dodge_value"),
       rate:   getValues("defend_dodge_rate", "Evade Chance")
     });
-    newChar.stats.defend.parry = new Stat({
+    char.stats.defend.parry = new Stat({
       name:   "Block",
       value:  getValues("defend_parry_value"),
       rate:  [
@@ -193,48 +196,48 @@ module.exports = function(html, abilities, gear) {
         getValues("defend_parry_rate", "Block Rate")
       ]
     });
-    newChar.stats.defend.critical = new Stat({
+    char.stats.defend.critical = new Stat({
       name:   "Critical Defense",
       value:  getValues("defend_critical_value"),
       rate:   getValues("defend_critical_damage_rate", "Damage Reduction")
     });
-    newChar.stats.defend.damage_reduction = new Stat({
+    char.stats.defend.damage_reduction = new Stat({
       name:   "Damage Reduction",
       value:  getValues("defend_damage_modify_diff"),
       rate:   getValues("defend_damage_modify_rate", "Rate")
     })
-    newChar.stats.defend.willpower = new Stat({
+    char.stats.defend.willpower = new Stat({
       name:   "Willpower",
       value:  getValues("defend_stiff_duration_level")
     });
-    newChar.stats.defend.hp_regen = new Stat({
+    char.stats.defend.hp_regen = new Stat({
       name:   "HP Regen",
       value:  getValues("hp_regen")
     });
-    newChar.stats.defend.hp_regen_combat = new Stat({
+    char.stats.defend.hp_regen_combat = new Stat({
       name:   "HP Regen Combat",
       value:  getValues("hp_regen_combat")
     });
-    newChar.stats.defend.heal_power = new Stat({
+    char.stats.defend.heal_power = new Stat({
       name:   "Recovery",
       value:  getValues("heal_power_value"),
       rate:    getValues("heal_power_rate", "Recovery Chance")
     });
 
-    newChar.stats.points.offense    = abilities.records.point_ability.offense_point;
-    newChar.stats.points.ap         = abilities.records.point_ability.attack_power_value;
-    newChar.stats.points.elemental  = abilities.records.point_ability.attack_attribute_value;
+    char.stats.points.offense    = abilities.records.point_ability.offense_point;
+    char.stats.points.ap         = abilities.records.point_ability.attack_power_value;
+    char.stats.points.elemental  = abilities.records.point_ability.attack_attribute_value;
 
-    newChar.stats.points.threat     = abilities.records.point_ability.picks[0];
-    newChar.stats.points.move_speed = abilities.records.point_ability.picks[2];
+    char.stats.points.threat     = abilities.records.point_ability.picks[0];
+    char.stats.points.move_speed = abilities.records.point_ability.picks[2];
 
-    newChar.stats.points.defense    = abilities.records.point_ability.defense_point;
-    newChar.stats.points.dp         = abilities.records.point_ability.defense_power_value;
-    newChar.stats.points.hp         = abilities.records.point_ability.max_hp;
+    char.stats.points.defense    = abilities.records.point_ability.defense_point;
+    char.stats.points.dp         = abilities.records.point_ability.defense_power_value;
+    char.stats.points.hp         = abilities.records.point_ability.max_hp;
 
-    newChar.stats.points.regen      = abilities.records.point_ability.picks[1];
-    newChar.stats.points.hm_focus   = abilities.records.point_ability.picks[3];
-    newChar.stats.points.debuff     = abilities.records.point_ability.picks[4];
+    char.stats.points.regen      = abilities.records.point_ability.picks[1];
+    char.stats.points.hm_focus   = abilities.records.point_ability.picks[3];
+    char.stats.points.debuff     = abilities.records.point_ability.picks[4];
   }
 
   if(typeof gear === 'string') {
@@ -341,11 +344,11 @@ module.exports = function(html, abilities, gear) {
       return res;
     }
 
-    newChar.weapon = getWeapon(d.querySelector('div.wrapWeapon'));
+    char.weapon = getWeapon(d.querySelector('div.wrapWeapon'));
 
     Array.prototype.slice.call(d.querySelectorAll('div.wrapAccessory')).forEach(elem => {
       let gear = getGear(elem);
-      newChar.gear[gear.type] = gear.obj;
+      char.gear[gear.type] = gear.obj;
     })
 
     // ss = soulshield
@@ -353,7 +356,7 @@ module.exports = function(html, abilities, gear) {
     let ssAreas = Array.prototype.slice.call(d.querySelectorAll('.gemIcon map area'));
 
     if(ssIcons != undefined && ssAreas != undefined) {
-      newChar.soulshield = ssIcons.map((elem, index) => {
+      char.soulshield = ssIcons.map((elem, index) => {
         let pos       = parseInt(elem.getAttribute('class').match('^pos([0-9])').pop());
         let area      = ssAreas[pos - 1];
 
@@ -368,5 +371,7 @@ module.exports = function(html, abilities, gear) {
     }
   }
 
-  return newChar;
+  char.lastMod = new Date();
+
+  return char;
 }

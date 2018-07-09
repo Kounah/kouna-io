@@ -36,7 +36,6 @@ module.exports = function(app, passport, edge) {
         res.send(edge.render('page.docs', def({docs: docs, count: count, page: page, context: req, types: config.docs.types, colors: config.docs.colors})));
       });
     })
-
   })
 
   app.get('/docs/mydocs', (req, res) => {
@@ -177,5 +176,35 @@ module.exports = function(app, passport, edge) {
     } else {
       res.redirect('/docs/list')
     }
+  })
+
+  app.get('/docs/view/:docId', (req, res) => {
+    Document.findOne({
+      _id: req.params.docId
+    }).exec((err, doc) => {
+      if(err) {
+        console.log(err);
+        res.send(err);
+      }
+
+      if(!doc) {
+        res.sendStatus(404);
+        return;
+      }
+
+      var mayedit = false;
+      if(req.isAuthenticated()) {
+        console.log(req.user._id, doc.creator, doc.editors);
+      }
+
+      if(req.isAuthenticated() && (req.user._id + '' == doc.creator || doc.editors.includes('' + req.user._id)))
+        mayedit = true;
+
+      res.send(edge.render('page.docs.view', def({
+        context: req,
+        doc: doc,
+        mayedit: mayedit
+      })))
+    })
   })
 }

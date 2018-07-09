@@ -1,0 +1,55 @@
+@layout('layout.bns')
+
+@section('title')
+  List
+@endsection
+
+@section('content')
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-content" id="bns-chargist-anchor">
+          <span class="card-title">Characters for <a class="secondary-text dropdown-trigger" data-target="dropdown-query">Query</a></span>
+          <ul class="dropdown-content" id="dropdown-query">
+            @each(prop in propertyRange(query))
+            <li><span><b>{{prop.key}}</b>: <q><span>{{prop.value}}</span></q></span></li>
+            @endeach
+          </ul>
+          <div class="collection">
+            @each(char in chars)
+            <a class="collection-item bns-character-gist" data-region="{{char.region}}" data-name="{{char.general.name}}" data-container="bns-chargist-anchor"
+            data-position="right" href="/bns/profile/{{char.region}}/{{char.general.name}}"><b>{{char.general.account}}'s</b> {{char.general.class}} <q><b>{{char.general.name}}</b></q> [Level {{char.general.level}} HM{{char.general.hm}}] {{char.general.server}}
+            </a>
+            @endeach
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">How To Use</span>
+          <p>I did not create any kind of ui for this query yet, neither a documentation for the values, here at this point i am just going to tell you the system of the query paramters for this filtering.</p>
+
+          <p>the form is:
+            <ul class="browser-default">
+              <li>- ... separator</li>
+              <li>c ... indicator (first section)</li>
+              <li>a.b.c.x.y.z ... (2nd section) path to the value of an character object. (
+                <a href="/bns/api/data/character/eu/Kouna">see this</a> for reference
+                )</li>
+              <li>lt | gt | bt | in ... [optional] (3rd section) keywords what filter to apply
+                <ul class="browser-default">
+                  <li>lt .. less than [Number]</li>
+                  <li>gt .. greater than [Number]</li>
+                  <li>bt .. between [Number],[Number]</li>
+                  <li>in .. self explaining [Comma Separated List of Strings]</li>
+                </ul>
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

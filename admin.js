@@ -5,7 +5,7 @@ const readline    = require('readline');
 const process     = require('process');
 const {dir}       = require('./app/code/context');
 const User        = require('./app/models/user');
-const configDB    = require('./config/database')
+const configDB    = require('./config/database');
 
 mongoose.connect(configDB.url);
 
