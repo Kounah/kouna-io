@@ -106,7 +106,7 @@ module.exports = function(app, passport, edge) {
       res.send(edge.render('page.bns.list', def({
         context: res,
         chars: chars,
-        query: query,
+        query: q,
         page: page
       })))
     })
