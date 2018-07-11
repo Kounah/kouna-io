@@ -77,7 +77,7 @@ text: asciify('kouna.io', {font: 'univers'}, function(err, res) {
   var width = lines[0].length;
   var termWidth = process.stdout.columns;
 
-  process.stdout.write('\r' +
+  console.log(
     lines.map(line => {
       return ' '.repeat(termWidth).center(line)
     })
@@ -85,9 +85,9 @@ text: asciify('kouna.io', {font: 'univers'}, function(err, res) {
     .cyan
   );
 
-  process.stdout.write('\n\n');
+  console.log('\n\n');
 
-  process.stdout.write(' '.repeat(termWidth).center('\u2500'.repeat(width)) + '\n');
+  console.log(' '.repeat(termWidth).center('\u2500'.repeat(width)) + '\n');
 
   // general
   var tableinfo = [
@@ -141,24 +141,7 @@ text: asciify('kouna.io', {font: 'univers'}, function(err, res) {
 
   tableinfo.push(['APP Port', '' + port])
 
-  process.stdout.write(tableinfo.map(item => {
+  console.log(tableinfo.map(item => {
     return ' '.repeat(termWidth).center(' '.repeat(width).left(item[0]).right(item[1]));
-  }).join('\n') + '\n');
-
-  process.exit(1)
+  }).join('\n'));
 });
-
-function restart() {
-  var proc = spawn('node', [path.join(__dirname, 'run.js')]);
-  proc.stdout.on('data', function(data) { process.stdout.write(data) });
-  proc.stderr.on('data', function(data) { process.stdout.write(data) });
-  proc.on('exit', function (code) {
-    console.log('child process exited with code ' + code);
-    delete(proc);
-    // if(code !== 1) {
-    setTimeout(function() {
-      restart(nodefile);
-    }, 2000);
-    // }
-  });
-}

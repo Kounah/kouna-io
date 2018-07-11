@@ -8,9 +8,13 @@ function start(nodefile) {
   console.log(nodefile)
   var proc = child_process.spawn('node', [nodefile]);
 
-  proc.stdout.on('data', function(data) { process.stdout.write(data) });
-
-  proc.stderr.on('data', function(data) { process.stdout.write(data) });
+  // proc.stdout.on('data', function(data) {
+  //   process.stdout.write(data)
+  // });
+  //
+  // proc.stderr.on('data', function(data) {
+  //   process.stdout.write(data)
+  // });
 
   proc.on('exit', function (code) {
     console.log('child process exited with code ' + code);
@@ -18,7 +22,7 @@ function start(nodefile) {
     // if(code !== 1) {
       setTimeout(function() {
         start(nodefile);
-      }, 2000);
+      }, 500);
     // }
   });
 }
