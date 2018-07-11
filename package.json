@@ -29,6 +29,7 @@
     "edge.js": "^1.1.4",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "filesize": "^3.6.1",
     "flash": "^1.1.0",
     "highlightjs": "^9.10.0",
     "jquery": "^3.3.1",
