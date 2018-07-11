@@ -51,23 +51,16 @@ module.exports = function(app, passport, edge) {
 
   app.get('/bns/list/:region', (req, res) => {
     let query = {};
-
     console.log(`${'[BNS]'.blue} ${'/list'.magenta} request query: `, req.query);
-
     var q = {};
     Object.keys(req.query).forEach(key => {
-      console.log(key)
       let keys = key.split('-');
       let isArray = req.query[key] instanceof Array;
-      console.log(isArray);
       var curQ;
       try {
-        console.log(keys, keys.length)
         if(keys[0] === 'c') {
           if(keys.length === 1) return;
           if(keys.length === 2) {
-            console.log('cat 2')
-            // equals
             if(isArray) {
               curQ = {'$in': req.query[key]}
             } else {
@@ -85,12 +78,10 @@ module.exports = function(app, passport, edge) {
               curQ = {'$in': req.query[key].split(',')}
             }
             if(keys[2] === 'bt') {
-              console.log('cat');
               var m = req.query[key].match(/([0-9]+\.{0,1}[0-9]*),([0-9]+\.{0,1}[0-9]*)/m);
               curQ = {'$gt': parseInt(m[1]), '$lt': parseInt(m[2])}
             }
           }
-
           q[keys[1]] = curQ;
         }
       } catch (err) { console.log(err.message.red); }
