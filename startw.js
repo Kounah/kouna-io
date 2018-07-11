@@ -15,11 +15,11 @@ function start(nodefile) {
   proc.on('exit', function (code) {
     console.log('child process exited with code ' + code);
     delete(proc);
-    if(code !== 1) {
+    // if(code !== 1) {
       setTimeout(function() {
         start(nodefile);
       }, 2000);
-    }
+    // }
   });
 }
 
