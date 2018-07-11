@@ -6,7 +6,7 @@ String.prototype.center = function (text) {
     var end       = Math.ceil(this.length / 2) + Math.ceil(text.length / 2);
     return this.substr(0, start) + text + this.substr(end, this.length - 1)
   } else {
-    return this
+    return this;
   }
 }
 

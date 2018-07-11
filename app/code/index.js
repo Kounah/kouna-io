@@ -3,6 +3,7 @@ const fs            = require('fs');
 const process       = require('process');
 const os            = require('os');
 const filesize      = require('filesize');
+const {spawn}       = require('child_process');
 
 const colors        = require('colors');
 const asciify       = require('asciify');
@@ -74,17 +75,19 @@ text: asciify('kouna.io', {font: 'univers'}, function(err, res) {
   });
 
   var width = lines[0].length;
+  var termWidth = process.stdout.columns;
 
   process.stdout.write('\r' +
     lines.map(line => {
-      return ' '.repeat(process.stdout.columns).center(line)
+      return ' '.repeat(termWidth).center(line)
     })
     .join('\n')
-    .cyan);
+    .cyan
+  );
 
   process.stdout.write('\n\n');
 
-  process.stdout.write(' '.repeat(process.stdout.columns).center('\u2500'.repeat(width)) + '\n');
+  process.stdout.write(' '.repeat(termWidth).center('\u2500'.repeat(width)) + '\n');
 
   // general
   var tableinfo = [
@@ -139,6 +142,23 @@ text: asciify('kouna.io', {font: 'univers'}, function(err, res) {
   tableinfo.push(['APP Port', '' + port])
 
   process.stdout.write(tableinfo.map(item => {
-    return ' '.repeat(process.stdout.columns).center(' '.repeat(width).left(item[0]).right(item[1]));
+    return ' '.repeat(termWidth).center(' '.repeat(width).left(item[0]).right(item[1]));
   }).join('\n') + '\n');
+
+  process.exit(1)
 });
+
+function restart() {
+  var proc = spawn('node', [path.join(__dirname, 'run.js')]);
+  proc.stdout.on('data', function(data) { process.stdout.write(data) });
+  proc.stderr.on('data', function(data) { process.stdout.write(data) });
+  proc.on('exit', function (code) {
+    console.log('child process exited with code ' + code);
+    delete(proc);
+    // if(code !== 1) {
+    setTimeout(function() {
+      restart(nodefile);
+    }, 2000);
+    // }
+  });
+}
