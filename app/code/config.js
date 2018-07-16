@@ -87,5 +87,7 @@ module.exports = function(dir) {
 
   result.pageBase = 'http://kouna.io:8080'
 
+  result.port = process.env.port || 8080;
+
   return result;
 }
