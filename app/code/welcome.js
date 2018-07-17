@@ -21,9 +21,8 @@ module.exports = function() {
       .cyan
     );
 
-    console.log('\n\n');
 
-    console.log(' '.repeat(termWidth).center('\u2500'.repeat(width)) + '\n');
+    console.log(' '.repeat(termWidth).center('\u2500'.repeat(width).center(`  ${require('../../package.json').version}  `)));
 
     // general
     var tableinfo = [
