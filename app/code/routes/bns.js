@@ -85,7 +85,7 @@ module.exports = function(app, passport, edge) {
             }
             if(keys[2] === 'bt') {
               var m = req.query[key].match(/([0-9]+\.{0,1}[0-9]*),([0-9]+\.{0,1}[0-9]*)/m);
-              curQ = {'$gt': parseInt(m[1]), '$lt': parseInt(m[2])}
+              curQ = {'$gt': JSON.parse(m[1]), '$lt': JSON.parse(m[2])}
             }
           }
           q[keys[1]] = curQ;
@@ -94,6 +94,8 @@ module.exports = function(app, passport, edge) {
     })
 
     let page = req.query.page | req.query.p | 0;
+
+    console.log(q);
 
     BnsChar.find(q)
     .sort({'general.account': 1, 'general.name': 1})
