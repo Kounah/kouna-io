@@ -25,3 +25,13 @@ String.prototype.right = function (text) {
     return this;
   }
 }
+
+Array.prototype.get = function (str, sep){
+  let parr = str.split(sep | '.');
+  let res = this;
+  while(parr.length > 0) {
+    let p = p.shift();
+    res = res[p];
+  }
+  return res;
+}

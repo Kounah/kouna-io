@@ -1,3 +1,5 @@
+var __DEBUG = false;
+
 (function($, M) {
   $(document).ready(function() {
     document.querySelectorAll('.bns-character-gist').forEach(function(elem, i) {
@@ -13,6 +15,7 @@
       $(dropdown).append('<div class="col s12 center"><div class="kouna-loader"><div></div><div></div><div></div><div></div></div></div>');
       elem.parentElement.insertBefore(dropdown, elem)
 
+      if(__DEBUG)
       console.log(document.getElementById(elem.getAttribute('data-container')));
 
       elem.setAttribute('data-target', 'gist-dropdown-' + i);
@@ -45,6 +48,28 @@
       }
 
       elem.addEventListener('mouseover', asyncLoadContent);
+    })
+
+    var elems = document.querySelectorAll('.bns-character-model-keys');
+    var instances = M.Autocomplete.init(elems, {});
+
+    $(elems).on('keydown', function (event) {
+      if(!['ArrowUp', 'ArrowDown'].includes(event.key)) {
+        M.Autocomplete.getInstance(this).open()
+      }
+    });
+
+    $.ajax({
+      method    : 'GET',
+      url       : '/bns/api/keys/char',
+      dataType  : 'json'
+    }).done(function(data) {
+      instances.forEach(ins => {
+        ins.updateData(data);
+        console.log('updated data');
+      })
+    }).fail(function() {
+      console.log('Failed to get character model keys');
     })
   })
 })(jQuery, M);

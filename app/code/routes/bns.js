@@ -3,7 +3,7 @@ const {BnsChar, User} = require('../db');
 const config = require('../bns/config');
 const dateFormat = config.char.dateFormat;
 const getChar = require('../bns/getChar');
-
+const {dumpKeysRecursively} = require('recursive-keys')
 
 module.exports = function(app, passport, edge) {
   app.get('/bns/profile', (req, res) => {
@@ -47,6 +47,12 @@ module.exports = function(app, passport, edge) {
     getChar(req.params.char, req.params.region, (err, char) => {
       res.json(char)
     })
+  })
+
+  app.get('/bns/list', (req, res) => {
+    res.send(edge.render('page.bns.list_no_region', def({
+      context: req,
+    })));
   })
 
   app.get('/bns/list/:region', (req, res) => {
@@ -102,6 +108,23 @@ module.exports = function(app, passport, edge) {
       })))
     })
   });
+
+  app.get('/bns/api/keys/char', (req, res) => {
+    BnsChar.findOne({}, (err, char) => {
+      function f(x) {
+        var o = {};
+        dumpKeysRecursively(x).forEach(key => {
+          o[key] = null;
+        })
+        return o;
+      }
+
+      var o = char['_doc'];
+      delete o._id;
+      delete o.__v;
+      res.send(f(o))
+    })
+  })
 
   app.get('/bns/list/:region/:name/history', (req, res) => {
     res.sendStatus(404);

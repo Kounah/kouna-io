@@ -1,0 +1,30 @@
+@layout('layout.bns')
+
+@section('title')
+  BnS List
+@endsection
+
+@section('content')
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card hoverable" >
+          <a href="/bns/list/eu">
+            <div class="card-content">
+              <h1 class="center">EU</h1>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col s12 m6">
+        <div class="card hoverable" href="/bns/list/na">
+          <a href="/bns/list/na">
+            <div class="card-content">
+              <h1 class="center">NA</h1>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
