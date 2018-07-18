@@ -1,9 +1,15 @@
 const {def} = require('../fn');
-const {BnsChar, User} = require('../db');
+const {BnsRaid, BnsChar, User} = require('../db');
 const config = require('../bns/config');
 const dateFormat = config.char.dateFormat;
 const getChar = require('../bns/getChar');
 const {dumpKeysRecursively} = require('recursive-keys')
+const ObjectId = require('mongodb').ObjectId;
+
+function handleError(err) {
+  if(err)
+    console.log(err);
+}
 
 module.exports = function(app, passport, edge) {
   app.get('/bns/profile', (req, res) => {
@@ -146,6 +152,173 @@ module.exports = function(app, passport, edge) {
     //     chars: chars
     //   })))
     // })
+  })
+
+  // RAID SECTION
+
+  app.get('/bns/raid', (req, res) => {
+    if(req.isAuthenticated()) {
+      BnsRaid.find({members: req.user._id}).exec((err, raids) => {
+        handleError(err);
+
+        res.send(edge.render('page.bns.raid', def({
+          context: req,
+          raids: raids
+        })))
+      })
+    } else {
+      res.send(edge.render('page.bns.raid', def({
+        context: req
+      })))
+    }
+  });
+
+  app.post('/bns/raid', (req, res) => {
+    if(req.isAuthenticated()) {
+      var raid = new BnsRaid();
+      raid.createdOn = new Date();
+      raid.creator = req.user._id + '';
+      raid.members.push(req.user._id + '');
+      raid.editors.push(req.user._id + '');
+      raid.name = req.body.name;
+      raid.description = req.body.description;
+
+      raid.save((err, newRaid) => {
+        handleError(err);
+
+        res.redirect('/bns/raid')
+      })
+    } else {
+      res.sendStatus(401);
+    }
+  })
+
+  function raidCharInfo(raid, memberId) {
+    return raid.characters.map((raidChar, raidCharIndex) => {
+      if(raidChar.userId == memberId) {
+        return {
+          character: raidChar,
+          groups: raid.groups.map((group, groupIndex) => {
+            var matchingClassifications = group.classifications.filter(d => {return d.charIndex == raidCharIndex});
+            if(matchingClassifications.length > 0) {
+              return {
+                title: group.title,
+                subtitle: group.subtitle,
+                plannedfor: group.plannedfor,
+                classifications: matchingClassifications.map((classif, classifId) => {
+                  return {
+                    character: raid.characters[classif.charIndex],
+                    roles: classif.roles.map(role => {
+                      return group.roles[role];
+                    })
+                  }
+                })
+              }
+            } else {
+              return null;
+            }
+          }).filter(d => {return d != null})
+        }
+      } else {
+        return null;
+      }
+    }).filter(d => {return d != null})
+  }
+
+  app.get('/bns/raid/:raidId/member/:memberId/detail', (req, res) => {
+    if(req.isAuthenticated()) {
+      BnsRaid.findById(req.params.raidId).exec((err, raid) => {
+        handleError(err);
+
+        if(raid != undefined) {
+          if(raid.members.includes(req.params.memberId)) {
+            var result = raidCharInfo(raid, req.params.memberId);
+
+            console.log(result);
+
+            res.send(edge.render('page.bns.raid.memberdetail', def({
+              context: req,
+              data: result,
+              raidId: req.params.raidId,
+              memberId: req.params.memberId
+            })))
+          } else {
+            res.sendStatus(403);
+          }
+        } else {
+          res.sendStatus(404);
+        }
+      })
+    } else {
+      res.sendStatus(401);
+    }
+  })
+
+  app.post('/bns/raid/:raidId/member/:memberId/character', (req, res) => {
+    if(req.isAuthenticated()) {
+      BnsRaid.findById(req.params.raidId).exec((err, raid) => {
+        handleError(err);
+
+        if(raid != undefined) {
+          if(raid.editors.includes('' + req.user._id)) {
+            getChar(req.body.characterName, req.body.characterRegion, (err, char) => {
+              handleError(err);
+
+              raid.characters.push({
+                userId: req.params.memberId,
+                bnsCharId: '' + char._id
+              })
+
+              raid.save((err, newRaid) => {
+                handleError(err);
+
+                res.redirect('/bns/raid')
+              })
+            })
+          } else {
+            res.sendStatus(403)
+          }
+        } else {
+          res.sendStatus(404)
+        }
+      })
+    } else {
+      res.sendStatus(401)
+    }
+  })
+
+  app.post('/bns/raid/:raidId/member/:memberId/character/:characterId/remove', (req, res) => {
+    if(req.isAuthenticated()) {
+      BnsRaid.findById(req.params.raidId).exec((err, raid) => {
+        handleError(err);
+
+        if(raid != undefined) {
+          if(raid.editors.includes('' + req.user._id)) {
+            raid.characters = raid.characters.map((v,i) => {
+              
+            })
+            .filter(d => {
+
+            })
+          } else {
+            res.sendStatus(403)
+          }
+        } else {
+          res.sendStatus(404)
+        }
+      })
+    } else {
+      res.sendStatus(401)
+    }
+  })
+
+  app.get('/bns/char/id/:id', (req, res) => {
+    console.log('' + req.params.id);
+    BnsChar.findOne({_id: '' + req.params.id}).select('region general').exec((err, char) => {
+      console.log(char)
+
+      res.json(char);
+    })
   })
 
 }

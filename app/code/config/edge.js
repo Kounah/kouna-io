@@ -61,5 +61,17 @@ module.exports = function(edge) {
     }
   })
 
+  edge.global('renderMarkdown', function(markdown) {
+    return require('../markdown').render(markdown);
+  })
+
+  edge.global('includes', function(arr, item) {
+    if(arr instanceof Array) {
+      return arr.includes(item);
+    } else {
+      return false;
+    }
+  })
+
   require('../bns/edge.js')(edge);
 }

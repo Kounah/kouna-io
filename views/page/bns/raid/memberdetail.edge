@@ -1,0 +1,13 @@
+<div class="row">
+  @each(d in data)
+  <div class="right-align">
+    <a class="left bns-get-char-by-id" data-id="{{d.character.bnsCharId}}">d.character.bnsCharId</a>
+    <form action="/bns/raid/{{raidId}}/member/{{memberId}}/characters/{{d.character._id}}/remove" method="post">
+      <button class="btn-small ret waves-effect waves-light" type="submit" target="_blank">
+        <i class="material-icons">delete</i>
+      </button>
+    </form>
+  </div>
+  <div class="divider"></div>
+  @endeach
+</div>

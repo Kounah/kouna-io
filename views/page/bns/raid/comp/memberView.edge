@@ -1,0 +1,46 @@
+<ul class="collapsible">
+  @each(member in raid.members)
+  <li>
+    <div class="collapsible-header">
+      <a class="async-user" data-id="{{{member}}}"></a>
+    </div>
+    <div class="collapsible-body">
+      <div class="bns-raid-member-detail row" data-raidid="{{{raid._id}}}" data-userid="{{{member}}}">
+      </div>
+
+      @if(includes(raid.editors, '' + context.user._id))
+      <div class="center">
+        <button class="btn modal-trigger" data-target="modal-addCharacter-{{raid._id}}-{{member}}">
+          <i class="material-icons left">add</i>
+          Add Character
+        </button>
+        <form action="/bns/raid/{{raid.id}}/member/{{member}}/character" method="post">
+          <div class="modal modal-fixed-footer"  id="modal-addCharacter-{{raid._id}}-{{member}}">
+            <div class="modal-content">
+                <div class="input-field">
+                  <input type="text" name="characterName" value="">
+                  <label for="characterName">Character Name</label>
+                </div>
+                <div class="input-field">
+                  <select name="characterRegion">
+                    <option value="eu">Europe</option>
+                    <option value="na">North America</option>
+                  </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-flat modal-close" type="button">
+                Cancel
+              </button>
+              <button class="btn" type="submit">
+                OK
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      @endif
+    </div>
+  </li>
+  @endeach
+</ul>

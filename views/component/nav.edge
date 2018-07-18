@@ -91,6 +91,9 @@
             Login
           </a>
           <form method="POST" action="/login">
+            <div class="hide">
+              <input type="text" name="redirUrl" value="{{{context.path}}}">
+            </div>
             <div class="modal" id="nav-login">
               <div class="modal-content">
                 <div class="row">

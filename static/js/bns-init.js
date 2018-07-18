@@ -1,24 +1,29 @@
 var __DEBUG = false;
+var loader = '<div class="col s12 center"><div class="kouna-loader"><div></div><div></div><div></div><div></div></div></div>';
+var bnsCharGistCounter = 0;
 
-(function($, M) {
-  $(document).ready(function() {
-    document.querySelectorAll('.bns-character-gist').forEach(function(elem, i) {
+function bnsInit ($, M) {
+  { // bns character gist
+    function bnsCharGist (elem) {
+      console.log(elem);
+
+      bnsCharGistCounter++;
       var region      = elem.getAttribute('data-region');
       var name        = elem.getAttribute('data-name');
       var dropdown    = document.createElement('div');
       dropdown.classList.add('dropdown-content');
       dropdown.classList.add('row')
-      dropdown.setAttribute('id', 'gist-dropdown-' + i);
+      dropdown.setAttribute('id', 'gist-dropdown-' + bnsCharGistCounter);
 
       elem.style.cursor = 'pointer';
 
-      $(dropdown).append('<div class="col s12 center"><div class="kouna-loader"><div></div><div></div><div></div><div></div></div></div>');
+      $(dropdown).append(loader);
       elem.parentElement.insertBefore(dropdown, elem)
 
       if(__DEBUG)
       console.log(document.getElementById(elem.getAttribute('data-container')));
 
-      elem.setAttribute('data-target', 'gist-dropdown-' + i);
+      elem.setAttribute('data-target', 'gist-dropdown-' + bnsCharGistCounter);
       var instance  = M.Dropdown.init(elem, {
         hover           : true,
         constrainWidth  : false,
@@ -48,8 +53,15 @@ var __DEBUG = false;
       }
 
       elem.addEventListener('mouseover', asyncLoadContent);
+      bnsCharGistCounter++;
+    }
+    $('.bns-character-gist:not(.initialized)').each(function() {
+      bnsCharGist(this)
+      $(this).addClass('initialized');
     })
+  }
 
+  { // bns character model keys
     var elems = document.querySelectorAll('.bns-character-model-keys');
     var instances = M.Autocomplete.init(elems, {});
 
@@ -71,5 +83,84 @@ var __DEBUG = false;
     }).fail(function() {
       console.log('Failed to get character model keys');
     })
+  }
+
+  { // bns raid member detail
+    function bnsRaidMemberDetail(elem) {
+      $(elem).addClass('center')
+      .html(loader);
+
+      var userId = $(elem).attr('data-userid');
+      var raidId = $(elem).attr('data-raidid');
+
+      $.ajax({
+        method      : 'GET',
+        url         : '/bns/raid/' + raidId + '/member/' + userId + '/detail',
+        datayType   : 'html'
+      }).done(function(data) {
+        $(elem).removeClass('center')
+        .html(data)
+
+        bnsInit($, M);
+      }).fail(function() {
+        $(elem).html('')
+        .append($(document.createElement('p'))
+          .append('<span>Something went wrong, to retry click </span>')
+          .append($(document.createElement('a'))
+            .text('here')
+            .attr('href', '#!')
+            .on('click', function() {
+              bnsRaidMemberDetail(elem);
+            }))
+          .append('<span>.</span>')
+        )
+      })
+    }
+    $('.bns-raid-member-detail:not(.initialized)').each(function() {
+      bnsRaidMemberDetail(this);
+      this.classList.add('initialized')
+    })
+  }
+
+  { // bns get char by id
+    function bnsGetCharById(elem) {
+      var charId = $(elem).attr('data-id');
+
+      $.ajax({
+        method    : 'GET',
+        url       : '/bns/char/id/' + charId,
+        dataType  : 'json'
+      }).done(function(d) {
+        var $namelink = $(elem)
+        .attr('href', '/bns/profile/' + d.region + '/' + d.general.name)
+        .attr('target', '_blank')
+        .attr('data-region', d.region)
+        .attr('data-name', d.general.name)
+        .text(d.general.name)
+        $namelink.removeClass('get-bns-char-by-id');
+
+        var namelink = $namelink.get().shift()
+
+        elem = namelink;
+      }).fail(function() {
+        $(elem).html('')
+        .append($(document.createElement('a'))
+          .text('retry')
+          .attr('href', '#!')
+          .on('click', function() {
+            bnsGetCharById(elem);
+          }))
+      })
+    }
+    $('.bns-get-char-by-id').each(function() {
+      console.log(this);
+      bnsGetCharById(this);
+    })
+  }
+}
+
+(function($, M) {
+  $(document).ready(function() {
+    bnsInit(jQuery, M);
   })
-})(jQuery, M);
+})(jQuery, M)

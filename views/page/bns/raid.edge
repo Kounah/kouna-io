@@ -1,0 +1,111 @@
+@layout('layout.bns')
+
+@section('title')
+  Raid Manager
+@endsection
+
+@section('content')
+@if(context.user)
+<div class="container">
+  @if(raids)
+  @each(raid in raids)
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{raid.name}}</span>
+      <p>{{raid.description}}</p>
+    </div>
+    <div class="divider"></div>
+    <div class="card-content">
+      <div class="row">
+        <div class="col s4">
+          <strong>Members:</strong>
+          <br>
+          <span>{{raid.members.length}}</span>
+        </div>
+        <div class="col s4">
+          <strong>Groups:</strong>
+          <br>
+          <span>{{raid.groups.length}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-action">
+      @if(raid.creator == context.user._id)
+      <button type="button" class="btn-flat waves-effect">
+        <i class="material-icons left">settings</i>
+        Settings
+      </button>
+      @endif
+
+      <button type="button" class="btn-flat waves-effect modal-trigger" data-target="modal-members-{{raid._id}}">
+        <i class="material-icons left">people</i>
+        Members
+      </button>
+      <div class="modal modal-fixed-footer" id="modal-members-{{raid._id}}">
+        <div class="modal-content">
+          <h4>{{raid.name}} - Member</h4>
+          <div class="divider row"></div>
+
+          @!component('page.bns.raid.comp.memberView', raid=raid, context=context)
+        </div>
+        <div class="modal-footer">
+          <button class="btn modal-close" type="button">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endeach
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Create A Raid?</span>
+      <p>If you want to create a new raid, click this button.</p>
+    </div>
+    <div class="card-content">
+      <p class="center">
+        <button class="btn modal-trigger" type="button" data-target="modal-addRaid">Add a Raid</button>
+      </p>
+
+      <form class="" action="" method="post">
+        <div class="modal modal-fixed-footer" id="modal-addRaid">
+          <div class="modal-content">
+            <div class="row">
+              <div class="col s12 input-field">
+                <input type="text" name="name" value="">
+                <label for="name">Name</label>
+              </div>
+              <div class="col s12 input-field">
+                <textarea name="description" class="materialize-textarea"></textarea>
+                <label for="description" spellcheck="false">Description</label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+            <button class="btn waves-effect" type="submit" name="button">Confirm</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  @else
+  <div class="card">
+    <div class="card-content">
+      <p>There are no raids, yet</p>
+    </div>
+  </div>
+  @endif
+</div>
+@else
+<div class="container">
+  <div class="card-panel">
+    <div class="card-content">
+      <p>In Order to use this feature you need to <a href="/login">Sign In</a></p>
+    </div>
+  </div>
+</div>
+@endif
+@endsection

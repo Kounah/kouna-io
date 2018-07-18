@@ -25,11 +25,14 @@ module.exports = function(app, passport, edge) {
     }
   });
 
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/account/profile', // redirect to the secure profile section
-    failureRedirect : '/login', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
-  }));
+  app.post('/login', function(req, res, next) {
+
+    passport.authenticate('local-login', {
+      successRedirect : req.body.redirUrl ? req.body.redirUrl : '/account/profile', // redirect to the secure profile section
+      failureRedirect : '/login', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+    })(req, res, next)
+  });
 
   app.get('/register', (req, res) => {
     res.send(edge.render('page.account.register', def({context: req})));

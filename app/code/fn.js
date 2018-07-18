@@ -4,8 +4,7 @@ function def(o) {
   let result = {};
 
   let copyFrom = [{
-    nav: config.links,
-    aceThemes: config.ace.modules.filter(d => d.type == 'theme')
+    nav: config.links
   }];
 
 
