@@ -1,13 +1,32 @@
 <div class="row">
-  @each(d in data)
-  <div class="right-align">
-    <a class="left bns-get-char-by-id" data-id="{{d.character.bnsCharId}}">d.character.bnsCharId</a>
-    <form action="/bns/raid/{{raidId}}/member/{{memberId}}/characters/{{d.character._id}}/remove" method="post">
-      <button class="btn-small ret waves-effect waves-light" type="submit" target="_blank">
-        <i class="material-icons">delete</i>
-      </button>
-    </form>
+  <div class="card">
+    <div class="card-tabs">
+      <ul class="tabs tabs-fixed-with">
+        @each(d in data)
+        <li class="tab">
+          <a class="bns-get-char-by-id" href="#tab-raid-{{raidId}}-member-{{memberId}}-character-{{d.character._id}}" data-id="{{d.character.bnsCharId}}">
+            {{d.character.bnsCharId}}
+          </a>
+        </li>
+        @endeach
+      </ul>
+    </div>
+    @each(d in data)
+    <div class="card-content" id="tab-raid-{{raidId}}-member-{{memberId}}-character-{{d.character._id}}">
+      <h4><span class="bns-get-char-by-id" data-id="{{d.character.bnsCharId}}">{{d.character.bnsCharId}}</span>
+        <span class="right">
+          <form action="/bns/raid/{{raidId}}/member/{{memberId}}/character/{{d.character._id}}/remove" method="post">
+            <button type="submit" class="btn-floating btn-small waves-effect waves-red red-text tooltipped" data-tooltip="Delete">
+              <i class="material-icons">delete</i>
+            </button>
+          </form>
+        </span>
+      </h4>
+
+      <p class="bns-get-char-by-id" usechildnodes overwritehref preventoverwritetext data-id="{{d.character.bnsCharId}}">
+        <strong class="print-info">general.account</strong>'s <span class="print-info">general.class</span> <strong class="print-info">general.name</strong> from [<span class="print-info" uppercase>region</span>] <span class="print-info">general.server</span> 
+      </p>
+    </div>
+    @endeach
   </div>
-  <div class="divider"></div>
-  @endeach
 </div>

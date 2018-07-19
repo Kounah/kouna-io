@@ -5,12 +5,9 @@
       <a class="async-user" data-id="{{{member}}}"></a>
     </div>
     <div class="collapsible-body">
-      <div class="bns-raid-member-detail row" data-raidid="{{{raid._id}}}" data-userid="{{{member}}}">
-      </div>
-
-      @if(includes(raid.editors, '' + context.user._id))
-      <div class="center">
-        <button class="btn modal-trigger" data-target="modal-addCharacter-{{raid._id}}-{{member}}">
+      <h4>Characters
+        @if(includes(raid.editors, '' + context.user._id))
+        <button class="btn modal-trigger right" data-target="modal-addCharacter-{{raid._id}}-{{member}}">
           <i class="material-icons left">add</i>
           Add Character
         </button>
@@ -26,10 +23,11 @@
                     <option value="eu">Europe</option>
                     <option value="na">North America</option>
                   </select>
+                  <label for="characterRegion">Region</label>
                 </div>
             </div>
             <div class="modal-footer">
-              <button class="btn-flat modal-close" type="button">
+              <button class="btn-flat close-this-modal" type="button">
                 Cancel
               </button>
               <button class="btn" type="submit">
@@ -38,8 +36,11 @@
             </div>
           </div>
         </form>
+        @endif
+      </h4>
+
+      <div class="bns-raid-member-detail row" data-raidid="{{{raid._id}}}" data-userid="{{{member}}}">
       </div>
-      @endif
     </div>
   </li>
   @endeach

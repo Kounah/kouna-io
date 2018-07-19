@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   })
 
+  document.querySelectorAll('.close-this-modal').forEach(function (elem) {
+    elem.addEventListener('click', function(event) {
+      M.Modal.getInstance(elem.parentElement.parentElement).close();
+    })
+  })
+
   document.querySelectorAll('.svg-icon').forEach(function(elem) {
     elem.style.backgroundImage = 'url(' + elem.getAttribute('data-src') + ')';
   })

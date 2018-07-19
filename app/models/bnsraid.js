@@ -8,6 +8,16 @@ var bnsRaidSchema = mongoose.Schema({
   creator     : String,
   editors     : [String],
   members     : [String],
+  settings    : {
+    roles         : [{
+      name            : String,
+      description     : String,
+      prefClasses     : [String],
+      roleGroup       : Number,
+      boss            : String,
+      groups          : [Number]
+    }]
+  },
   groups      : [{
     title           : String,
     subtitle        : String,
@@ -17,21 +27,16 @@ var bnsRaidSchema = mongoose.Schema({
         day         : String,
         time        : String
       },
-      roles         : [{
-        name            : String,
-        description     : String,
-        prefClasses     : [String],
-        roleGroup       : Number
-      }]
     },
     classifications: [{
       charIndex : Number,
-      roles     : [Number]
+      roles     : [Number],
     }]
   }],
   characters      : [{
     userId          : String,
     bnsCharId       : String,
+    groups          : String,
   }]
 })
 

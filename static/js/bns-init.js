@@ -2,6 +2,14 @@ var __DEBUG = false;
 var loader = '<div class="col s12 center"><div class="kouna-loader"><div></div><div></div><div></div><div></div></div></div>';
 var bnsCharGistCounter = 0;
 
+function getJsonPath(o, path) {
+  if(path.length > 0) {
+    return getJsonPath(o[path.shift()], path);
+  } else {
+    return o;
+  }
+}
+
 function bnsInit ($, M) {
   { // bns character gist
     function bnsCharGist (elem) {
@@ -101,6 +109,7 @@ function bnsInit ($, M) {
         $(elem).removeClass('center')
         .html(data)
 
+        M.AutoInit(elem);
         bnsInit($, M);
       }).fail(function() {
         $(elem).html('')
@@ -125,23 +134,48 @@ function bnsInit ($, M) {
   { // bns get char by id
     function bnsGetCharById(elem) {
       var charId = $(elem).attr('data-id');
+      var option = {};
+      option.preventoverwritetext = $(elem).attr('preventoverwritetext') != undefined;
+      option.usechargist = $(elem).attr('usechargist') != undefined;
+      option.overwritehref = $(elem).attr('overwritehref') != undefined;
+      option.usechildnodes = $(elem).attr('usechildnodes') != undefined;
 
       $.ajax({
         method    : 'GET',
         url       : '/bns/char/id/' + charId,
         dataType  : 'json'
       }).done(function(d) {
-        var $namelink = $(elem)
-        .attr('href', '/bns/profile/' + d.region + '/' + d.general.name)
-        .attr('target', '_blank')
-        .attr('data-region', d.region)
-        .attr('data-name', d.general.name)
-        .text(d.general.name)
-        $namelink.removeClass('get-bns-char-by-id');
+        if(!option.preventoverwritetext) {
+          $(elem).text(d.general.name)
+        }
 
-        var namelink = $namelink.get().shift()
+        if(option.usechargist) {
+          var $namelink = $(elem)
+          .attr('data-region', d.region)
+          .attr('data-name', d.general.name)
+          .addClass('bns-char-gist')
+          .removeClass('get-bns-char-by-id');
 
-        elem = namelink;
+          var namelink = $namelink.get().shift()
+          elem = namelink;
+        }
+
+        if(option.overwriteHref) {
+          $(elem)
+          .attr('href', '/bns/profile/' + d.region + '/' + d.general.name)
+          .attr('target', '_blank')
+        }
+
+        if(option.usechildnodes) {
+          elem.querySelectorAll('.print-info').forEach(function(pi) {
+            var text = getJsonPath(d, pi.innerText.split('.'));
+            if(pi.getAttribute('uppercase') != undefined) {
+              text = text.toUpperCase();
+            }
+
+            pi.innerText = text;
+          })
+        }
       }).fail(function() {
         $(elem).html('')
         .append($(document.createElement('a'))
@@ -153,7 +187,6 @@ function bnsInit ($, M) {
       })
     }
     $('.bns-get-char-by-id').each(function() {
-      console.log(this);
       bnsGetCharById(this);
     })
   }

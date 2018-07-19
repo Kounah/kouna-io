@@ -17,15 +17,14 @@
     <div class="divider"></div>
     <div class="card-content">
       <div class="row">
-        <div class="col s4">
+        <div class="col s4 center">
           <strong>Members:</strong>
-          <br>
-          <span>{{raid.members.length}}</span>
+          <h4 class="secondary-text">{{raid.members.length}}</h4>
         </div>
-        <div class="col s4">
+        <div class="col s4 center">
           <strong>Groups:</strong>
           <br>
-          <span>{{raid.groups.length}}</span>
+          <h4 class="secondary-text">{{raid.groups.length}}</h4>
         </div>
       </div>
     </div>
@@ -41,19 +40,115 @@
         <i class="material-icons left">people</i>
         Members
       </button>
-      <div class="modal modal-fixed-footer" id="modal-members-{{raid._id}}">
-        <div class="modal-content">
-          <h4>{{raid.name}} - Member</h4>
-          <div class="divider row"></div>
+    </div>
+  </div>
+  <div class="modal modal-fixed-footer" id="modal-members-{{raid._id}}">
+    <div class="modal-content">
+      <h4>{{raid.name}} - Member
 
-          @!component('page.bns.raid.comp.memberView', raid=raid, context=context)
+        @if(includes(raid.editors, '' + context.user._id))
+        <button class="btn-floating modal-trigger right" data-target="modal-inviteplayer-{{raid._id}}">
+          <i class="material-icons">add</i>
+        </button>
+        @endif
+      </h4>
+
+      @if(includes(raid.editors, '' + context.user._id))
+      <form name="dummy" method="post">
+        <div class="modal modal-fixed-footer" id="modal-inviteplayer-{{raid._id}}">
+          <div class="modal-content">
+            <h4>Invite User</h4>
+            <p>the user you want to send an invite to must have an account on this page. Ask them for the email-address they used for for this account (listed on their
+              <a href="/account/profile">Account Page</a>)
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="input-field">
+              <input type="text" name="to" value="">
+              <label for="to">Recipients kouna.io account email-address</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-flat close-this-modal">
+              cancel
+            </button>
+            <button type="submit" name="send" class="btn waves-effect">
+              <i class="material-icons right">send</i>
+              Send Invite
+            </button>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn modal-close" type="button">
-            OK
-          </button>
-        </div>
-      </div>
+        <script type="text/javascript">
+          (function ($, M) {
+            var cs = document.currentScript;
+            var p  = cs.parentElement;
+            var to = p.querySelector('input[name="to"]');
+            var send = p.querySelector('button[name="send"]');
+
+            function disable() {
+              to.classList.add('disabled');
+              send.classList.add('disabled');
+            }
+
+            function reenable() {
+              to.classList.remove('disabled');
+              send.classList.remove('disabled');
+            }
+
+            function sendInvite() {
+
+              disable()
+
+              $.ajax({
+                method: 'POST',
+                url: '/invites/send',
+                data: {
+                  type: 'bns_raid_invite',
+                  data: {
+                    raidId: '{{raid._id}}'
+                  },
+                  recipient: $(to).val()
+                },
+                dataType: 'json'
+              }).done(function(d) {
+                setTimeout(function() {
+                  reenable();
+                  to.value = '';
+                }, 2000);
+                M.toast({
+                  html: d,
+                  classes: 'green white-text'
+                })
+              }).fail(function() {
+                setTimeout(reenable, 2000);
+                M.toast({
+                  html: 'error sending request.',
+                  classes: 'red white-text'
+                })
+              })
+
+            }
+
+            p.onsubmit = function(e) {
+              e.preventDefault();
+              sendInvite();
+            }
+
+            p.removeChild(cs);
+          })(jQuery, M)
+        </script>
+      </form>
+
+      @endif
+      <div class="divider row"></div>
+
+      @!component('page.bns.raid.comp.memberView', raid=raid, context=context)
+    </div>
+    <div class="modal-footer">
+      <button class="btn close-this-modal" type="button">
+        OK
+      </button>
     </div>
   </div>
   @endeach
@@ -83,7 +178,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Cancel</a>
+            <a href="#!" class="close-this-modal waves-effect waves-red btn-flat">Cancel</a>
             <button class="btn waves-effect" type="submit" name="button">Confirm</button>
           </div>
         </div>

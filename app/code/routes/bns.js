@@ -234,8 +234,6 @@ module.exports = function(app, passport, edge) {
           if(raid.members.includes(req.params.memberId)) {
             var result = raidCharInfo(raid, req.params.memberId);
 
-            console.log(result);
-
             res.send(edge.render('page.bns.raid.memberdetail', def({
               context: req,
               data: result,
@@ -287,18 +285,34 @@ module.exports = function(app, passport, edge) {
     }
   })
 
-  app.post('/bns/raid/:raidId/member/:memberId/character/:characterId/remove', (req, res) => {
+  function removeRaidCharacter(req, res) {
     if(req.isAuthenticated()) {
       BnsRaid.findById(req.params.raidId).exec((err, raid) => {
         handleError(err);
 
         if(raid != undefined) {
           if(raid.editors.includes('' + req.user._id)) {
-            raid.characters = raid.characters.map((v,i) => {
-              
-            })
-            .filter(d => {
 
+            var ri = [];
+            raid.characters = raid.characters.filter((d, fi) => {
+              if(d._id + '' != req.params.characterId) {
+                return true;
+              } else {
+                ri.push(fi);
+                return false;
+              }
+            })
+
+            raid.groups.forEach((g, gi) => {
+              raid.groups[gi].classifications = raid.groups[gi].classifications.filter(d => {
+                return !ri.includes(d.charIndex)
+              })
+            })
+
+            raid.save((err, newRaid) => {
+              handleError(err);
+
+              res.redirect('/bns/raid')
             })
           } else {
             res.sendStatus(403)
@@ -310,13 +324,18 @@ module.exports = function(app, passport, edge) {
     } else {
       res.sendStatus(401)
     }
+  }
+
+  app.delete('/bns/raid/:raidId/member/:memberId/character/:characterId', (req, res) => {
+    removeRaidCharacter(req, res);
+  })
+
+  app.post('/bns/raid/:raidId/member/:memberId/character/:characterId/remove', (req, res) => {
+    removeRaidCharacter(req, res);
   })
 
   app.get('/bns/char/id/:id', (req, res) => {
-    console.log('' + req.params.id);
     BnsChar.findOne({_id: '' + req.params.id}).select('region general').exec((err, char) => {
-      console.log(char)
-
       res.json(char);
     })
   })
