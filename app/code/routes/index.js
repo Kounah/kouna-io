@@ -6,6 +6,7 @@ module.exports = function(app, passport, edge) {
   require('./tools')(app, passport, edge);
   require('./bns')(app, passport, edge);
   require('./resources')(app, passport, edge);
+  require('./invite')(app, passport, edge);
 
   app.get('/*', (req, res) => {
     try {

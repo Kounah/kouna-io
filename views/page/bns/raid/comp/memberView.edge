@@ -7,9 +7,8 @@
     <div class="collapsible-body">
       <h4>Characters
         @if(includes(raid.editors, '' + context.user._id))
-        <button class="btn modal-trigger right" data-target="modal-addCharacter-{{raid._id}}-{{member}}">
-          <i class="material-icons left">add</i>
-          Add Character
+        <button class="btn-floating btn-small modal-trigger right" data-target="modal-addCharacter-{{raid._id}}-{{member}}">
+          <i class="material-icons">add</i>
         </button>
         <form action="/bns/raid/{{raid.id}}/member/{{member}}/character" method="post">
           <div class="modal modal-fixed-footer"  id="modal-addCharacter-{{raid._id}}-{{member}}">

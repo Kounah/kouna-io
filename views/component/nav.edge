@@ -1,3 +1,8 @@
+@if(context && context.user)
+<ul class="dropdown-content" id="nav-notification-invites-dropdown">
+</ul>
+@endif
+
 <ul class="sidenav" id="mobile-nav">
   @if(items)
     <li class="no-padding">
@@ -39,7 +44,7 @@
 <nav>
   <div class="nav-wrapper">
     <ul>
-      <li><a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+      <li><a data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
     </ul>
     <ul class="hide-on-med-and-down">
       @each(item in items)
@@ -50,7 +55,192 @@
     </ul>
     <ul class="right">
       @if(context && context.user)
-        <li><a href="#" class="dropdown-trigger" data-target="nav-account-dropdown">
+        <li><a class="dropdown-trigger" data-target="nav-notification-dropdown">
+          <i class="material-icons">notifications</i>
+        </a></li>
+        <ul class="dropdown-content" id="nav-notification-dropdown">
+          <li>
+            <a data-target="nav-notification-invites-dropdown">
+              <i class="material-icons left">email</i>
+              Invites
+              <span class="new badge hide">0</span>
+            </a>
+            <script type="text/javascript">
+              (function($, M) {
+                var cs = document.currentScript;
+                var p = cs.parentElement;
+                var ddt = p.querySelector('a[data-target]');
+                var ddc = document.getElementById(ddt.getAttribute('data-target'))
+                var badge = ddt.querySelector('.badge')
+
+                M.Dropdown.init(ddt, {
+                  hover: true,
+                  alignment: 'right',
+                  coverTrigger: false,
+                  constrainWidth: false,
+                  container: document.body
+                })
+
+                function buildInvite(inv) {
+                  var res =
+                  $(document.createElement('li'))
+                  .append(
+                    $(document.createElement('div'))
+                    .addClass('card z-depth-0')
+                    .append(
+                      $(document.createElement('div'))
+                      .addClass('card-content')
+                      .append(
+                        $(document.createElement('div'))
+                        .addClass('center')
+                        .append(
+                          $(document.createElement('p'))
+                          .append(
+                            $(document.createElement('span'))
+                            .attr('data-id', inv.from)
+                            .asyncUser()
+                          ).append('<span> has invited you to</span>')
+                        )
+                      ).append(
+                        $(document.createElement('div'))
+                        .addClass('center')
+                        .append(
+                          $(document.createElement('button'))
+                          .addClass('btn waves-effect waves-light')
+                          .addClass('green accent-2 green-text text-darken-4')
+                          // .text('Accept')
+                          .append('<i class="material-icons">check</i>')
+                          .on('click', function() {
+                            $.ajax({
+                              method: 'POST',
+                              url: '/invite/' + inv._id + '/accept',
+                              dataType: 'json'
+                            }).done(function(d) {
+                              if(d.success != undefined) {
+                                if(d.success == true) {
+                                  M.toast({
+                                    html: d.message,
+                                    classes: 'green accent-2 green-text text-darken-4'
+                                  })
+                                } else {
+                                  M.toast({
+                                    html: d.message,
+                                    classes: 'yellow accent-2 yellow-text text-darken-4'
+                                  })
+                                }
+                              }
+                            }).fail(function() {
+                              M.toast({
+                                html: 'failed to accept the invite',
+                                classes: 'red accent-2 red-text text-darken-4'
+                              })
+                            })
+                          })
+                        ).append(
+                          '<span> </span>'
+                        )
+                        .append(
+                          $(document.createElement('button'))
+                          .addClass('btn waves-effect waves-light')
+                          .addClass('red accent-2 red-text text-darken-4')
+                          // .text('Decline')
+                          .append('<i class="material-icons">clear</i>')
+                          .on('click', function() {
+                            $.ajax({
+                              method: 'POST',
+                              url: '/invite/' + inv._id + '/decline',
+                              dataType: 'json'
+                            }).done(function(d) {
+                              if(d.success != undefined) {
+                                if(d.success == true) {
+                                  M.toast({
+                                    html: d.message,
+                                    classes: 'green accent-2 green-text text-darken-4'
+                                  })
+                                } else {
+                                  M.toast({
+                                    html: d.message,
+                                    classes: 'yellow accent-2 yellow-text text-darken-4'
+                                  })
+                                }
+                              }
+                            }).fail(function() {
+                              M.toast({
+                                html: 'failed to decline the invite',
+                                classes: 'red accent-2 red-text text-darken-4'
+                              })
+                            })
+                          })
+                        )
+                      )
+                    )
+                  );
+                  return res;
+                }
+
+                var lastScan;
+                function checkInvites() {
+
+                  if(window.notif == undefined) window.notif = {};
+                  if(window.notif.inv == undefined) window.notif.inv = [];
+
+                  if(window.notif.inv.length <= 0) {
+                    $.ajax({
+                      method: 'GET',
+                      url: '/invites',
+                      dataType: 'json'
+                    }).done(function(d) {
+                      if(d.success == true) {
+                        window.notif.inv = d.result;
+                        badge.classList.remove('hide');
+                        badge.classList.remove('new');
+                        badge.innerText = window.notif.inv.length;
+                        d.result.forEach(function(inv) {
+                          $(ddc).append(buildInvite(inv));
+                        })
+                      }
+                    }).fail(function() {
+                      console.error('failed to get invites');
+                    })
+                  } else {
+                    $.ajax({
+                      method: 'GET',
+                      url: '/invites',
+                      dataType: 'json',
+                      data: {
+                        after: lastScan
+                      }
+                    }).done(function(d) {
+                      if(d.success == true) {
+                        if(d.result.length > 0) {
+                          M.toast({
+                            html: 'you have ' + d.result.length + ' new invites'
+                          })
+
+                          window.notif.inv = window.notif.concat(d.result);
+                          d.result.forEach(function(inv) {
+                            $(ddc).append(buildInvite(inv));
+                          })
+                        }
+                      }
+                    }).fail(function() {
+                      console.error('failed to get invites');
+                    })
+                  }
+
+                  lastScan = new Date();
+                }
+
+                checkInvites();
+                setInterval(checkInvites, 5000);
+
+                p.removeChild(cs);
+              })(jQuery, M)
+            </script>
+          </li>
+        </ul>
+
+        <li><a class="dropdown-trigger" data-target="nav-account-dropdown">
           @!component('component.icon', { type: 'material', key: 'account_circle', position: 'left' })
           @if(context.user.local.name)
           {{ context.user.local.name }}
@@ -86,7 +276,7 @@
         </ul>
       @else
         <li>
-          <a href="#" class="modal-trigger" data-target="nav-login">
+          <a class="modal-trigger" data-target="nav-login">
             @!component('component.icon', {type: 'material', key: 'input', position: 'left'})
             Login
           </a>

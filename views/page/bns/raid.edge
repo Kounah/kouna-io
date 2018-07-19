@@ -65,8 +65,8 @@
             <div class="divider"></div>
 
             <div class="input-field">
-              <input type="text" name="to" value="">
-              <label for="to">Recipients kouna.io account email-address</label>
+              <input type="text" name="to" value="" />
+              <label for="to">e-mail address</label>
             </div>
           </div>
           <div class="modal-footer">
@@ -102,13 +102,13 @@
 
               $.ajax({
                 method: 'POST',
-                url: '/invites/send',
+                url: '/invite/send',
                 data: {
                   type: 'bns_raid_invite',
                   data: {
                     raidId: '{{raid._id}}'
                   },
-                  recipient: $(to).val()
+                  to: $(to).val()
                 },
                 dataType: 'json'
               }).done(function(d) {
@@ -116,15 +116,25 @@
                   reenable();
                   to.value = '';
                 }, 2000);
-                M.toast({
-                  html: d,
-                  classes: 'green white-text'
-                })
+                if(d.success != undefined) {
+                  if(d.success == true) {
+                    M.toast({
+                      html: d.message,
+                      classes: 'green accent-1 green-text text-darken-4'
+                    })
+                  }
+                  if(d.success == false) {
+                    M.toast({
+                      html: d.message,
+                      classes: 'yellow accent-1 yellow-text text-darken-4'
+                    })
+                  }
+                }
               }).fail(function() {
                 setTimeout(reenable, 2000);
                 M.toast({
                   html: 'error sending request.',
-                  classes: 'red white-text'
+                  classes: 'red accent-1 red-text text-darken-4'
                 })
               })
 
