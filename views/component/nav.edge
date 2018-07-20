@@ -68,174 +68,198 @@
             <script type="text/javascript">
               (function($, M) {
                 var cs = document.currentScript;
-                var p = cs.parentElement;
-                var ddt = p.querySelector('a[data-target]');
-                var ddc = document.getElementById(ddt.getAttribute('data-target'))
-                var badge = ddt.querySelector('.badge')
+                function initInvites() {
+                  var p = cs.parentElement;
+                  var ddt = p.querySelector('a[data-target]');
+                  var ddc = document.getElementById(ddt.getAttribute('data-target'))
+                  var badge = ddt.querySelector('.badge')
 
-                M.Dropdown.init(ddt, {
-                  hover: true,
-                  alignment: 'right',
-                  coverTrigger: false,
-                  constrainWidth: false,
-                  container: document.body
-                })
+                  M.Dropdown.init(ddt, {
+                    hover: true,
+                    alignment: 'right',
+                    coverTrigger: false,
+                    constrainWidth: false,
+                    container: document.body
+                  })
 
-                function buildInvite(inv) {
-                  var res =
-                  $(document.createElement('li'))
-                  .append(
-                    $(document.createElement('div'))
-                    .addClass('card z-depth-0')
+                  function buildInvite(inv) {
+                    var $wrapper = $(document.createElement('li'));
+                    $wrapper
                     .append(
                       $(document.createElement('div'))
-                      .addClass('card-content')
+                      .addClass('card z-depth-0')
                       .append(
                         $(document.createElement('div'))
-                        .addClass('center')
+                        .addClass('card-content')
                         .append(
-                          $(document.createElement('p'))
+                          $(document.createElement('div'))
+                          .addClass('center')
                           .append(
-                            $(document.createElement('span'))
-                            .attr('data-id', inv.from)
-                            .asyncUser()
-                          ).append('<span> has invited you to</span>')
-                        )
-                      ).append(
-                        $(document.createElement('div'))
-                        .addClass('center')
-                        .append(
-                          $(document.createElement('button'))
-                          .addClass('btn waves-effect waves-light')
-                          .addClass('green accent-2 green-text text-darken-4')
-                          // .text('Accept')
-                          .append('<i class="material-icons">check</i>')
-                          .on('click', function() {
-                            $.ajax({
-                              method: 'POST',
-                              url: '/invite/' + inv._id + '/accept',
-                              dataType: 'json'
-                            }).done(function(d) {
-                              if(d.success != undefined) {
-                                if(d.success == true) {
-                                  M.toast({
-                                    html: d.message,
-                                    classes: 'green accent-2 green-text text-darken-4'
-                                  })
-                                } else {
-                                  M.toast({
-                                    html: d.message,
-                                    classes: 'yellow accent-2 yellow-text text-darken-4'
-                                  })
-                                }
-                              }
-                            }).fail(function() {
-                              M.toast({
-                                html: 'failed to accept the invite',
-                                classes: 'red accent-2 red-text text-darken-4'
-                              })
-                            })
-                          })
+                            $(document.createElement('p'))
+                            .append(
+                              $(document.createElement('span'))
+                              .attr('data-id', inv.from)
+                              .asyncUser()
+                            ).append('<span> has invited you to</span>')
+                          )
                         ).append(
-                          '<span> </span>'
-                        )
-                        .append(
-                          $(document.createElement('button'))
-                          .addClass('btn waves-effect waves-light')
-                          .addClass('red accent-2 red-text text-darken-4')
-                          // .text('Decline')
-                          .append('<i class="material-icons">clear</i>')
-                          .on('click', function() {
-                            $.ajax({
-                              method: 'POST',
-                              url: '/invite/' + inv._id + '/decline',
-                              dataType: 'json'
-                            }).done(function(d) {
-                              if(d.success != undefined) {
-                                if(d.success == true) {
-                                  M.toast({
-                                    html: d.message,
-                                    classes: 'green accent-2 green-text text-darken-4'
-                                  })
-                                } else {
-                                  M.toast({
-                                    html: d.message,
-                                    classes: 'yellow accent-2 yellow-text text-darken-4'
-                                  })
+                          $(document.createElement('div'))
+                          .addClass('center')
+                          .append(
+                            $(document.createElement('button'))
+                            .addClass('btn waves-effect waves-light')
+                            .addClass('green lighten-2 green-text text-darken-4')
+                            // .text('Accept')
+                            .append('<i class="material-icons">check</i>')
+                            .on('click', function() {
+                              $.ajax({
+                                method: 'POST',
+                                url: '/invite/' + inv._id + '/accept',
+                                dataType: 'json'
+                              }).done(function(d) {
+                                if(d.success != undefined) {
+                                  var w = $wrapper.get().shift();
+                                  w.parentElement.removeChild(w);
+                                  badge.innerText = parseInt(badge.innerText) - 1;
+
+                                  if(d.success == true) {
+                                    M.toast({
+                                      html: md.render(d.message),
+                                      margin: 0,
+                                      classes: 'green lighten-2 green-text text-darken-4'
+                                    })
+                                  } else {
+                                    M.toast({
+                                      html: md.render(d.message),
+                                      margin: 0,
+                                      classes: 'yellow lighten-2 yellow-text text-darken-4'
+                                    })
+                                  }
                                 }
-                              }
-                            }).fail(function() {
-                              M.toast({
-                                html: 'failed to decline the invite',
-                                classes: 'red accent-2 red-text text-darken-4'
+                              }).fail(function(...err) {
+                                console.error(err);
+                                M.toast({
+                                  html: 'failed to accept the invite',
+                                  classes: 'red lighten-2 red-text text-darken-4'
+                                })
                               })
                             })
-                          })
+                            ).append(
+                            '<span> </span>'
+                            )
+                            .append(
+                            $(document.createElement('button'))
+                            .addClass('btn waves-effect waves-light')
+                            .addClass('red lighten-2 red-text text-darken-4')
+                            // .text('Decline')
+                            .append('<i class="material-icons">clear</i>')
+                            .on('click', function() {
+                              $.ajax({
+                                method: 'POST',
+                                url: '/invite/' + inv._id + '/decline',
+                                dataType: 'json'
+                              }).done(function(d) {
+                                if(d.success != undefined) {
+                                  var w = $wrapper.get().shift();
+                                  w.parentElement.removeChild(w);
+                                  badge.innerText = parseInt(badge.innerText) - 1;
+
+                                  if(d.success == true) {
+                                    M.toast({
+                                      html: md.render(d.message),
+                                      margin: 0,
+                                      classes: 'green lighten-2 green-text text-darken-4'
+                                    })
+                                  } else {
+                                    M.toast({
+                                      html: md.render(d.message),
+                                      margin: 0,
+                                      classes: 'yellow lighten-2 yellow-text text-darken-4'
+                                    })
+                                  }
+                                }
+                              }).fail(function(...err) {
+                                console.error(err);
+                                M.toast({
+                                  html: 'failed to decline the invite',
+                                  classes: 'red lighten-2 red-text text-darken-4'
+                                })
+                              })
+                            })
+                          )
                         )
                       )
-                    )
-                  );
-                  return res;
-                }
+                    );
+                    return $wrapper;
+                  }
 
-                var lastScan;
-                function checkInvites() {
+                  var lastScan;
+                  function checkInvites() {
 
-                  if(window.notif == undefined) window.notif = {};
-                  if(window.notif.inv == undefined) window.notif.inv = [];
+                    if(window.notif == undefined) window.notif = {};
+                    if(window.notif.inv == undefined) window.notif.inv = [];
 
-                  if(window.notif.inv.length <= 0) {
-                    $.ajax({
-                      method: 'GET',
-                      url: '/invites',
-                      dataType: 'json'
-                    }).done(function(d) {
-                      if(d.success == true) {
-                        window.notif.inv = d.result;
-                        badge.classList.remove('hide');
-                        badge.classList.remove('new');
-                        badge.innerText = window.notif.inv.length;
-                        d.result.forEach(function(inv) {
-                          $(ddc).append(buildInvite(inv));
-                        })
-                      }
-                    }).fail(function() {
-                      console.error('failed to get invites');
-                    })
-                  } else {
-                    $.ajax({
-                      method: 'GET',
-                      url: '/invites',
-                      dataType: 'json',
-                      data: {
-                        after: lastScan
-                      }
-                    }).done(function(d) {
-                      if(d.success == true) {
-                        if(d.result.length > 0) {
-                          M.toast({
-                            html: 'you have ' + d.result.length + ' new invites'
-                          })
-
-                          window.notif.inv = window.notif.concat(d.result);
+                    if(window.notif.inv.length <= 0) {
+                      $.ajax({
+                        method: 'GET',
+                        url: '/invites',
+                        dataType: 'json'
+                      }).done(function(d) {
+                        if(d.success == true) {
+                          window.notif.inv = d.result;
+                          badge.classList.remove('hide');
+                          badge.classList.remove('new');
+                          badge.innerText = window.notif.inv.length;
+                          console.log(d.result);
                           d.result.forEach(function(inv) {
                             $(ddc).append(buildInvite(inv));
                           })
                         }
-                      }
-                    }).fail(function() {
-                      console.error('failed to get invites');
-                    })
+                      }).fail(function() {
+                        console.error('failed to get invites');
+                      })
+                    } else {
+                      $.ajax({
+                        method: 'GET',
+                        url: '/invites',
+                        dataType: 'json',
+                        data: {
+                          after: lastScan
+                        }
+                      }).done(function(d) {
+                        if(d.success == true) {
+                          if(d.result.length > 0) {
+                            M.toast({
+                              html: 'you have ' + d.result.length + ' new invites'
+                            })
+
+                            window.notif.inv = window.notif.concat(d.result);
+                            console.log(d.result);
+                            d.result.forEach(function(inv) {
+                              $(ddc).append(buildInvite(inv));
+                            })
+                          }
+                        }
+                      }).fail(function() {
+                        console.error('failed to get invites');
+                      })
+                    }
+
+                    lastScan = new Date() + '';
+                    lastScan = lastScan.split(/\\ \\([a-z|A-Z|0-9|\\ ]*?\\)/).join('');
                   }
 
-                  lastScan = new Date();
+                  checkInvites();
+                  setInterval(checkInvites, 5000);
+
+                  p.removeChild(cs);
                 }
 
-                checkInvites();
-                setInterval(checkInvites, 5000);
-
-                p.removeChild(cs);
+                $(document).ready(function() {
+                  initInvites();
+                })
               })(jQuery, M)
+
             </script>
           </li>
         </ul>

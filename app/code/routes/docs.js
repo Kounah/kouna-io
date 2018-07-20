@@ -1,4 +1,4 @@
-const {User, Document} = require('../db');
+const {User, Document} = require('../../models');
 const {dir, config} = require('../context')
 const {def} = require('../fn')
 

@@ -1,4 +1,4 @@
-const {BnsChar, User} = require('../db');
+const {BnsChar, User} = require('../../models');
 const curl = require('curl');
 const querystring = require('querystring');
 const moment = require('moment');

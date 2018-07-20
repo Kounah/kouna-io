@@ -1,4 +1,4 @@
-const {Invite, User} = require('../db');
+const {Invite, User} = require('../../models');
 const moment = require('moment');
 
 function handleError(err) {
@@ -98,7 +98,7 @@ module.exports = function (app, edge, passport) {
             var inv = invites;
             if(req.query && req.query.after) {
               inv = invites.filter(d => {
-                return moment(req.query.after).isBefore(moment(d.createdOn));
+                return moment().isBefore(moment(d.createdOn));
               })
             }
             res.json({
@@ -115,6 +115,8 @@ module.exports = function (app, edge, passport) {
     }
   })
 
+  const action = require('../invite/actions')
+
   app.post('/invite/:inviteId/:action', (req, res) => {
     if(req.isAuthenticated()) {
       User.findOne({_id: req.user._id}).exec((err, user) => {
@@ -127,9 +129,20 @@ module.exports = function (app, edge, passport) {
             handleError(err);
 
             if(invite == undefined) {
-              res.sendStatus('400');
+              res.sendStatus(400);
             } else {
-
+              var selectedAction = action[invite.type][req.params.action];
+              if(selectedAction != undefined) {
+                selectedAction(invite, (message, data) => {
+                  res.json({
+                    success   : true,
+                    message   : message,
+                    result    : data
+                  });
+                });
+              } else {
+                res.sendStatus(400)
+              }
             }
           })
         }

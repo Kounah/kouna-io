@@ -1,5 +1,5 @@
 const {dir, config} = require('../context');
-const {User} = require('../db');
+const {User} = require('../../models');
 const uuid = require('uuid/v5');
 const path = require('path');
 const fs = require('fs');
@@ -13,6 +13,14 @@ module.exports = function(app, passport, edge) {
 
   app.get('/jquery', (req, res) => {
     res.sendFile(path.join(dir, 'node_modules', 'jquery', 'dist', 'jquery.min.js'));
+  })
+
+  app.get('/markdownit', (req, res) => {
+    res.sendFile(path.join(dir, 'node_modules', 'markdown-it', 'dist', 'markdown-it.js'));
+  })
+
+  app.get('/moment', (req, res) => {
+    res.sendFile(path.join(dir, 'node_modules', 'moment', 'min', 'moment.min.js'));
   })
 
   app.get('/login', (req, res) => {

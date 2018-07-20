@@ -1,5 +1,5 @@
 const {def} = require('../fn');
-const {BnsRaid, BnsChar, User} = require('../db');
+const {BnsRaid, BnsChar, User} = require('../../models');
 const config = require('../bns/config');
 const dateFormat = config.char.dateFormat;
 const getChar = require('../bns/getChar');
