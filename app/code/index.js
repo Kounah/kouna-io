@@ -1,23 +1,14 @@
 const path          = require('path');
-const fs            = require('fs');
-const process       = require('process');
-const os            = require('os');
-const filesize      = require('filesize');
-const {spawn}       = require('child_process');
 
 const colors        = require('colors');
-const asciify       = require('asciify');
-const uuid          = require('uuid/v5');
 
 const mongoose      = require('mongoose');
 const passport      = require('passport');
 
 const {dir, config} = require('./context');
-const {def}         = require('./fn');
 
 const meta          = require('./meta');
 
-// require local
 const configDB      = require('../../config/database');
 
 // configuration
