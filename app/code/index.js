@@ -56,3 +56,10 @@ app.listen(config.port);
 // other
 
 require('./welcome')()
+
+var pixiv = require('./pixiv');
+
+console.log('scheduling pixiv bookmark update for every 24 hours');
+setInterval(pixiv.getBookmarks, 1000 * 60 * 60 * 24)
+
+pixiv.getBookmarks();

@@ -5,11 +5,13 @@ const Document = require('./document');
 const BnsChar = require('./bnschar');
 const BnsRaid = require('./bnsraid');
 const Invite = require('./invite');
+const PixivBookmark = require('./pixivBookmark')
 
 module.exports = {
   User,
   Document,
   BnsChar,
   BnsRaid,
-  Invite
+  Invite,
+  PixivBookmark
 }
